@@ -207,6 +207,7 @@ function afled(data, idag) {
     ustartede: heste.filter((h) => !h.starter),
     fb: (data.facebook ?? []).slice(0, 5),
     kuskPL: (data.kusk ?? []).find((s) => s.aar === saeson.aar && s.starter > 0) ?? (data.kusk ?? []).find((s) => s.starter > 0),
+    kuskFoer: (data.kusk ?? []).find((s) => s.aar === saeson.aar - 1),
     kortheste: heste.filter((h) => HESTEKORT[h.id]),
   };
 }
@@ -617,25 +618,40 @@ const KUSKSEJRE = [
   ['Dansk Hoppe Kriterium 2026', 'Monterey Market – 1.13,2a over 2000 meter, 306.000 kr.'],
   ['Jydsk 2-årings Grand Prix 2026', 'New Watch i debuten – staldkammeraten Nabucco blev toer'],
 ];
-const kuskSektion = (o) => (SITE.kusk ? `
-<section class="sek sek--papir kusk">
-  <div class="wrap kusk__gitter">
-    <figure class="kusk__foto parallax" data-p>${billede('patrick', `${SITE.kusk.navn} i sulkyen efter sejren med New Watch`, { sizes: '(min-width: 901px) 50vw, 92vw' })}<figcaption>New Watch og ${SITE.kusk.navn} efter sejren i Jydsk 2-årings Grand Prix 2026 · Foto: Ole Hindby</figcaption></figure>
-    <div>
-      ${etiket('Kusken', ' data-vis')}
-      <h2 data-vis style="--i:1">${SITE.kusk.navn}.</h2>
-      <p class="indled" data-vis style="--i:2">Født i ${SITE.kusk.foedt} og jockey hos ${SITE.person} med Charlottenlund som hjemmebane${o.kuskPL ? ` – i ${o.kuskPL.aar} er det blevet til ${o.kuskPL.sejre} sejre på ${o.kuskPL.starter} starter` : ''}.</p>
-      ${o.kuskPL ? `<dl class="kusk__tal" data-vis style="--i:3">
-        <div><dt>Sejre</dt><dd data-tael="${o.kuskPL.sejre}">${o.kuskPL.sejre}</dd></div>
-        <div><dt>Starter</dt><dd>${o.kuskPL.starter}</dd></div>
-        <div><dt>Sejrsprocent</dt><dd>${o.kuskPL.procent}<small>%</small></dd></div>
-        <div><dt>Indkørt</dt><dd>${nf(o.kuskPL.praemier)}<small>kr.</small></dd></div>
-      </dl>` : ''}
-      <ul class="kusk__sejre" data-vis style="--i:4">${KUSKSEJRE.map(([loeb, tekst]) => `<li><b>${loeb}</b><span>${tekst}</span></li>`).join('')}</ul>
-      <blockquote class="kusk__citat" data-vis style="--i:5"><p>»Det nye dream team i dansk travsport.«</p><cite>travservice.dk om ${SITE.person} og ${SITE.kusk.navn}, april 2026</cite></blockquote>
+const kuskSektion = (o) => {
+  if (!SITE.kusk) return '';
+  const [fornavn, ...efternavn] = SITE.kusk.navn.split(' ');
+  const pl = o.kuskPL, foer = o.kuskFoer;
+  return `
+<section class="kusk">
+  <div class="kusk__hero parallax" data-p>
+    ${billede('patrick', `${SITE.kusk.navn} vinker med buketten efter sejren med New Watch`, { sizes: '100vw' })}
+    <p class="kusk__kredit">New Watch og ${SITE.kusk.navn} efter Jydsk 2-årings Grand Prix 2026 · Foto: Ole Hindby</p>
+    <div class="wrap kusk__over">
+      ${etiket('Kusken hos Team Juul', ' data-vis')}
+      <h2 class="kusk__navn" data-vis style="--i:1"><span>${fornavn}</span> <span>${efternavn.join(' ')}</span></h2>
     </div>
   </div>
-</section>` : '');
+  <div class="sek--papir kusk__info">
+    <div class="wrap kusk__gitter">
+      <div data-vis>
+        <p class="indled">Født i ${SITE.kusk.foedt} og jockey hos ${SITE.person} med Charlottenlund som hjemmebane.${pl && foer?.starter ? ` ${pl.aar} blev gennembruddet: fra ${foer.starter} starter året før til ${pl.starter} – og ${pl.sejre} sejre.` : ''}</p>
+        <blockquote class="kusk__citat"><p>»Det nye dream team i dansk travsport.«</p><cite>travservice.dk om ${SITE.person} og ${SITE.kusk.navn}, april 2026</cite></blockquote>
+      </div>
+      ${pl ? `<dl class="kusk__tal" data-vis style="--i:1">
+        <div><dd data-tael="${pl.sejre}">${pl.sejre}</dd><dt>Sejre i ${pl.aar}</dt></div>
+        <div><dd data-tael="${pl.starter}">${pl.starter}</dd><dt>Starter</dt></div>
+        <div><dd>${pl.procent}<small>%</small></dd><dt>Sejrsprocent</dt></div>
+        <div><dd>${(pl.praemier / 1e6).toLocaleString('da-DK', { maximumFractionDigits: 1 })}<small>mio. kr.</small></dd><dt>Indkørt</dt></div>
+      </dl>` : '<div></div>'}
+      <div data-vis style="--i:2">
+        <h3 class="mini">Storløb vundet</h3>
+        <ol class="kusk__sejre">${KUSKSEJRE.map(([loeb, tekst]) => `<li><span class="kusk__plads" aria-hidden="true">1</span><div><b>${loeb}</b><span>${tekst}</span></div></li>`).join('')}</ol>
+      </div>
+    </div>
+  </div>
+</section>`;
+};
 
 // Hestene på en vandret bane, der kører, mens man ruller: nye profiler med billede, de mest vindende, til sidst de unge på vej.
 const hestebane = (o) => {
@@ -827,7 +843,6 @@ ${baand()}
 </section>
 
 ${hestebane(o)}
-${kuskSektion(o)}
 
 <section class="sek sek--papir">
   <div class="wrap">
@@ -853,6 +868,7 @@ ${kuskSektion(o)}
   </div>
 </section>
 
+${kuskSektion(o)}
 ${stakSektion({
   over: 'Stalden',
   titel: 'Træning med 50 års erfaring.',

@@ -268,25 +268,34 @@ html:not(.fx) .derby__kort { scroll-snap-align: center; }
 .stak__foto img { flex: 1; width: 100%; min-height: 200px; object-fit: cover; border-radius: var(--r-lille); }
 .stak__foto figcaption { font-size: .72rem; line-height: 1.4; opacity: .75; }
 
-/* Kusken */
-.kusk__gitter { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: center; }
-.kusk__foto { margin: 0; overflow: hidden; border-radius: var(--r); }
-.kusk__foto img { width: 100%; height: auto; aspect-ratio: 4 / 3.4; object-fit: cover; object-position: 50% 40%; }
-.kusk__foto figcaption { padding: 12px 4px 0; font-size: .78rem; color: var(--daemp); }
-.kusk h2 { font-size: clamp(3.4rem, 7vw, 6.6rem); }
-.kusk .indled { margin-top: 20px; }
-.kusk__tal { display: grid; grid-template-columns: repeat(4, auto); justify-content: start; gap: 12px 36px; margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--linje); }
-.kusk__tal dt { font-size: .64rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--daemp); }
-.kusk__tal dd { font: 900 clamp(2rem, 3vw, 2.8rem)/1 var(--display); font-variant-numeric: tabular-nums; }
-.kusk__tal dd small { margin-left: 4px; font-size: .45em; color: var(--daemp); }
+/* Kusken: billedet i fuld bredde med navnet i kæmpe bogstaver, derunder tre spalter på lys bund */
+.kusk__hero { position: relative; display: flex; align-items: flex-end; height: clamp(420px, 50vw, 760px); overflow: hidden; color: #fff; }
+.kusk__hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+.kusk__hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(rgba(13, 13, 12, .25), transparent 30%, transparent 48%, rgba(13, 13, 12, .9)); }
+.kusk__over { position: relative; z-index: 1; padding-bottom: clamp(20px, 3vw, 44px); }
+.kusk__over .etiket { color: rgba(255, 255, 255, .8); }
+.kusk__navn { font-size: clamp(3.6rem, 12.5vw, 12rem); font-weight: 900; line-height: .8; }
+.kusk__navn span:last-child { color: var(--roed); }
+.kusk__kredit { position: absolute; bottom: 18px; right: var(--kant); z-index: 1; padding: 7px 14px; border-radius: 999px; background: rgba(13, 13, 12, .55); backdrop-filter: blur(10px); font-size: .72rem; }
+.kusk__info { padding-block: clamp(48px, 6vw, 88px); }
+.kusk__gitter { display: grid; grid-template-columns: 1.15fr 1fr 1fr; gap: 32px clamp(32px, 4.5vw, 72px); align-items: start; }
+.kusk__info .indled { color: var(--tekst); }
+.kusk__citat { margin-top: 28px; padding-left: 20px; border-left: 3px solid var(--roed); }
+.kusk__citat p { font: italic 500 clamp(1.4rem, 2.1vw, 1.85rem)/1.15 var(--serif); }
+.kusk__citat cite { display: block; margin-top: 10px; font-size: .7rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--daemp); }
+.kusk__tal { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--linje); }
+.kusk__tal div { display: flex; flex-direction: column; gap: 6px; padding: 18px 0 20px; border-bottom: 1px solid var(--linje); }
+.kusk__tal div:nth-child(odd) { padding-right: 16px; border-right: 1px solid var(--linje); }
+.kusk__tal div:nth-child(even) { padding-left: 20px; }
+.kusk__tal dd { font: 900 clamp(2.8rem, 4.4vw, 4.2rem)/.85 var(--display); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.kusk__tal dd small { margin-left: 5px; font: 700 .7rem var(--sans); color: var(--daemp); }
 .kusk__tal div:first-child dd { color: var(--roed); }
-.kusk__sejre { display: grid; gap: 10px; margin-top: 28px; }
-.kusk__sejre li { display: grid; gap: 2px; padding: 14px 18px; border-radius: var(--r-lille); background: var(--flade); }
-.kusk__sejre b { font: 850 1.35rem/1.05 var(--display); text-transform: uppercase; }
-.kusk__sejre span { font-size: .9rem; color: var(--daemp); }
-.kusk__citat { margin-top: 28px; }
-.kusk__citat p { font: italic 500 clamp(1.5rem, 2.4vw, 2.1rem)/1.15 var(--serif); }
-.kusk__citat cite { display: block; margin-top: 10px; font-size: .74rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--daemp); }
+.kusk__tal dt { font-size: .66rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--daemp); }
+.kusk__sejre { display: grid; border-top: 1px solid var(--linje); }
+.kusk__sejre li { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start; padding: 16px 0; border-bottom: 1px solid var(--linje); }
+.kusk__plads { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--roed); color: #fff; font-weight: 800; font-size: .9rem; }
+.kusk__sejre b { display: block; font: 850 1.4rem/1 var(--display); text-transform: uppercase; }
+.kusk__sejre div span { display: block; margin-top: 4px; font-size: .88rem; color: var(--daemp); }
 
 /* ---------- citatet ---------- */
 
@@ -628,7 +637,9 @@ html:not(.js) .fb { display: none; }
   .stak__foto { grid-column: 1; grid-row: auto; }
   .stak__foto img { min-height: 0; aspect-ratio: 16 / 10; }
   .kusk__gitter { grid-template-columns: 1fr; }
-  .kusk__tal { grid-template-columns: repeat(2, auto); }
+  .kusk__hero { height: clamp(380px, 92vw, 560px); }
+  .kusk__hero > img { object-position: 58% 30%; }
+  .kusk__kredit { bottom: auto; right: auto; left: var(--kant); top: 14px; max-width: calc(100% - 2 * var(--kant)); }
   .ydelser { grid-template-columns: 1fr; }
   .ydelser__nr { margin-bottom: 24px; }
   .bund__gitter { grid-template-columns: 1fr 1fr; }
