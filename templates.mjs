@@ -481,19 +481,6 @@ const hestekort = (heste) => `<ul class="hestekort">${heste.map((h, i) => `
       </li>`).join('')}
     </ul>`;
 
-// Kompakte kort for de øvrige startede heste.
-const profilkort = (h, i) => `
-      <a class="profil" href="https://travinfo.dk/horse_tabs/${h.id}" target="_blank" rel="noopener" data-vis style="--i:${i % 3}">
-        <h3>${esc(h.navn)}</h3>
-        <p>${omHest(h)}${afstamning(h) ? `<br>${afstamning(h)}` : ''}</p>
-        <dl>
-          <div><dt>Starter</dt><dd>${h.starter}</dd></div>
-          <div><dt>1-2-3</dt><dd>${esc(h.placeringer)}</dd></div>
-          <div><dt>Indkørt</dt><dd>${kr(h.praemier)}</dd></div>
-        </dl>
-        <span class="profil__ud">Travinfo ${ud}${nyFane}</span>
-      </a>`;
-
 // Hesterække til den fulde træningsliste.
 const hesteraekke = (h, i) => `
       <li class="hest" data-vis style="--i:${i % 6}">
@@ -564,47 +551,108 @@ const derby = () => `
   </div>
 </section>`;
 
-// Karrieren som kort, der lægger sig oven på hinanden.
-const karriere = () => `
+// Kort, der lægger sig oven på hinanden, med en fast spalte ved siden af. kort = [[nummer/år, titel, tekst], …]
+const stakSektion = ({ over, titel, tekst, valg = '', figur = '', kort }) => `
 <section class="sek karriere">
   <div class="wrap karriere__gitter">
     <div class="karriere__fast">
-      ${etiket('Karrieren')}
-      <h2>Et liv i sulkyen.</h2>
-      <p class="indled">Fra staldmand i Skive til rekordholder på Charlottenlund – seks nedslag i en karriere, der begyndte i 1968.</p>
-      <p class="valg">${link('om-steen/', 'Hele historien')}</p>
-      <figure class="karriere__foto">${billede('copperfield', 'En ung Steen Juul med Copperfield og en buket', { sizes: '(min-width: 1101px) 34vw, 92vw' })}<figcaption>En ung Steen Juul med Copperfield – den første store stjerne i stalden · Foto: Burt Seeger</figcaption></figure>
+      ${etiket(over)}
+      <h2>${titel}</h2>
+      <p class="indled">${tekst}</p>
+      ${valg ? `<p class="valg">${valg}</p>` : ''}
+      ${figur}
     </div>
-    <ol class="stak">${KARRIERE.map(([aar, titel, tekst], i) => `
+    <ol class="stak">${kort.map(([nr, h, p], i) => `
       <li class="stak__kort" style="--i:${i}">
-        <span class="stak__aar">${aar}</span>
+        <span class="stak__aar">${nr}</span>
         <div>
-          <h3>${titel}</h3>
-          <p>${tekst}</p>
+          <h3>${h}</h3>
+          <p>${p}</p>
         </div>
       </li>`).join('')}
     </ol>
   </div>
 </section>`;
 
+const karriere = () => stakSektion({
+  over: 'Karrieren',
+  titel: 'Et liv i sulkyen.',
+  tekst: 'Fra staldmand i Skive til rekordholder på Charlottenlund – seks nedslag i en karriere, der begyndte i 1968.',
+  kort: KARRIERE,
+});
+
+// Det, stalden tilbyder – som kort på forsiden og som gitter på Stalden.
+const YDELSER = (o) => [
+  ['01', 'Træning af løbsheste', `${o.heste.length} heste står på træningslisten. I ${o.saeson.aar} har staldens heste været til start i ${dkListe(o.banerIAar)}.`],
+  ['02', 'Tilkøring af ungheste', o.ungheste.length > 1 ? `Lige nu står ${o.ungheste.length} åringer og 2-årige på træningslisten og bygges op mod deres første starter.` : 'Ungheste køres til og bygges op mod deres første starter.'],
+  ['03', 'Erfaring i sulkyen', `${SITE.fornavn} har kørt løb siden 1968 og kører selv staldens heste – i ${o.kusk.aar} ${o.kusk.starter} starter og ${o.kusk.sejre} sejre som kusk.`],
+];
 const ydelser = (o) => `
-    <ul class="ydelser">
-      <li data-vis>
-        <span class="ydelser__nr" aria-hidden="true">01</span>
-        <h3>Træning af løbsheste</h3>
-        <p>${o.heste.length} heste står på træningslisten. I ${o.saeson.aar} har staldens heste været til start i ${dkListe(o.banerIAar)}.</p>
-      </li>
-      <li data-vis style="--i:1">
-        <span class="ydelser__nr" aria-hidden="true">02</span>
-        <h3>Tilkøring af ungheste</h3>
-        <p>${o.ungheste.length > 1 ? `Lige nu står ${o.ungheste.length} åringer og 2-årige på træningslisten og bygges op mod deres første starter.` : 'Ungheste køres til og bygges op mod deres første starter.'}</p>
-      </li>
-      <li data-vis style="--i:2">
-        <span class="ydelser__nr" aria-hidden="true">03</span>
-        <h3>Erfaring i sulkyen</h3>
-        <p>${SITE.fornavn} har kørt løb siden 1968 og kører selv staldens heste – i ${o.kusk.aar} ${o.kusk.starter} starter og ${o.kusk.sejre} sejre som kusk.</p>
-      </li>
+    <ul class="ydelser">${YDELSER(o).map(([nr, h, p], i) => `
+      <li data-vis style="--i:${i}">
+        <span class="ydelser__nr" aria-hidden="true">${nr}</span>
+        <h3>${h}</h3>
+        <p>${p}</p>
+      </li>`).join('')}
     </ul>`;
+
+// Hestene på en vandret bane, der kører, mens man ruller: nye profiler med billede, de mest vindende, til sidst de unge på vej.
+const hestebane = (o) => {
+  const startede = o.loebsheste.filter((h) => !HESTEKORT[h.id]).slice(0, 8);
+  const antal = o.kortheste.length + startede.length + (o.ustartede.length ? 1 : 0);
+  return `
+<section class="derby derby--heste" data-p="fast" style="--antal:${antal}">
+  <div class="derby__ramme">
+    <div class="wrap derby__hoved">
+      <div>
+        ${etiket('Hestene')}
+        <h2>I stalden lige nu.</h2>
+      </div>
+      <div>
+        <p>${o.heste.length} heste på træningslisten – ${o.loebsheste.length} har været til start, og ${o.ustartede.length} unge heste er på vej. Her er de mest vindende.</p>
+        <p class="valg">${knap('heste/', `Hele træningslisten (${o.heste.length})`, 'knap--lys')}</p>
+      </div>
+      <div class="derby__bar" aria-hidden="true"><i></i></div>
+    </div>
+    <ol class="derby__spor">${o.kortheste.map((h) => `
+      <li class="derby__kort derby__kort--foto hkort">
+        <a href="https://travinfo.dk/horse_tabs/${h.id}" target="_blank" rel="noopener">
+          ${billede(HESTEKORT[h.id][0], `${h.navn}, ${omHest(h)}`, { sizes: '360px' })}
+          <span class="hkort__over">${h.starter ? 'Staldens profil' : 'Ny i stalden'}</span>
+          <div class="derby__tekst">
+            <h3>${esc(h.navn)}</h3>
+            <p>${omHest(h)}<br><span>${afstamning(h)}</span></p>
+          </div>${nyFane}
+        </a>
+      </li>`).join('')}${startede.map((h) => `
+      <li class="derby__kort hkort">
+        <a href="https://travinfo.dk/horse_tabs/${h.id}" target="_blank" rel="noopener">
+          <span class="derby__aar">${sejre(h)}<small>${sejre(h) === 1 ? 'sejr' : 'sejre'}</small></span>
+          <div class="derby__tekst">
+            <h3>${esc(h.navn)}</h3>
+            <p>${omHest(h)}<br><span>${afstamning(h)}</span></p>
+            <dl>
+              <div><dt>Starter</dt><dd>${h.starter}</dd></div>
+              <div><dt>Indkørt</dt><dd>${kr(h.praemier)}</dd></div>
+              <div><dt>Rekord</dt><dd>${bedsteRekord(h.rekord) || '–'}</dd></div>
+            </dl>
+          </div>${nyFane}
+        </a>
+      </li>`).join('')}${o.ustartede.length ? `
+      <li class="derby__kort hkort hkort--vej">
+        <a href="${R}heste/">
+          <span class="derby__aar">${o.ustartede.length}<small>på vej</small></span>
+          <div class="derby__tekst">
+            <h3>De unge</h3>
+            <p><span>${o.ustartede.map((h) => esc(h.navn)).join(' · ')}</span></p>
+            <span class="hkort__ud">Hele træningslisten ${pil}</span>
+          </div>
+        </a>
+      </li>` : ''}
+    </ol>
+  </div>
+</section>`;
+};
 
 // Billedgitteret: stor og bred = 2×2 felter, hoej = 1×2. Fjerde felt (valgfrit) styrer beskæringen. Hvert billede glider lidt i sin ramme.
 const FOTOS = [
@@ -663,7 +711,7 @@ const fbKort = (liste) => `
     </ul>`;
 
 const foelg = (fb = []) => (SITE.facebook || fb.length ? `
-<section class="sek sek--flade">
+<section class="sek sek--kant">
   <div class="wrap foelg">
     <div>
       ${etiket('Følg med', ' data-vis')}
@@ -692,7 +740,7 @@ const forside = (o) => `
       <p class="hero__meta"><span>Travtræner og kusk</span><span>Charlottenlund Trav</span><span>Hall of Fame</span></p>
       <h1 class="hero__navn"><span class="sr">Team Steen Juul – Steen Juul, travtræner og kusk på Charlottenlund</span><span class="hero__ord hero__ord--1" aria-hidden="true"><span>Team</span></span><span class="hero__ord hero__ord--2" aria-hidden="true"><span>Juul</span></span></h1>
       <div class="hero__bund">
-        <p class="hero__indled">Næsten 8.000 sejre, ti derbysejre som kusk og en plads i Travsportens Hall of Fame. I dag ${o.heste.length} heste i træning med Charlottenlund som hjemmebane.</p>
+        <p class="hero__indled">${o.heste.length} heste i træning med Charlottenlund som hjemmebane – og en træner med næsten 8.000 sejre, ti derbysejre som kusk og en plads i Travsportens Hall of Fame.</p>
         <p class="valg">${knap('kontakt/', 'Kontakt stalden', 'knap--lys')} ${knap('heste/', 'Se hestene', 'knap--kant')}</p>
       </div>
     </div>
@@ -703,30 +751,15 @@ ${baand()}
 
 <section class="sek udsagn">
   <div class="wrap">
-    ${etiket('Legenden')}
-    <p class="udsagn__tekst" data-p>${ordvis('Fra en sejr med Karat i 1968 til *næsten 8.000 sejre,* *ti derbysejre* som kusk og en plads i travsportens *Hall of Fame.*')}</p>
+    ${etiket('Team Juul i dag')}
+    <p class="udsagn__tekst" data-p>${ordvis(`I dag *${o.heste.length} heste* i træning, *Charlottenlund* som hjemmebane – og en træner med *næsten 8.000 sejre* bag sig.`)}</p>
     <ul class="rekorder">
       <li data-vis><small class="rekorder__over">Næsten</small><b data-tael="8000">8.000</b><span>sejre i karrieren</span><small>»tæt på 8000 sejre« – Sjællandske, dec. 2024</small></li>
       <li data-vis style="--i:1"><b data-tael="10">10</b><span>derbysejre som kusk</span><small>tangerer N. J. Kosters rekord</small></li>
-      <li data-vis style="--i:2"><b data-tael="25">25</b><span>sejre i De Jydske Grand Prix’er</span><small>fra Camrose 1978 til Daytona 2019</small></li>
+      <li data-vis style="--i:2"><b data-tael="50">50</b><span>år som træner</span><small>siden 1. december 1974</small></li>
       <li data-vis style="--i:3"><b data-tael="35">35</b><span>championater på Charlottenlund</span><small>fra 1985 til 2024</small></li>
     </ul>
     <p class="note">Kilder: Sjællandske Medier (1. december 2024), Travsportens Hall of Fame (thof.dk), da.wikipedia.org og Charlottenlund Travbanes løbsprogram (5. januar 2025).</p>
-  </div>
-</section>
-${derby()}
-${karriere()}
-
-<section class="sek citat-sek">
-  <div class="wrap citat">
-    <figure class="citat__foto parallax" data-p>${billede('extreme', 'Steen Juul og derbyvinderen Extreme med buketten efter en sejr', { sizes: '(min-width: 901px) 46vw, 92vw' })}</figure>
-    <div class="citat__tekst">
-      <blockquote data-vis>
-        <p>»Steen Juul vil vinde – hver gang.«</p>
-        <footer>Travsportens Hall of Fame om Steen Juul</footer>
-      </blockquote>
-      <p class="citat__note" data-vis style="--i:1">Billedet: Extreme og Steen efter sejren i Rex The Great – ifølge Team Juul i den hurtigste tid nogensinde på en dansk væddeløbsbane, 1.09,7a over 1600 meter. Extreme vandt Dansk Trav Derby i 2020.</p>
-    </div>
   </div>
 </section>
 
@@ -749,48 +782,7 @@ ${karriere()}
   </div>
 </section>
 
-<section class="sek">
-  <div class="wrap">
-    <div class="sekhoved">
-      <div>
-        ${etiket('Hestene', ' data-vis')}
-        <h2 data-vis style="--i:1">I stalden lige nu.</h2>
-      </div>
-      <p data-vis style="--i:2">${o.heste.length} heste på træningslisten – ${o.loebsheste.length} har været til start, og ${o.ustartede.length} unge heste er på vej. Her er de mest vindende.</p>
-    </div>
-    ${o.kortheste.length ? hestekort(o.kortheste) : ''}
-    <div class="profiler">${o.loebsheste.filter((h) => !HESTEKORT[h.id]).slice(0, 5).map(profilkort).join('')}${o.ustartede.length ? `
-      <a class="profil profil--vej" href="${R}heste/" data-vis style="--i:2">
-        <h3>${o.ustartede.length} på vej</h3>
-        <p>Unge heste, der endnu ikke har været til start:</p>
-        <p class="profil__navne">${o.ustartede.map((h) => esc(h.navn)).join(' · ')}</p>
-        <span class="profil__ud">Hele træningslisten ${pil}</span>
-      </a>` : ''}
-    </div>
-    <p class="midt" data-vis>${knap('heste/', `Hele træningslisten (${o.heste.length})`, 'knap--lys')}</p>
-  </div>
-</section>
-
-<section class="bredbillede parallax" data-p>
-  ${billede('graes', 'Travhest i fuld fart med kusken i rødt og grønt', { sizes: '100vw' })}
-  <div class="bredbillede__tekst wrap">
-    <p class="bredbillede__stor" data-vis>Siden 1968.</p>
-    <p data-vis style="--i:1">Første løb: 31. august 1968 med Karat – sejr i første forsøg. Foto: Kjeld Mikkelsen</p>
-  </div>
-</section>
-
-<section class="sek">
-  <div class="wrap">
-    <div class="sekhoved">
-      <div>
-        ${etiket('Fra banen', ' data-vis')}
-        <h2 data-vis style="--i:1">Løbsdage.</h2>
-      </div>
-      <p data-vis style="--i:2">Billeder fra Team Juuls Facebook-side.</p>
-    </div>
-    ${galleri(5)}
-  </div>
-</section>
+${hestebane(o)}
 
 <section class="sek sek--papir">
   <div class="wrap">
@@ -816,7 +808,42 @@ ${karriere()}
   </div>
 </section>
 
-<section class="sek">
+${stakSektion({
+  over: 'Stalden',
+  titel: 'Træning med 50 års erfaring.',
+  tekst: `${SITE.navn} træner ${o.heste.length} heste med Charlottenlund Trav som hjemmebane. Ring for en snak om din hest.`,
+  valg: `${knap('kontakt/', 'Kontakt stalden')} ${link('stalden/', 'Om stalden')}`,
+  figur: `<figure class="karriere__foto">${billede('sort', 'Sort travhest i trav foran tribunen', { sizes: '(min-width: 1101px) 34vw, 92vw' })}<figcaption>Fra løbsdagene · Team Juuls Facebook-side</figcaption></figure>`,
+  kort: YDELSER(o),
+})}
+<section class="sek sek--flade">
+  <div class="wrap">
+    <div class="sekhoved">
+      <div>
+        ${etiket('Fra banen', ' data-vis')}
+        <h2 data-vis style="--i:1">Løbsdage.</h2>
+      </div>
+      <p data-vis style="--i:2">Billeder fra Team Juuls Facebook-side.</p>
+    </div>
+    ${galleri(5)}
+  </div>
+</section>
+
+<section class="sek citat-sek">
+  <div class="wrap citat">
+    <figure class="citat__foto parallax" data-p>${billede('extreme', 'Steen Juul og derbyvinderen Extreme med buketten efter en sejr', { sizes: '(min-width: 901px) 46vw, 92vw' })}</figure>
+    <div class="citat__tekst">
+      <blockquote data-vis>
+        <p>»Steen Juul vil vinde – hver gang.«</p>
+        <footer>Travsportens Hall of Fame om Steen Juul</footer>
+      </blockquote>
+      <p class="citat__note" data-vis style="--i:1">Billedet: Extreme og Steen efter sejren i Rex The Great – ifølge Team Juul i den hurtigste tid nogensinde på en dansk væddeløbsbane, 1.09,7a over 1600 meter. Extreme vandt Dansk Trav Derby i 2020.</p>
+      <p class="valg" data-vis style="--i:2">${link('om-steen/', 'Historien, derbysejrene og championaterne')}</p>
+    </div>
+  </div>
+</section>
+
+<section class="sek sek--flade">
   <div class="wrap duo">
     <div>
       ${etiket('Banerne', ' data-vis')}
@@ -887,18 +914,14 @@ ${sidehoved({
   </div>
 </section>
 
-<section class="sek sek--roed">
-  <div class="wrap">
-    <div class="sekhoved">
-      <div>
-        ${etiket('Dansk Trav Derby', ' data-vis')}
-        <h2 data-vis style="--i:1">Alle derbysejrene.</h2>
-      </div>
-      <p data-vis style="--i:2">Dansk Trav Derby køres hvert år sidste søndag i august på Charlottenlund – og er Danmarks største travløb.</p>
-    </div>
-    <ol class="derbyliste">${DERBY.map(([aar, hest, rolle, note], i) => `
-      <li data-vis style="--i:${i % 4}"><span class="derbyliste__aar">${aar}</span><b>${hest}</b><span>${rolle}${note ? ` · ${note}` : ''}</span></li>`).join('')}
-    </ol>
+${karriere()}
+${derby()}
+
+<section class="bredbillede parallax" data-p>
+  ${billede('graes', 'Travhest i fuld fart med kusken i rødt og grønt', { sizes: '100vw' })}
+  <div class="bredbillede__tekst wrap">
+    <p class="bredbillede__stor" data-vis>Siden 1968.</p>
+    <p data-vis style="--i:1">Første løb: 31. august 1968 med Karat – sejr i første forsøg. Foto: Kjeld Mikkelsen</p>
   </div>
 </section>
 

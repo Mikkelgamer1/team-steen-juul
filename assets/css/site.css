@@ -228,6 +228,23 @@ html:not(.fx) .derby__kort { scroll-snap-align: center; }
 .derby__kort:nth-child(3n + 2) .derby__krans { color: var(--groen); opacity: .22; }
 .derby__kort--foto::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, .3) 52%, rgba(0, 0, 0, .9) 80%); }
 
+/* Hestene på samme slags bane, på grøn bund */
+.derby--heste { background: var(--groen); }
+.derby--heste .etiket::before { background: linear-gradient(90deg, #fff 50%, var(--roed) 50%); }
+.derby--heste .derby__kort:nth-child(3n) { background: var(--roed); }
+.derby__hoved .valg { margin-top: 18px; }
+.hkort { padding: 0; }
+.hkort > a { display: flex; flex-direction: column; justify-content: space-between; height: 100%; padding: clamp(20px, 2vw, 28px); }
+.hkort .derby__aar small { margin-left: 10px; font: 700 .72rem var(--sans); letter-spacing: .16em; text-transform: uppercase; }
+.hkort h3 { transition: opacity .2s; }
+.hkort > a:hover h3 { opacity: .75; }
+.hkort dl { display: grid; grid-template-columns: repeat(3, auto); justify-content: space-between; gap: 10px; margin-top: 14px; padding-top: 12px; border-top: 1px solid currentColor; border-color: color-mix(in srgb, currentColor 22%, transparent); }
+.hkort dt { font-size: .56rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; opacity: .7; }
+.hkort dd { margin-top: 2px; font-size: .9rem; font-weight: 700; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.hkort__over { align-self: flex-start; padding: 6px 12px; border-radius: 999px; background: var(--roed); font-size: .66rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.hkort__ud { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; font-size: .8rem; font-weight: 700; }
+.hkort--vej p span { font-size: .95rem; line-height: 1.5; }
+
 /* ---------- karrieren: kort, der lægger sig oven på hinanden ---------- */
 
 .karriere__gitter { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(32px, 6vw, 112px); align-items: start; }
@@ -306,20 +323,6 @@ html:not(.fx) .derby__kort { scroll-snap-align: center; }
 .hestekort dd { margin-top: 4px; font-size: 1.2rem; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .hestekort small { display: block; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--linje); font-size: .82rem; line-height: 1.5; color: var(--daemp); }
 
-.profiler { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
-.profiler > * { flex: 0 1 calc((100% - 28px) / 3); }
-.profil { display: flex; flex-direction: column; padding: 24px 26px; border-radius: var(--r); box-shadow: inset 0 0 0 1px var(--linje); transition: box-shadow .3s, background .3s; }
-.profil:hover { background: var(--flade); }
-.profil h3 { font: italic 600 1.6rem/1.1 var(--serif); letter-spacing: -.01em; }
-.profil p { margin-top: 6px; font-size: .84rem; color: var(--daemp); }
-.profil dl { display: grid; grid-template-columns: repeat(3, auto); justify-content: space-between; gap: 12px; margin-top: 18px; }
-.profil dd { margin-top: 4px; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
-.profil__ud { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; font-size: .78rem; font-weight: 600; color: var(--roed); }
-.profil--vej { background: var(--groen); box-shadow: none; color: #fff; }
-.profil--vej:hover { background: #0f7540; }
-.profil--vej p { color: rgba(255, 255, 255, .82); }
-.profil--vej .profil__navne { margin-top: 10px; font-size: .9rem; line-height: 1.55; color: #fff; }
-.profil--vej .profil__ud { margin-top: auto; padding-top: 16px; color: #fff; }
 
 /* Bredt billede med stor tekst */
 .bredbillede { position: relative; display: flex; align-items: flex-end; height: clamp(440px, 90svh, 880px); overflow: hidden; color: #fff; }
@@ -486,11 +489,6 @@ html:not(.js) .fb { display: none; }
 .prosa blockquote p { font: italic 500 clamp(2rem, 3.6vw, 3.2rem)/1.05 var(--serif); letter-spacing: -.02em; color: var(--tekst); }
 .prosa cite { display: block; margin-top: 16px; font-size: .74rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--daemp); }
 
-.derbyliste { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 310px), 1fr)); gap: 0 36px; }
-.derbyliste li { display: grid; grid-template-columns: auto 1fr; column-gap: 22px; align-items: baseline; padding: 22px 0; border-top: 1px solid var(--linje); }
-.derbyliste__aar { grid-row: span 2; font: 900 3.6rem/.85 var(--display); }
-.derbyliste b { font: italic 600 1.55rem/1.1 var(--serif); }
-.derbyliste li > span:last-child { font-size: .84rem; color: var(--daemp); }
 
 .champ { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 .champ li { display: grid; gap: 6px; padding: clamp(20px, 2.4vw, 30px); border-radius: var(--r); background: var(--flade); }
@@ -592,7 +590,6 @@ html:not(.js) .fb { display: none; }
   .hero__rul { display: none; }
   .derby__hoved { grid-template-columns: 1fr; }
   .derby__hoved p { font-size: .95rem; }
-  .profiler > * { flex-basis: calc((100% - 14px) / 2); }
   .duo, .resgitter, .tabeller, .artikel, .partnere, .foelg, .sekhoved, .sidehoved__bund, .citat { grid-template-columns: 1fr; }
   .hestekort li:only-child a { grid-template-columns: 1fr; }
   .hestekort li:only-child img { min-height: 0; aspect-ratio: 6 / 5; }
@@ -620,12 +617,14 @@ html:not(.js) .fb { display: none; }
   .hero__bund .knap { min-height: 48px; padding: 0 20px; }
   .baand li { padding-block: 12px; gap: 24px; padding-left: 24px; }
   .derby__kort { width: 76vw; }
+  .hkort dl { gap: 6px; }
+  .hkort dd { font-size: .78rem; }
+  .hkort dt { font-size: .5rem; letter-spacing: .1em; }
   .tal { grid-auto-rows: minmax(140px, auto); gap: 10px; }
   .tal__felt { padding: 18px; }
   .tal__felt b { font-size: 2.8rem; }
   .tal__felt--stor b { font-size: 8rem; }
   .hestekort dl { grid-template-columns: repeat(2, auto); justify-content: start; gap: 12px 32px; }
-  .profiler > * { flex-basis: 100%; }
   .kpi { grid-template-columns: repeat(2, 1fr); }
   .galleri { grid-template-columns: 1fr 1fr; grid-auto-rows: 38vw; gap: 10px; }
   .chips li { padding: 12px 16px; }
