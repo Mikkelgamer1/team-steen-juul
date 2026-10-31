@@ -39,9 +39,9 @@ const DERBY = [
   [2021, 'Festival of Speed', 'Kusk og træner', 'Nr. 10 som kusk – staldkammeraten Frodo Cash blev toer'],
 ];
 // Billeder til derbykortene: år → [billede, alt, kredit, beskæring]. 2017, 2018 og 2020 er fra Team Juuls Facebook-collage
-// "Derbyvinder 17, 18 & 20". 1983 er et arkivbillede (kilde skal bekræftes). Vindere uden billede får en tegnet laurbærkrans.
+// "Derbyvinder 17, 18 & 20". 1983 er fra travet.dk (22.8.2023, foto Burt Seeger). Vindere uden billede får en tegnet laurbærkrans.
 const DERBYFOTO = {
-  1983: ['derby-1983', 'For Ever Vixi med laurbærkrans og Charlottenlund Travbanes dækken efter derbysejren i 1983', '', '88% 50%'],
+  1983: ['derby-1983', 'For Ever Vixi med laurbærkrans og Charlottenlund Travbanes dækken efter derbysejren i 1983', 'Foto: Burt Seeger', '88% 50%'],
   2017: ['derby-2017', 'Bvlgari Peak med laurbærkrans og derbydækken i 2017', 'Foto: Burt Seeger', '30% 50%'],
   2018: ['derby-2018', 'Chock Nock med laurbærkrans foran publikum i 2018', 'Foto: Burt Seeger', '46% 40%'],
   2020: ['derby-2020', 'Extreme med laurbærkrans og derbydækken i 2020', '', '35% 30%'],
@@ -62,6 +62,7 @@ const KARRIERE = [
 const BILLEDER = {
   'festival': [1.529, 800, 1170],
   'derby-1983': [1.406, 800],
+  'vixi-ejer': [1.540, 616],
   'derby-2017': [1.006, 505],
   'derby-2018': [1.473, 610],
   'derby-2020': [0.699, 420],
@@ -559,6 +560,7 @@ const karriere = () => `
       <h2>Et liv i sulkyen.</h2>
       <p class="indled">Fra staldmand i Skive til rekordholder på Charlottenlund – seks nedslag i en karriere, der begyndte i 1968.</p>
       <p class="valg">${link('om-steen/', 'Hele historien')}</p>
+      <figure class="karriere__foto">${billede('vixi-ejer', 'For Ever Vixi med Steen Juul og ejeren Ivar Hvidtfeldt', { sizes: '(min-width: 1101px) 34vw, 92vw' })}<figcaption>For Ever Vixi med Steen Juul og ejeren Ivar Hvidtfeldt – den første derbyvinder · Foto: Burt Seeger</figcaption></figure>
     </div>
     <ol class="stak">${KARRIERE.map(([aar, titel, tekst], i) => `
       <li class="stak__kort" style="--i:${i}">
@@ -852,7 +854,9 @@ ${sidehoved({
       <p data-vis>Debuten kom den 31. august 1968 med Karat – og blev til sejr i første forsøg. Derefter lod succesen vente på sig: de fire første sæsoner gav tre sejre på 115 starter. I 1972–74 blev det til 30.</p>
       <p data-vis>Den 1. december 1974 blev han som 24-årig selvstændig træner. I 1976 tog han championatet i Skive fra banens syvdobbelte champion Karsten Andersen, og året efter slog han Tarok i Skovbo Eliteløb med Pondus Hanover – til odds 26. I 1980 blev han landschampion for første gang med en ny sæsonrekord på 216 sejre.</p>
       <h2 data-vis>Lunden.</h2>
-      <p data-vis>Den 15. januar 1983 flyttede Steen Juul til Charlottenlund. Samme år vandt Dilli Hanover i 1.13,5 – dansk rekord og verdensrekord for hopper på 1000-meterbane, en rekord der holdt i 16 år. Og samme år kom den første derbysejr med For Ever Vixi, som han havde fået i træning blot seks dage før løbet.</p>
+      <p data-vis>Den 15. januar 1983 flyttede Steen Juul til Charlottenlund. Samme år vandt Dilli Hanover i 1.13,5 – dansk rekord og verdensrekord for hopper på 1000-meterbane, en rekord der holdt i 16 år. Og samme år kom den første derbysejr.</p>
+      <figure class="prosa__foto" data-vis>${billede('derby-1983', 'For Ever Vixi med laurbærkrans og Charlottenlund Travbanes dækken efter derbysejren i 1983', { sizes: '(min-width: 1101px) 680px, 92vw' })}<figcaption>For Ever Vixi efter derbysejren i 1983 · Foto: Burt Seeger</figcaption></figure>
+      <p data-vis>For Ever Vixi var købt i Sverige godt en uge før Derbyet. Steen Juul og ejeren Ivar Hvidtfeldt tog flyvebåden til Malmø for at prøvekøre hesten på Jägersro, og ugedagen før løbet sad han bag den for første gang. I Derbyet kom parret forbi den førende Fight Løjbjerg i opløbet.</p>
       <p data-vis>I 1985 fulgte det første Kriterium med Join Løjbjerg og det første af 35 championater på Charlottenlund til og med 2024.</p>
       <h2 data-vis>Ude i Europa.</h2>
       <p data-vis>Det største år ude kom i 2002. Legendary Lover K vandt Copenhagen Cup, Elite Rennen i Gelsenkirchen, Momarken Grand Prix og Kymi Grand Prix og blev den hidtil eneste dansktrænede samlede vinder af den europæiske Grand Circuit – med 5.143.947 kr. indkørt på sæsonen. Året efter blev parret nr. 7 i Prix d’Amérique.</p>
@@ -863,7 +867,7 @@ ${sidehoved({
       <p data-vis>De Jydske Grand Prix’er for 2- til 4-årige har givet 25 sejre, fra Camrose i 1978 til Daytona i 2019. Sejrstallet som kusk var officielt opgjort til 7.602 pr. 1. april 2020, og ved 50-års jubilæet som træner i december 2024 var han ifølge Sjællandske tæt på 8.000 sejre.</p>
       <p data-vis>I dag har ${SITE.navn} ${o.heste.length} heste på træningslisten, og i ${o.saeson.aar} er det indtil videre blevet til ${o.saeson.sejre} sejre på ${o.saeson.starter} starter som træner.</p>
       <p class="valg" data-vis>${ekstern(SITE.travinfo, 'Profilen på Travinfo')} ${ekstern(SITE.thof, 'Hall of Fame-artiklen')}</p>
-      <p class="note" data-vis>Kilder: Travsportens Hall of Fame (thof.dk), Sjællandske Medier (1. december 2024), da.wikipedia.org (Steen Juul; Dansk Trav Derby), Team Juul på Facebook og Dansk Hestevæddeløb.</p>
+      <p class="note" data-vis>Kilder: Travsportens Hall of Fame (thof.dk), travet.dk (22. august 2023), Sjællandske Medier (1. december 2024), da.wikipedia.org (Steen Juul; Dansk Trav Derby), Team Juul på Facebook og Dansk Hestevæddeløb.</p>
     </div>
   </div>
 </section>

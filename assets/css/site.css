@@ -234,6 +234,10 @@ html:not(.fx) .derby__kort { scroll-snap-align: center; }
 .karriere__gitter { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(32px, 6vw, 112px); align-items: start; }
 .karriere__fast { position: sticky; top: calc(var(--top) + 40px); }
 .karriere__fast .indled { margin-top: 22px; max-width: 38ch; }
+.karriere__foto, .prosa__foto { margin: 36px 0 0; }
+.karriere__foto img, .prosa__foto img { width: 100%; height: auto; border-radius: var(--r); }
+.karriere__foto figcaption, .prosa__foto figcaption { margin-top: 10px; font-size: .78rem; color: var(--daemp); }
+.prosa__foto { margin-block: 32px; }
 .stak__kort { position: sticky; top: calc(var(--top) + 28px + var(--i) * 16px); display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 20px 32px; align-items: start; min-height: clamp(260px, 42svh, 380px); margin-bottom: 16svh; padding: clamp(24px, 3.2vw, 44px); border-radius: var(--r); background: var(--flade2); box-shadow: 0 -24px 60px -30px rgba(0, 0, 0, .9); }
 .stak__kort:last-child { margin-bottom: 0; }
 .stak__kort:nth-child(4n + 1) { background: var(--papir); color: #0d0d0c; }
