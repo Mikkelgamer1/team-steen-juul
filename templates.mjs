@@ -39,10 +39,11 @@ const DERBY = [
   [2021, 'Festival of Speed', 'Kusk og træner', 'Nr. 10 som kusk – staldkammeraten Frodo Cash blev toer'],
 ];
 // Billeder til derbykortene: år → [billede, alt, kredit, beskæring]. 2017, 2018 og 2020 er fra Team Juuls Facebook-collage
-// "Derbyvinder 17, 18 & 20". 1983 er fra travet.dk (22.8.2023) og 1987 fra travsportshistorie.dk (18.8.2025), begge foto Burt Seeger. 1993, 1994, 1997 og 2007 er fra travsportshistorie.dk (Dansk Trav Derby 1990-99 og 2000-2009, Kenn Erik Bech) uden fotografnavn. Vindere uden billede får en tegnet laurbærkrans.
+// "Derbyvinder 17, 18 & 20". 1983 er fra travet.dk (22.8.2023) og 1987 fra travsportshistorie.dk (18.8.2025), begge foto Burt Seeger. 1993, 1994, 1997 og 2007 er fra travsportshistorie.dk (Dansk Trav Derby 1990-99 og 2000-2009, Kenn Erik Bech) uden fotografnavn. 1990 (New Quick) er et arkivbillede uden kendt kilde. Vindere uden billede får en tegnet laurbærkrans.
 const DERBYFOTO = {
   1983: ['derby-1983', 'For Ever Vixi med laurbærkrans og Charlottenlund Travbanes dækken efter derbysejren i 1983', 'Foto: Burt Seeger', '88% 50%'],
   1987: ['derby-1987', 'Konsonant med sin 13-årige opdrætter, Camilla Rasmussen, der krammer derbypokalen i 1987', 'Foto: Burt Seeger', '50% 32%'],
+  1990: ['derby-1990', 'New Quick i trav med startnummer 2, sort-hvidt arkivbillede', '', '6% 50%'],
   1993: ['derby-1993', 'Rudolf Le Ann i fuld fart med Steen Juul i sulkyen', 'Kilde: travsportshistorie.dk', '28% 50%'],
   1994: ['derby-1994', 'Skalflex med startnummer 5, sort-hvidt arkivbillede', 'Kilde: travsportshistorie.dk', '50% 40%'],
   1997: ['derby-1997', 'Atom Tess i opløbet', 'Kilde: travsportshistorie.dk', '30% 50%'],
@@ -69,6 +70,7 @@ const BILLEDER = {
   'derby-1983': [1.406, 800],
   'vixi-ejer': [1.540, 616],
   'derby-1987': [0.689, 720],
+  'derby-1990': [1.393, 500],
   'derby-1993': [1.708, 900],
   'derby-1994': [1.032, 413],
   'derby-1997': [1.103, 441],
