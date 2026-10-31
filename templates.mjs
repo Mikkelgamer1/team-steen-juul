@@ -87,6 +87,9 @@ const BILLEDER = {
   'k-2002': [1.415, 700, 1100],
   'patrick': [2.127, 800, 1400],
   'lunden': [1.400, 900, 1600],
+  'h-frodo': [1.515, 800],
+  'h-monterey': [1.501, 800],
+  'h-ostedantik': [1.501, 800],
   'copperfield': [1.382, 700, 1200],
   'derby-1993': [1.708, 900],
   'derby-1994': [1.032, 413],
@@ -110,6 +113,15 @@ const BILLEDER = {
   'tribune': [1.515, 600, 850],
 };
 // Hestekort: hest-id → [billede, billedtekst fra Facebook-opslaget]
+// Billeder på kortene i hestebanen: hest-id → [billede, alt, kredit, beskæring]. Kun billeder, hvor kilden siger, hvilken hest det er.
+// Kilder: travet.dk – "Mesterskab for Danmark til Frodo Cash" (okt. 2025), "Perfekt sæsondebut for Monterey Market" (maj 2026),
+// "Auktionsløbet 2024 til Lets Go Ostedantik" (artiklens hovedbillede).
+const HESTEFOTO = {
+  643267: ['h-frodo', 'Frodo Cash i front med Steen Juul i sulkyen', 'Foto: Burt Seeger', '14% 50%'],
+  656701: ['h-monterey', 'Monterey Market i fuld fart', 'Kilde: travet.dk', '58% 50%'],
+  653150: ['h-ostedantik', 'Lets Go Ostedantik i vindercirklen med Steen Juul og ejerne', 'Foto: Kjeld Mikkelsen', '64% 40%'],
+};
+
 const HESTEKORT = {
   658123: ['nike-high', 'Den nye Team Lunden-hest i stalden. Den forrige, Bali, blev nr. 2 i Dansk Trav Derby. Kilde: Team Juul på Facebook'],
 };
@@ -703,9 +715,12 @@ const hestebane = (o) => {
             <p>${omHest(h)}<br><span>${afstamning(h)}</span></p>
           </div>${nyFane}
         </a>
-      </li>`).join('')}${startede.map((h) => `
-      <li class="derby__kort hkort">
+      </li>`).join('')}${startede.map((h) => {
+      const [foto, alt, kredit, pos] = HESTEFOTO[h.id] ?? [];
+      return `
+      <li class="derby__kort hkort${foto ? ' derby__kort--foto' : ''}"${pos ? ` style="--pos:${pos}"` : ''}>
         <a href="https://travinfo.dk/horse_tabs/${h.id}" target="_blank" rel="noopener">
+          ${foto ? billede(foto, alt, { sizes: '360px' }) : ''}
           <span class="derby__aar">${sejre(h)}<small>${sejre(h) === 1 ? 'sejr' : 'sejre'}</small></span>
           <div class="derby__tekst">
             <h3>${esc(h.navn)}</h3>
@@ -715,9 +730,11 @@ const hestebane = (o) => {
               <div><dt>Indkørt</dt><dd>${kr(h.praemier)}</dd></div>
               <div><dt>Rekord</dt><dd>${bedsteRekord(h.rekord) || '–'}</dd></div>
             </dl>
+            ${kredit ? `<small class="derby__kredit">${kredit}</small>` : ''}
           </div>${nyFane}
         </a>
-      </li>`).join('')}${o.ustartede.length ? `
+      </li>`;
+    }).join('')}${o.ustartede.length ? `
       <li class="derby__kort hkort hkort--vej">
         <a href="${R}heste/">
           <span class="derby__aar">${o.ustartede.length}<small>på vej</small></span>
