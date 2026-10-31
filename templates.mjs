@@ -39,8 +39,9 @@ const DERBY = [
   [2021, 'Festival of Speed', 'Kusk og træner', 'Nr. 10 som kusk – staldkammeraten Frodo Cash blev toer'],
 ];
 // Billeder til derbykortene: år → [billede, alt, kredit, beskæring]. 2017, 2018 og 2020 er fra Team Juuls Facebook-collage
-// "Derbyvinder 17, 18 & 20". Der findes ingen brugbare billeder af de ældre vindere – de får en tegnet laurbærkrans.
+// "Derbyvinder 17, 18 & 20". 1983 er et arkivbillede (kilde skal bekræftes). Vindere uden billede får en tegnet laurbærkrans.
 const DERBYFOTO = {
+  1983: ['derby-1983', 'For Ever Vixi med laurbærkrans og Charlottenlund Travbanes dækken efter derbysejren i 1983', '', '88% 50%'],
   2017: ['derby-2017', 'Bvlgari Peak med laurbærkrans og derbydækken i 2017', 'Foto: Burt Seeger', '30% 50%'],
   2018: ['derby-2018', 'Chock Nock med laurbærkrans foran publikum i 2018', 'Foto: Burt Seeger', '46% 40%'],
   2020: ['derby-2020', 'Extreme med laurbærkrans og derbydækken i 2020', '', '35% 30%'],
@@ -60,6 +61,7 @@ const KARRIERE = [
 // Billeder: navn → [forhold, bredder…]. Kilder står i billedteksterne og i bunden.
 const BILLEDER = {
   'festival': [1.529, 800, 1170],
+  'derby-1983': [1.406, 800],
   'derby-2017': [1.006, 505],
   'derby-2018': [1.473, 610],
   'derby-2020': [0.699, 420],
