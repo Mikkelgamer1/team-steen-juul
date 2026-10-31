@@ -198,8 +198,8 @@ function afled(data, idag) {
 
 // ---------- fælles dele ----------
 
-// Holdets mærke: løbsfarverne rød og grøn som et skråt delt felt + navnet.
-const maerke = (cls = '') => `<span class="maerke ${cls}"><i class="maerke__farver" aria-hidden="true"></i><span class="maerke__ord"><small>Team</small>Steen Juul</span></span>`;
+// Holdets logo: navnet fra Facebook-siden, TEAM JUUL, sat som forsidens store navn – JUUL i rødt.
+const maerke = (cls = '') => `<span class="maerke ${cls}"><span>Team</span><span class="maerke__juul">Juul</span></span>`;
 
 const top = (sti) => `
 <header class="top">
