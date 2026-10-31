@@ -36,7 +36,7 @@ const DERBY = [
   [2017, 'Bvlgari Peak', 'Kusk og træner'],
   [2018, 'Chock Nock', 'Træner', 'Björn Goop i sulkyen'],
   [2020, 'Extreme', 'Kusk og træner', '', 'extreme'],
-  [2021, 'Festival of Speed', 'Kusk og træner', 'Derbysejr nr. 10 som kusk'],
+  [2021, 'Festival of Speed', 'Kusk og træner', 'Nr. 10 som kusk – staldkammeraten Frodo Cash blev toer'],
 ];
 
 // Karrieren i seks nedslag. Kilde: Travsportens Hall of Fame (thof.dk) og da.wikipedia.org.
@@ -51,7 +51,7 @@ const KARRIERE = [
 
 // Billeder: navn → [forhold, bredder…]. Kilder står i billedteksterne og i bunden.
 const BILLEDER = {
-  'hero': [1.478, 800, 1200, 1729],
+  'festival': [1.529, 800, 1170],
   'extreme': [0.999, 600, 900, 1170],
   'solvalla': [1.289, 800, 1400, 2200],
   'graes': [1.499, 800, 1400, 2048],
@@ -642,7 +642,7 @@ const foelg = (fb = []) => (SITE.facebook || fb.length ? `
 const forside = (o) => `
 <section class="hero" data-p="fast">
   <div class="hero__ramme">
-    <figure class="hero__foto">${billede('hero', 'Travhest fra Team Steen Juul i aftenløb under lysene', { sizes: '100vw', lazy: false })}</figure>
+    <figure class="hero__foto">${billede('festival', 'Festival of Speed med laurbærkrans og Steen Juul, der smiler', { sizes: '100vw', lazy: false })}<figcaption>Festival of Speed – derbyvinder 2021 · Foto: Kjeld Mikkelsen</figcaption></figure>
     <div class="hero__slor" aria-hidden="true"></div>
     <div class="hero__indhold wrap">
       <p class="hero__meta"><span>Travtræner og kusk</span><span>Charlottenlund Trav</span><span>Hall of Fame</span></p>

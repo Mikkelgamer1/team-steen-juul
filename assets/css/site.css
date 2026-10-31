@@ -148,7 +148,8 @@ html:not(.fx) .fremdrift { display: none; }
 .hero__ramme { --q: min(1, calc(var(--p) * 1.45)); --navn: min(13.4vw, 25svh); --pb: 1.8em; --ph: .74em; position: relative; height: 100svh; min-height: 560px; overflow: hidden; }
 .fx .hero__ramme { position: sticky; top: 0; }
 .hero__foto { position: absolute; left: 50%; top: 50%; z-index: 1; margin: 0; overflow: hidden; font-size: var(--navn); width: calc(var(--pb) + var(--q) * (100% - var(--pb))); height: calc(var(--ph) + var(--q) * (100% - var(--ph))); border-radius: calc((1 - var(--q)) * var(--ph) / 2); translate: -50% -50%; animation: pille 1.3s var(--ease) .15s both; }
-.hero__foto img { width: 100%; height: 100%; object-fit: cover; object-position: 44% 42%; }
+.hero__foto img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 12%; }
+.hero__foto figcaption { position: absolute; top: calc(var(--top) + 54px); right: var(--kant); z-index: 2; padding: 7px 14px; border-radius: 999px; background: rgba(13, 13, 12, .55); backdrop-filter: blur(10px); font-size: .74rem; color: #fff; white-space: nowrap; opacity: clamp(0, calc(var(--q) * 2 - 1), 1); }
 .hero__slor { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(13, 13, 12, .7) 0%, rgba(13, 13, 12, .1) 30%, rgba(13, 13, 12, .2) 55%, rgba(13, 13, 12, .92) 100%); opacity: var(--q); pointer-events: none; }
 .hero__indhold { position: relative; z-index: 2; display: grid; grid-template-rows: auto 1fr auto; height: 100%; padding-top: var(--top); padding-bottom: clamp(24px, 4svh, 48px); }
 .hero__meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; padding-block: 12px; border-top: 1px solid rgba(242, 237, 227, .2); font: 600 .72rem var(--sans); letter-spacing: .18em; text-transform: uppercase; color: rgba(242, 237, 227, .7); animation: op .8s var(--ease) .2s both; }
