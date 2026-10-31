@@ -75,6 +75,8 @@ async function hentTravinfo(gammel) {
   const resultater = await get(`/licenseholders/trainers/${L}/results`);
   const traeningsliste = await get(`/licenseholders/trainers/${L}/horses`);
   const kommende = await get(`/licenseholders/trainers/${L}/comingstarts`).catch(() => []);
+  // Staldens kusk (SITE.kusk) – fejler det, vises afsnittet bare uden tal.
+  const kusk = SITE.kusk ? await get(`/licenseholders/drivers/${SITE.kusk.licens}/statistics`).catch(() => null) : null;
   assert(Array.isArray(traeningsliste) && Array.isArray(resultater) && traenerStat.statistics?.length, 'uventet svar fra API');
 
   const kendte = new Map((gammel?.heste ?? []).map((h) => [h.id, h]));
@@ -100,6 +102,7 @@ async function hentTravinfo(gammel) {
     traener: { foedt: Number(basis.yearBorn), hjemmebane: basis.homeTrack, licens: basis.licenseInfo?.description, farver: basis.trotAdditionalInformation?.dress },
     traenerStatistik: tilStatistik(traenerStat),
     kuskStatistik: tilStatistik(kuskStat),
+    kusk: kusk?.statistics ? tilStatistik(kusk) : gammel?.kusk ?? [],
     heste,
     resultater: flet(resultater.filter(erStart).map(tilResultat), gammel?.resultater),
     kommende: kommende.map((k) => ({ dato: k.raceInformation.date, bane: k.track.code, loeb: k.raceInformation.raceNumber, hestId: k.horse.id, hest: paentNavn(k.horse.name), kusk: kuskNavn(k.driver?.name) })),

@@ -262,6 +262,31 @@ html:not(.fx) .derby__kort { scroll-snap-align: center; }
 .stak__aar { font: 900 clamp(4.4rem, 8.4vw, 8rem)/.8 var(--display); letter-spacing: -.02em; }
 .stak__kort h3 { margin-bottom: 14px; font: 850 clamp(1.9rem, 3vw, 2.7rem)/.95 var(--display); text-transform: uppercase; letter-spacing: 0; }
 .stak__kort p { max-width: 44ch; opacity: .86; }
+.stak__kort--foto { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto 1fr; }
+.stak__kort--foto > .stak__aar, .stak__kort--foto > div { grid-column: 1; }
+.stak__foto { grid-column: 2; grid-row: 1 / span 2; align-self: stretch; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.stak__foto img { flex: 1; width: 100%; min-height: 200px; object-fit: cover; border-radius: var(--r-lille); }
+.stak__foto figcaption { font-size: .72rem; line-height: 1.4; opacity: .75; }
+
+/* Kusken */
+.kusk__gitter { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: center; }
+.kusk__foto { margin: 0; overflow: hidden; border-radius: var(--r); }
+.kusk__foto img { width: 100%; height: auto; aspect-ratio: 4 / 3.4; object-fit: cover; object-position: 50% 40%; }
+.kusk__foto figcaption { padding: 12px 4px 0; font-size: .78rem; color: var(--daemp); }
+.kusk h2 { font-size: clamp(3.4rem, 7vw, 6.6rem); }
+.kusk .indled { margin-top: 20px; }
+.kusk__tal { display: grid; grid-template-columns: repeat(4, auto); justify-content: start; gap: 12px 36px; margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--linje); }
+.kusk__tal dt { font-size: .64rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--daemp); }
+.kusk__tal dd { font: 900 clamp(2rem, 3vw, 2.8rem)/1 var(--display); font-variant-numeric: tabular-nums; }
+.kusk__tal dd small { margin-left: 4px; font-size: .45em; color: var(--daemp); }
+.kusk__tal div:first-child dd { color: var(--roed); }
+.kusk__sejre { display: grid; gap: 10px; margin-top: 28px; }
+.kusk__sejre li { display: grid; gap: 2px; padding: 14px 18px; border-radius: var(--r-lille); background: var(--flade); }
+.kusk__sejre b { font: 850 1.35rem/1.05 var(--display); text-transform: uppercase; }
+.kusk__sejre span { font-size: .9rem; color: var(--daemp); }
+.kusk__citat { margin-top: 28px; }
+.kusk__citat p { font: italic 500 clamp(1.5rem, 2.4vw, 2.1rem)/1.15 var(--serif); }
+.kusk__citat cite { display: block; margin-top: 10px; font-size: .74rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--daemp); }
 
 /* ---------- citatet ---------- */
 
@@ -331,6 +356,12 @@ html:not(.fx) .derby__kort { scroll-snap-align: center; }
 .bredbillede__tekst { position: relative; z-index: 1; padding-bottom: clamp(28px, 5vw, 64px); }
 .bredbillede__stor { font: 900 clamp(5rem, 17vw, 17rem)/.8 var(--display); text-transform: uppercase; }
 .bredbillede__tekst p:last-child { margin-top: 18px; max-width: 52ch; font-size: .92rem; color: rgba(255, 255, 255, .82); }
+
+/* Opløbet på Charlottenlund over afsnittet om banerne */
+.lunden { margin: 0 0 clamp(32px, 4.5vw, 64px); }
+.lunden img { width: 100%; height: auto; aspect-ratio: 21 / 9; object-fit: cover; object-position: 30% 60%; border-radius: var(--r); }
+.lunden figcaption { margin-top: 10px; font-size: .76rem; color: var(--daemp); }
+.lunden figcaption a { text-decoration: underline; }
 
 /* Galleri: fast billedgitter */
 .galleri { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: clamp(150px, 15vw, 230px); grid-auto-flow: dense; gap: 12px; }
@@ -593,7 +624,11 @@ html:not(.js) .fb { display: none; }
   .duo, .resgitter, .tabeller, .artikel, .partnere, .foelg, .sekhoved, .sidehoved__bund, .citat { grid-template-columns: 1fr; }
   .hestekort li:only-child a { grid-template-columns: 1fr; }
   .hestekort li:only-child img { min-height: 0; aspect-ratio: 6 / 5; }
-  .stak__kort { grid-template-columns: 1fr; }
+  .stak__kort, .stak__kort--foto { grid-template-columns: 1fr; grid-template-rows: none; }
+  .stak__foto { grid-column: 1; grid-row: auto; }
+  .stak__foto img { min-height: 0; aspect-ratio: 16 / 10; }
+  .kusk__gitter { grid-template-columns: 1fr; }
+  .kusk__tal { grid-template-columns: repeat(2, auto); }
   .ydelser { grid-template-columns: 1fr; }
   .ydelser__nr { margin-bottom: 24px; }
   .bund__gitter { grid-template-columns: 1fr 1fr; }

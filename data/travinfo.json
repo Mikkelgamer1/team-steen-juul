@@ -1,5 +1,5 @@
 {
- "opdateret": "2026-10-31T11:56:16.227Z",
+ "opdateret": "2026-10-31T21:22:04.089Z",
  "traener": {
   "foedt": 1950,
   "hjemmebane": "Charlottenlund Trav",
@@ -98,6 +98,53 @@
    "treer": 63,
    "procent": 20,
    "praemier": 3211664
+  }
+ ],
+ "kusk": [
+  {
+   "aar": 2026,
+   "starter": 253,
+   "sejre": 41,
+   "toer": 28,
+   "treer": 26,
+   "procent": 16,
+   "praemier": 1799612
+  },
+  {
+   "aar": 2025,
+   "starter": 15,
+   "sejre": 3,
+   "toer": 3,
+   "treer": 2,
+   "procent": 20,
+   "praemier": 266573
+  },
+  {
+   "aar": 2024,
+   "starter": 5,
+   "sejre": 1,
+   "toer": 0,
+   "treer": 0,
+   "procent": 20,
+   "praemier": 20977
+  },
+  {
+   "aar": 2023,
+   "starter": 2,
+   "sejre": 0,
+   "toer": 0,
+   "treer": 0,
+   "procent": 0,
+   "praemier": 8217
+  },
+  {
+   "aar": 2022,
+   "starter": 1,
+   "sejre": 0,
+   "toer": 0,
+   "treer": 0,
+   "procent": 0,
+   "praemier": 4000
   }
  ],
  "heste": [

@@ -18,6 +18,8 @@ export const SITE = {
   wikipedia: 'https://da.wikipedia.org/wiki/Steen_Juul',
   thof: 'https://www.thof.dk/1970-til-1990/steen-juul',
   hjemmebane: 'https://www.travbanen.dk/',
+  // Staldens kusk – hans tal hentes hver dag fra Dansk Hestevæddeløb (licensregistret: født 2003, jockey hos Steen Juul).
+  kusk: { navn: 'Patrick Larsen', licens: 526155, foedt: 2003 },
   kort: 'https://www.google.com/maps/search/?api=1&query=Mannerupvej+8%2C+4320+Lejre',
 };
 
@@ -56,11 +58,16 @@ const DERBYFOTO = {
 
 // Karrieren i seks nedslag. Kilde: Travsportens Hall of Fame (thof.dk) og da.wikipedia.org.
 const KARRIERE = [
-  ['1968', 'Debut med sejr', 'Lidt over en uge efter sin 18-års fødselsdag kører Steen Juul sit første løb – den 31. august 1968 med Karat. Det bliver til sejr i første forsøg.'],
-  ['1974', 'Egen stald', 'Som 24-årig bliver han selvstændig træner den 1. december 1974. To år senere tager han championatet i Skive fra banens syvdobbelte champion.'],
-  ['1980', 'Landschampion', 'For første gang landschampion – med en ny sejrsrekord for en sæson: 216 sejre.'],
-  ['1983', 'Til Charlottenlund', 'Flytter til Lunden den 15. januar 1983. Samme år sætter Dilli Hanover verdensrekord for hopper på 1000-meterbane, 1.13,5 – og For Ever Vixi giver den første derbysejr.'],
-  ['2002', 'Legendary Lover K', 'Copenhagen Cup og den hidtil eneste dansktrænede samlede sejr i den europæiske Grand Circuit. Sæsonen giver 5.143.947 kr.'],
+  ['1968', 'Debut med sejr', 'Lidt over en uge efter sin 18-års fødselsdag kører Steen Juul sit første løb – den 31. august 1968 med Karat. Det bliver til sejr i første forsøg. De første år kører han som staldmand.',
+    ['k-1974', 'Steen Juul som staldmand for Torino', 'Som staldmand for Torino efter sejren i Jydsk 2-årings Grand Prix 1974 – svigerfar Børge Simonsen i sulkyen · Kilde: thof.dk']],
+  ['1974', 'Egen stald', 'Som 24-årig bliver han selvstændig træner den 1. december 1974. To år senere tager han championatet i Skive fra banens syvdobbelte champion.',
+    ['k-1975', 'Steen Juul på æresrunde med Vera Ankergård på Skive Trav', '1975: æresrunde på Skive Trav med toårshoppen Vera Ankergård · Kilde: thof.dk']],
+  ['1980', 'Landschampion', 'I 1977 slår han Tarok i Skovbo Eliteløb med Pondus Hanover til odds 26. I 1980 bliver han landschampion for første gang – med en ny sejrsrekord for en sæson: 216 sejre.',
+    ['k-1977', 'Pondus Hanover med Steen Juul i sulkyen slår Tarok i Skovbo Eliteløb', 'Pondus Hanover og Steen Juul slår Tarok i Skovbo Eliteløb 1977 · Kilde: thof.dk']],
+  ['1983', 'Til Charlottenlund', 'Flytter til Lunden den 15. januar 1983. Samme år sætter Dilli Hanover verdensrekord for hopper på 1000-meterbane, 1.13,5 – og For Ever Vixi giver den første derbysejr.',
+    ['k-1983', 'Steen Juul og Dilli Hanover', 'Dilli Hanover og Steen Juul · Kilde: thof.dk']],
+  ['2002', 'Legendary Lover K', 'Copenhagen Cup og den hidtil eneste dansktrænede samlede sejr i den europæiske Grand Circuit. Sæsonen giver 5.143.947 kr.',
+    ['k-2002', 'Legendary Lover K vinder Copenhagen Cup 2002', 'Legendary Lover K vinder Copenhagen Cup 2002 · Kilde: thof.dk']],
   ['2021', 'Derby nr. 10', 'Festival of Speed giver derbysejr nummer ti som kusk – og dermed tangerer Steen Juul N. J. Kosters rekord.'],
 ];
 
@@ -71,6 +78,13 @@ const BILLEDER = {
   'vixi-ejer': [1.540, 616],
   'derby-1987': [0.689, 720],
   'derby-1990': [1.393, 800],
+  'k-1974': [1.406, 554],
+  'k-1975': [1.290, 601],
+  'k-1977': [1.973, 590],
+  'k-1983': [1.406, 700, 1100],
+  'k-2002': [1.415, 700, 1100],
+  'patrick': [2.127, 800, 1400],
+  'lunden': [1.400, 900, 1600],
   'copperfield': [1.382, 700, 1200],
   'derby-1993': [1.708, 900],
   'derby-1994': [1.032, 413],
@@ -192,6 +206,7 @@ function afled(data, idag) {
     ungheste: heste.filter((h) => h.alder <= 2),
     ustartede: heste.filter((h) => !h.starter),
     fb: (data.facebook ?? []).slice(0, 5),
+    kuskPL: (data.kusk ?? []).find((s) => s.aar === saeson.aar && s.starter > 0) ?? (data.kusk ?? []).find((s) => s.starter > 0),
     kortheste: heste.filter((h) => HESTEKORT[h.id]),
   };
 }
@@ -290,7 +305,7 @@ const bund = (o) => `
   </div>
   <div class="wrap bund__linje">
     <p>Resultater og statistik: Dansk Hestevæddeløb · opdateret ${o.opdateret}</p>
-    <p>Billeder: Team Juuls Facebook-side – fotografer bl.a. Burt Seeger, Kjeld Mikkelsen og Gormfoto. Solvalla-fotoet: Lars Jakobsson/Kanal 75, <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener">CC BY 3.0${nyFane}</a></p>
+    <p>Billeder: Team Juuls Facebook-side – fotografer bl.a. Burt Seeger, Kjeld Mikkelsen og Gormfoto. Solvalla-fotoet: Lars Jakobsson/Kanal 75, <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener">CC BY 3.0${nyFane}</a>. Arkivbilleder: Burt Seeger, travet.dk, travsportshistorie.dk og Travsportens Hall of Fame. Charlottenlund: Malouette, <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank" rel="noopener">CC BY-SA 2.0${nyFane}</a></p>
     <p>© ${new Date().getFullYear()} ${SITE.navn}</p>
   </div>
   <p class="bund__ord" aria-hidden="true">Steen Juul</p>
@@ -562,13 +577,14 @@ const stakSektion = ({ over, titel, tekst, valg = '', figur = '', kort }) => `
       ${valg ? `<p class="valg">${valg}</p>` : ''}
       ${figur}
     </div>
-    <ol class="stak">${kort.map(([nr, h, p], i) => `
-      <li class="stak__kort" style="--i:${i}">
+    <ol class="stak">${kort.map(([nr, h, p, foto], i) => `
+      <li class="stak__kort${foto ? ' stak__kort--foto' : ''}" style="--i:${i}">
         <span class="stak__aar">${nr}</span>
         <div>
           <h3>${h}</h3>
           <p>${p}</p>
         </div>
+        ${foto ? `<figure class="stak__foto">${billede(foto[0], foto[1], { sizes: '(min-width: 1101px) 26vw, 88vw' })}<figcaption>${foto[2]}</figcaption></figure>` : ''}
       </li>`).join('')}
     </ol>
   </div>
@@ -595,6 +611,31 @@ const ydelser = (o) => `
         <p>${p}</p>
       </li>`).join('')}
     </ul>`;
+
+// Staldens unge kusk. Tallene opdateres hver dag; de store sejre er skrevet ind (kilder: trav24.dk 3. og 11.10.2026, travservice.dk 19.4.2026).
+const KUSKSEJRE = [
+  ['Dansk Hoppe Kriterium 2026', 'Monterey Market – 1.13,2a over 2000 meter, 306.000 kr.'],
+  ['Jydsk 2-årings Grand Prix 2026', 'New Watch i debuten – staldkammeraten Nabucco blev toer'],
+];
+const kuskSektion = (o) => (SITE.kusk ? `
+<section class="sek sek--papir kusk">
+  <div class="wrap kusk__gitter">
+    <figure class="kusk__foto parallax" data-p>${billede('patrick', `${SITE.kusk.navn} i sulkyen efter sejren med New Watch`, { sizes: '(min-width: 901px) 50vw, 92vw' })}<figcaption>New Watch og ${SITE.kusk.navn} efter sejren i Jydsk 2-årings Grand Prix 2026 · Foto: Ole Hindby</figcaption></figure>
+    <div>
+      ${etiket('Kusken', ' data-vis')}
+      <h2 data-vis style="--i:1">${SITE.kusk.navn}.</h2>
+      <p class="indled" data-vis style="--i:2">Født i ${SITE.kusk.foedt} og jockey hos ${SITE.person} med Charlottenlund som hjemmebane${o.kuskPL ? ` – i ${o.kuskPL.aar} er det blevet til ${o.kuskPL.sejre} sejre på ${o.kuskPL.starter} starter` : ''}.</p>
+      ${o.kuskPL ? `<dl class="kusk__tal" data-vis style="--i:3">
+        <div><dt>Sejre</dt><dd data-tael="${o.kuskPL.sejre}">${o.kuskPL.sejre}</dd></div>
+        <div><dt>Starter</dt><dd>${o.kuskPL.starter}</dd></div>
+        <div><dt>Sejrsprocent</dt><dd>${o.kuskPL.procent}<small>%</small></dd></div>
+        <div><dt>Indkørt</dt><dd>${nf(o.kuskPL.praemier)}<small>kr.</small></dd></div>
+      </dl>` : ''}
+      <ul class="kusk__sejre" data-vis style="--i:4">${KUSKSEJRE.map(([loeb, tekst]) => `<li><b>${loeb}</b><span>${tekst}</span></li>`).join('')}</ul>
+      <blockquote class="kusk__citat" data-vis style="--i:5"><p>»Det nye dream team i dansk travsport.«</p><cite>travservice.dk om ${SITE.person} og ${SITE.kusk.navn}, april 2026</cite></blockquote>
+    </div>
+  </div>
+</section>` : '');
 
 // Hestene på en vandret bane, der kører, mens man ruller: nye profiler med billede, de mest vindende, til sidst de unge på vej.
 const hestebane = (o) => {
@@ -668,6 +709,9 @@ const FOTOS = [
 const galleri = (n = FOTOS.length) => `<ul class="galleri">${FOTOS.slice(0, n).map(([navn, alt, form, pos], i) => `
       <li class="galleri__${form}" data-p style="--i:${i % 4}${pos ? `; --pos:${pos}` : ''}">${billede(navn, alt, { sizes: form === 'stor' || form === 'bred' ? '(min-width: 901px) 50vw, 92vw' : '(min-width: 901px) 25vw, 46vw' })}</li>`).join('')}
     </ul>`;
+
+// Opløbet på Charlottenlund – frit billede fra Wikimedia Commons (CC BY-SA 2.0), vist over afsnittet om hjemmebanen.
+const lundenFoto = () => `<figure class="lunden" data-vis>${billede('lunden', 'Opløbet på Charlottenlund Travbane med heste i sulky foran tribunen', { sizes: '(min-width: 1400px) 1300px, 94vw' })}<figcaption>Opløbet på Charlottenlund Travbane · Foto: Malouette, <a href="https://commons.wikimedia.org/wiki/File:Charlottenlund_Travbane.jpg" target="_blank" rel="noopener">Wikimedia Commons${nyFane}</a>, <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank" rel="noopener">CC BY-SA 2.0${nyFane}</a></figcaption></figure>`;
 
 const banebjaelker = (banetal) => {
   const max = Math.max(1, ...banetal.map((b) => b.antal));
@@ -783,6 +827,7 @@ ${baand()}
 </section>
 
 ${hestebane(o)}
+${kuskSektion(o)}
 
 <section class="sek sek--papir">
   <div class="wrap">
@@ -844,6 +889,7 @@ ${stakSektion({
 </section>
 
 <section class="sek sek--flade">
+  <div class="wrap">${lundenFoto()}</div>
   <div class="wrap duo">
     <div>
       ${etiket('Banerne', ' data-vis')}
@@ -982,6 +1028,7 @@ ${sidehoved({
     ${ydelser(o)}
   </div>
 </section>
+${kuskSektion(o)}
 
 <section class="sek sek--flade">
   <div class="wrap">
@@ -997,6 +1044,7 @@ ${sidehoved({
 </section>
 
 <section class="sek">
+  <div class="wrap">${lundenFoto()}</div>
   <div class="wrap duo">
     <div>
       ${etiket('Hjemmebanen', ' data-vis')}
