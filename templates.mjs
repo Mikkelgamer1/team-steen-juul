@@ -646,7 +646,7 @@ const forside = (o) => `
     <div class="hero__slor" aria-hidden="true"></div>
     <div class="hero__indhold wrap">
       <p class="hero__meta"><span>Travtræner og kusk</span><span>Charlottenlund Trav</span><span>Hall of Fame</span></p>
-      <h1 class="hero__navn"><span class="sr">Steen Juul – travtræner og kusk på Charlottenlund</span><span class="hero__ord hero__ord--1" aria-hidden="true"><span>Steen</span></span><span class="hero__ord hero__ord--2" aria-hidden="true"><span>Juul</span></span></h1>
+      <h1 class="hero__navn"><span class="sr">Team Steen Juul – Steen Juul, travtræner og kusk på Charlottenlund</span><span class="hero__ord hero__ord--1" aria-hidden="true"><span>Team</span></span><span class="hero__ord hero__ord--2" aria-hidden="true"><span>Juul</span></span></h1>
       <div class="hero__bund">
         <p class="hero__indled">Over 7.600 sejre, ti derbysejre som kusk og en plads i Travsportens Hall of Fame. I dag ${o.heste.length} heste i træning med Charlottenlund som hjemmebane.</p>
         <p class="valg">${knap('kontakt/', 'Kontakt stalden', 'knap--lys')} ${knap('heste/', 'Se hestene', 'knap--kant')}</p>
