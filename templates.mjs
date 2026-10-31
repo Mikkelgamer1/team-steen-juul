@@ -35,9 +35,17 @@ const DERBY = [
   [2007, 'Leviti', 'Kusk og træner'],
   [2017, 'Bvlgari Peak', 'Kusk og træner'],
   [2018, 'Chock Nock', 'Træner', 'Björn Goop i sulkyen'],
-  [2020, 'Extreme', 'Kusk og træner', '', 'extreme'],
+  [2020, 'Extreme', 'Kusk og træner'],
   [2021, 'Festival of Speed', 'Kusk og træner', 'Nr. 10 som kusk – staldkammeraten Frodo Cash blev toer'],
 ];
+// Billeder til derbykortene: år → [billede, alt, kredit, beskæring]. 2017, 2018 og 2020 er fra Team Juuls Facebook-collage
+// "Derbyvinder 17, 18 & 20". Der findes ingen brugbare billeder af de ældre vindere – de får en tegnet laurbærkrans.
+const DERBYFOTO = {
+  2017: ['derby-2017', 'Bvlgari Peak med laurbærkrans og derbydækken i 2017', 'Foto: Burt Seeger', '30% 50%'],
+  2018: ['derby-2018', 'Chock Nock med laurbærkrans foran publikum i 2018', 'Foto: Burt Seeger', '46% 40%'],
+  2020: ['derby-2020', 'Extreme med laurbærkrans og derbydækken i 2020', '', '35% 30%'],
+  2021: ['festival', 'Festival of Speed med laurbærkrans og Steen Juul', 'Foto: Kjeld Mikkelsen', '50% 20%'],
+};
 
 // Karrieren i seks nedslag. Kilde: Travsportens Hall of Fame (thof.dk) og da.wikipedia.org.
 const KARRIERE = [
@@ -52,6 +60,9 @@ const KARRIERE = [
 // Billeder: navn → [forhold, bredder…]. Kilder står i billedteksterne og i bunden.
 const BILLEDER = {
   'festival': [1.529, 800, 1170],
+  'derby-2017': [1.006, 505],
+  'derby-2018': [1.473, 610],
+  'derby-2020': [0.699, 420],
   'extreme': [0.999, 600, 900, 1170],
   'solvalla': [1.289, 800, 1400, 2200],
   'graes': [1.499, 800, 1400, 2048],
@@ -496,6 +507,18 @@ const baand = () => `
   <div class="baand__linje baand__linje--groen" aria-hidden="true"><div class="baand__flyt"><div class="baand__spor">${[0, 1].map(() => baandListe(DERBY.map(([aar, hest]) => `<b>${aar}</b> ${hest}`), true)).join('')}</div></div></div>
 </section>`;
 
+// Laurbærkransen til derbykort uden billede: blade parvis op ad begge sider af en cirkel.
+const KRANS = (() => {
+  let blade = '';
+  for (const s of [-1, 1]) for (let i = 1; i <= 10; i++) {
+    const v = i * 0.26; // radianer fra bunden af kransen
+    const x = (100 + s * 78 * Math.sin(v)).toFixed(1), y = (100 + 78 * Math.cos(v)).toFixed(1);
+    const retning = Math.atan2(-Math.sin(v), s * Math.cos(v)) * 180 / Math.PI;
+    for (const d of [-34, 34]) blade += `<ellipse cx="${x}" cy="${y}" rx="13" ry="5" transform="rotate(${Math.round(retning + d)} ${x} ${y}) translate(9 0)"/>`;
+  }
+  return `<svg class="derby__krans" viewBox="0 0 200 200" aria-hidden="true"><g fill="currentColor">${blade}</g></svg>`;
+})();
+
 // Derbysejrene på en vandret bane, der kører forbi, mens man ruller lodret.
 const derby = () => `
 <section class="derby" data-p="fast" style="--antal:${DERBY.length}">
@@ -508,15 +531,19 @@ const derby = () => `
       <p>Ti sejre som kusk og ni som træner – fra For Ever Vixi i 1983 til Festival of Speed i 2021. Med ti sejre som kusk tangerer Steen Juul N. J. Kosters rekord.</p>
       <div class="derby__bar" aria-hidden="true"><i></i></div>
     </div>
-    <ol class="derby__spor">${DERBY.map(([aar, hest, rolle, note, foto], i) => `
-      <li class="derby__kort${foto ? ' derby__kort--foto' : ''}" style="--i:${i}">
-        ${foto ? billede(foto, `${hest} og Steen Juul med vinderbuketten`, { sizes: '360px' }) : ''}
+    <ol class="derby__spor">${DERBY.map(([aar, hest, rolle, note], i) => {
+      const [foto, alt, kredit, pos] = DERBYFOTO[aar] ?? [];
+      return `
+      <li class="derby__kort${foto ? ' derby__kort--foto' : ''}" style="--i:${i}${pos ? `; --pos:${pos}` : ''}">
+        ${foto ? billede(foto, alt, { sizes: '360px' }) : KRANS}
         <span class="derby__aar">${aar}</span>
         <div class="derby__tekst">
           <h3>${hest}</h3>
           <p>${rolle}${note ? `<br><span>${note}</span>` : ''}</p>
+          ${kredit ? `<small class="derby__kredit">${kredit}</small>` : ''}
         </div>
-      </li>`).join('')}
+      </li>`;
+    }).join('')}
     </ol>
   </div>
 </section>`;
