@@ -489,6 +489,8 @@ html:not(.js) .fb { display: none; }
 .champ li { display: grid; gap: 6px; padding: clamp(20px, 2.4vw, 30px); border-radius: var(--r); background: var(--flade); }
 .champ b { font: 900 clamp(4rem, 7vw, 6.4rem)/.85 var(--display); font-variant-numeric: tabular-nums; }
 .champ span { font-weight: 600; color: var(--daemp); }
+.champ small { font-size: .78rem; color: var(--daemp); }
+.champ li:first-child small { color: rgba(255, 255, 255, .75); }
 .champ li:first-child { background: var(--roed); color: #fff; }
 .champ li:first-child span { color: rgba(255, 255, 255, .85); }
 

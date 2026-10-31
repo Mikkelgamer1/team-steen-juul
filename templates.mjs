@@ -665,9 +665,9 @@ ${baand()}
       <li data-vis><small class="rekorder__over">Næsten</small><b data-tael="8000">8.000</b><span>sejre i karrieren</span><small>»tæt på 8000 sejre« – Sjællandske, dec. 2024</small></li>
       <li data-vis style="--i:1"><b data-tael="10">10</b><span>derbysejre som kusk</span><small>tangerer N. J. Kosters rekord</small></li>
       <li data-vis style="--i:2"><b data-tael="25">25</b><span>sejre i De Jydske Grand Prix’er</span><small>fra Camrose 1978 til Daytona 2019</small></li>
-      <li data-vis style="--i:3"><b data-tael="30">30</b><span>championater på Charlottenlund</span><small>pr. januar 2018</small></li>
+      <li data-vis style="--i:3"><b data-tael="35">35</b><span>championater på Charlottenlund</span><small>fra 1985 til 2024</small></li>
     </ul>
-    <p class="note">Kilder: Sjællandske Medier (1. december 2024), Travsportens Hall of Fame (thof.dk) og da.wikipedia.org.</p>
+    <p class="note">Kilder: Sjællandske Medier (1. december 2024), Travsportens Hall of Fame (thof.dk), da.wikipedia.org og Charlottenlund Travbanes løbsprogram (5. januar 2025).</p>
   </div>
 </section>
 ${derby()}
@@ -787,7 +787,8 @@ ${partnere()}
 ${foelg(o.fb)}
 ${kontaktbaand()}`;
 
-const CHAMPIONATER = [['30', 'Charlottenlund'], ['7', 'Skive'], ['7', 'landschampionater'], ['4', 'Skovbo'], ['4', 'Odense'], ['2', 'Billund'], ['1', 'Nykøbing F.'], ['1', 'Halmstad (2004)']];
+// Championater som kusk: [antal, bane, år]. Kilder: da.wikipedia.org (til og med 2023), Charlottenlunds løbsprogram 5.1.2025 (Årets kusk 2024), thof.dk (Halmstad 2004).
+const CHAMPIONATER = [['35', 'Charlottenlund', '1985–2024'], ['8', 'Landschampion', '1980–84, 1994, 1999, 2017'], ['7', 'Skive', '1976–82'], ['5', 'Odense', '1993, 1999, 2016, 2017, 2021'], ['4', 'Skovbo', '1984, 1989, 2000, 2001'], ['2', 'Billund', '1981, 1982'], ['1', 'Nykøbing F.', '2010'], ['1', 'Halmstad', '2004']];
 
 const omSteen = (o, data) => `
 ${sidehoved({
@@ -823,7 +824,7 @@ ${sidehoved({
       <p data-vis>Den 1. december 1974 blev han som 24-årig selvstændig træner. I 1976 tog han championatet i Skive fra banens syvdobbelte champion Karsten Andersen, og året efter slog han Tarok i Skovbo Eliteløb med Pondus Hanover – til odds 26. I 1980 blev han landschampion for første gang med en ny sæsonrekord på 216 sejre.</p>
       <h2 data-vis>Lunden.</h2>
       <p data-vis>Den 15. januar 1983 flyttede Steen Juul til Charlottenlund. Samme år vandt Dilli Hanover i 1.13,5 – dansk rekord og verdensrekord for hopper på 1000-meterbane, en rekord der holdt i 16 år. Og samme år kom den første derbysejr med For Ever Vixi, som han havde fået i træning blot seks dage før løbet.</p>
-      <p data-vis>I 1985 fulgte det første Kriterium med Join Løjbjerg og det første af mindst 30 championater på Charlottenlund.</p>
+      <p data-vis>I 1985 fulgte det første Kriterium med Join Løjbjerg og det første af 35 championater på Charlottenlund til og med 2024.</p>
       <h2 data-vis>Ude i Europa.</h2>
       <p data-vis>Det største år ude kom i 2002. Legendary Lover K vandt Copenhagen Cup, Elite Rennen i Gelsenkirchen, Momarken Grand Prix og Kymi Grand Prix og blev den hidtil eneste dansktrænede samlede vinder af den europæiske Grand Circuit – med 5.143.947 kr. indkørt på sæsonen. Året efter blev parret nr. 7 i Prix d’Amérique.</p>
       <p data-vis>Senere har stjerner som Classic Grand Cru, In Cap’N Gown, Korvet Klintholm og Neo Holmsminde haft usædvanligt lange karrierer i stalden.</p>
@@ -860,10 +861,10 @@ ${sidehoved({
         ${etiket('Championater', ' data-vis')}
         <h2 data-vis style="--i:1">Flest sejre på banen.</h2>
       </div>
-      <p data-vis style="--i:2">Den kusk, der vinder flest løb på en bane i løbet af et år, bliver banens champion. Tallene er opgjort i januar 2018 af Travsportens Hall of Fame.</p>
+      <p data-vis style="--i:2">Den kusk, der vinder flest løb på en bane i løbet af et år, bliver banens champion. Kilder: da.wikipedia.org (til og med 2023), Charlottenlund Travbanes løbsprogram (Årets kusk 2024) og Travsportens Hall of Fame.</p>
     </div>
-    <ul class="champ">${CHAMPIONATER.map(([tal, sted], i) => `
-      <li data-vis style="--i:${i % 4}"><b data-tael="${tal}">${tal}</b><span>${sted}</span></li>`).join('')}
+    <ul class="champ">${CHAMPIONATER.map(([tal, sted, aar], i) => `
+      <li data-vis style="--i:${i % 4}"><b data-tael="${tal}">${tal}</b><span>${sted}</span><small>${aar}</small></li>`).join('')}
     </ul>
   </div>
 </section>
