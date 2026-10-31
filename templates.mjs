@@ -27,7 +27,7 @@ const PARTNERE = [];
 // Dansk Trav Derby: [år, hest, rolle, note, foto]. Kilder: da.wikipedia.org (Steen Juul; Dansk Trav Derby), thof.dk, Team Juuls Facebook-side.
 const DERBY = [
   [1983, 'For Ever Vixi', 'Kusk og træner', 'Kom i træning seks dage før løbet'],
-  [1987, 'Konsonant', 'Kusk og træner'],
+  [1987, 'Konsonant', 'Kusk og træner', 'Opdrætteren var kun 13 år'],
   [1990, 'New Quick', 'Kusk og træner'],
   [1993, 'Rudolf Le Ann', 'Kusk og træner'],
   [1994, 'Skalflex', 'Kusk', 'Træner: Leo S. Larsen'],
@@ -39,10 +39,10 @@ const DERBY = [
   [2021, 'Festival of Speed', 'Kusk og træner', 'Nr. 10 som kusk – staldkammeraten Frodo Cash blev toer'],
 ];
 // Billeder til derbykortene: år → [billede, alt, kredit, beskæring]. 2017, 2018 og 2020 er fra Team Juuls Facebook-collage
-// "Derbyvinder 17, 18 & 20". 1983 er fra travet.dk (22.8.2023, foto Burt Seeger). Vindere uden billede får en tegnet laurbærkrans.
+// "Derbyvinder 17, 18 & 20". 1983 er fra travet.dk (22.8.2023) og 1987 fra travsportshistorie.dk (18.8.2025), begge foto Burt Seeger. Vindere uden billede får en tegnet laurbærkrans.
 const DERBYFOTO = {
   1983: ['derby-1983', 'For Ever Vixi med laurbærkrans og Charlottenlund Travbanes dækken efter derbysejren i 1983', 'Foto: Burt Seeger', '88% 50%'],
-  1987: ['derby-1987', 'Konsonant og et barn, der krammer pokalen, i 1987', '', '50% 32%'],
+  1987: ['derby-1987', 'Konsonant med sin 13-årige opdrætter, Camilla Rasmussen, der krammer derbypokalen i 1987', 'Foto: Burt Seeger', '50% 32%'],
   2017: ['derby-2017', 'Bvlgari Peak med laurbærkrans og derbydækken i 2017', 'Foto: Burt Seeger', '30% 50%'],
   2018: ['derby-2018', 'Chock Nock med laurbærkrans foran publikum i 2018', 'Foto: Burt Seeger', '46% 40%'],
   2020: ['derby-2020', 'Extreme med laurbærkrans og derbydækken i 2020', '', '35% 30%'],
