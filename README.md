@@ -12,6 +12,9 @@ node build.mjs --test     selvtjek
 ## Det opdaterer sig selv
 
 - **Heste i træning, resultater, kommende starter og statistik** hentes fra Dansk Hestevæddeløbs åbne data (samme kilde som travinfo.dk) og gemmes i `data/travinfo.json`.
+- **Store sejre** (mindst 100.000 kr. i førstepræmie) findes automatisk for både stalden og kusken (`SITE.kusk`), og løbets navn hentes fra løbsdagens resultater. De vises under sæsonen, hos kusken og på resultatsiden – og vinder stalden Dansk Trav Derby, kommer sejren selv med på derbybanen.
+- **Kuskens tal og fødselsår**, **år som træner** (fra 1. december 1974) og **antal derbysejre** regnes ud ved hver opbygning.
+- Skrevet ind i hånden (ingen datakilde): næsten 8.000 sejre, 35 championater på Charlottenlund, Facebook-anbefalingerne (`SITE.anbefalinger`) og historien.
 - `.github/workflows/opdater.yml` henter data hver morgen og ved hvert push til `main` og gemmer dem i repoet – så bygger Vercel en ny udgave. Fejler hentningen, bygges der videre med de gemte data.
 - På Vercel bygges sitet med `vercel.json` og får projektets adresse automatisk. En `vercel.app`- eller `github.io`-adresse holdes ude af søgemaskinerne.
 

@@ -1,5 +1,5 @@
 {
- "opdateret": "2026-10-31T22:13:45.810Z",
+ "opdateret": "2026-10-31T22:23:23.926Z",
  "traener": {
   "foedt": 1950,
   "hjemmebane": "Charlottenlund Trav",
@@ -145,6 +145,51 @@
    "treer": 0,
    "procent": 0,
    "praemier": 4000
+  }
+ ],
+ "kuskFoedt": 2003,
+ "storloeb": [
+  {
+   "id": 837737,
+   "navn": "Dansk Hoppe Kriterium 2026",
+   "dato": "2026-10-11",
+   "bane": "Ch",
+   "hest": "Monterey Market",
+   "tid": "13,2a",
+   "distance": 2000,
+   "praemie": 306000
+  },
+  {
+   "id": 837611,
+   "navn": "Jydsk 2-årings Grand Prix 2026",
+   "dato": "2026-10-03",
+   "bane": "År",
+   "hest": "New Watch",
+   "tid": "16,6a",
+   "distance": 1800,
+   "praemie": 150000
+  }
+ ],
+ "kuskStorloeb": [
+  {
+   "id": 837737,
+   "navn": "Dansk Hoppe Kriterium 2026",
+   "dato": "2026-10-11",
+   "bane": "Ch",
+   "hest": "Monterey Market",
+   "tid": "13,2a",
+   "distance": 2000,
+   "praemie": 306000
+  },
+  {
+   "id": 837611,
+   "navn": "Jydsk 2-årings Grand Prix 2026",
+   "dato": "2026-10-03",
+   "bane": "År",
+   "hest": "New Watch",
+   "tid": "16,6a",
+   "distance": 1800,
+   "praemie": 150000
   }
  ],
  "heste": [

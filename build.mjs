@@ -34,6 +34,12 @@ const paentNavn = (s) => String(s ?? '').replace('*', '').trim().toLowerCase()
 // ponytail: antager ét efternavn først; dobbelte efternavne bliver vendt forkert – ret her, hvis det sker.
 const kuskNavn = (s) => { const [efternavn, ...rest] = String(s ?? '').trim().split(/\s+/); return [...rest, efternavn].join(' ').trim(); };
 
+/** " YesBOX præsenterer Dansk Hoppe Kriterium 2026. V5-3, Trio " → "Dansk Hoppe Kriterium 2026" (sponsor og spilformer væk) */
+const loebsnavn = (s) => String(s ?? '').trim().replace(/^.*?præsenterer\s+/i, '').split('. ')[0].replace(/\.$/, '').trim();
+
+/** Store sejre: vundne løb med mindst så meget i førstepræmie (kr.). */
+const STORLOEB = 100_000;
+
 /** Kun rigtige starter: ikke strøgne heste, prøve-/kvalløb eller løb uden resultat endnu. */
 const erStart = (r) => !r.withdrawn && r.raceType?.displayValue !== 'k' && r.placement?.displayValue !== '';
 
@@ -75,8 +81,23 @@ async function hentTravinfo(gammel) {
   const resultater = await get(`/licenseholders/trainers/${L}/results`);
   const traeningsliste = await get(`/licenseholders/trainers/${L}/horses`);
   const kommende = await get(`/licenseholders/trainers/${L}/comingstarts`).catch(() => []);
-  // Staldens kusk (SITE.kusk) – fejler det, vises afsnittet bare uden tal.
+  // Staldens kusk (SITE.kusk) – fejler det, vises afsnittet med de gemte tal.
   const kusk = SITE.kusk ? await get(`/licenseholders/drivers/${SITE.kusk.licens}/statistics`).catch(() => null) : null;
+  const kuskRes = SITE.kusk ? await get(`/licenseholders/drivers/${SITE.kusk.licens}/results`).catch(() => []) : [];
+  const kuskInfo = SITE.kusk ? await get(`/licenseholders/${SITE.kusk.licens}/basicinformation`).catch(() => null) : null;
+
+  // Store sejre med løbets navn fra løbsdagens resultater. Kendte løb gemmes, så navnet kun hentes én gang.
+  const storeSejre = async (raa, gamle = []) => {
+    const kendte = new Set(gamle.map((s) => s.id));
+    const nye = [];
+    for (const r of raa.filter((r) => erStart(r) && r.placement.displayValue === '1' && (r.prizeMoney?.sortValue ?? 0) >= STORLOEB)) {
+      const id = r.raceInformation.raceId;
+      if (kendte.has(id)) continue;
+      const dag = await get(`/raceinfo/${r.raceInformation.raceDayId}/results`).catch(() => null);
+      nye.push({ id, navn: loebsnavn(dag?.racesWithBasicInfoAndResultStatus?.find((x) => x.id === id)?.description), dato: r.raceInformation.date, bane: r.trackCode, hest: paentNavn(r.horse.name), tid: r.kilometerTime.displayValue, distance: r.distance.sortValue, praemie: r.prizeMoney.sortValue });
+    }
+    return [...nye, ...gamle].sort((a, b) => b.dato.localeCompare(a.dato));
+  };
   assert(Array.isArray(traeningsliste) && Array.isArray(resultater) && traenerStat.statistics?.length, 'uventet svar fra API');
 
   const kendte = new Map((gammel?.heste ?? []).map((h) => [h.id, h]));
@@ -103,6 +124,9 @@ async function hentTravinfo(gammel) {
     traenerStatistik: tilStatistik(traenerStat),
     kuskStatistik: tilStatistik(kuskStat),
     kusk: kusk?.statistics ? tilStatistik(kusk) : gammel?.kusk ?? [],
+    kuskFoedt: Number(kuskInfo?.yearBorn) || gammel?.kuskFoedt,
+    storloeb: await storeSejre(resultater, gammel?.storloeb),
+    kuskStorloeb: SITE.kusk ? await storeSejre(kuskRes, gammel?.kuskStorloeb) : [],
     heste,
     resultater: flet(resultater.filter(erStart).map(tilResultat), gammel?.resultater),
     kommende: kommende.map((k) => ({ dato: k.raceInformation.date, bane: k.track.code, loeb: k.raceInformation.raceNumber, hestId: k.horse.id, hest: paentNavn(k.horse.name), kusk: kuskNavn(k.driver?.name) })),
@@ -211,6 +235,9 @@ function test() {
   assert.equal(plac('1'), '1');
   assert.equal(plac('0'), '–');
   assert.equal(plac('d'), 'disk.');
+  assert.equal(loebsnavn(' YesBOX præsenterer Dansk Hoppe Kriterium 2026. V5-3, Trio '), 'Dansk Hoppe Kriterium 2026');
+  assert.equal(loebsnavn(' Jydsk 2-årings Grand Prix 2026. V4-3, V5-5, Trio '), 'Jydsk 2-årings Grand Prix 2026');
+  assert.equal(loebsnavn(undefined), '');
   const raa = (over) => ({ withdrawn: false, raceType: { displayValue: '' }, placement: { displayValue: '1' }, ...over });
   assert.equal(erStart(raa()), true);
   assert.equal(erStart(raa({ withdrawn: true })), false);

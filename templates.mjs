@@ -210,6 +210,10 @@ function afled(data, idag) {
     fb: (data.facebook ?? []).slice(0, 5),
     kuskPL: (data.kusk ?? []).find((s) => s.aar === saeson.aar && s.starter > 0) ?? (data.kusk ?? []).find((s) => s.starter > 0),
     kuskFoer: (data.kusk ?? []).find((s) => s.aar === saeson.aar - 1),
+    kuskFoedt: data.kuskFoedt ?? SITE.kusk?.foedt,
+    storloeb: data.storloeb ?? [],
+    kuskStorloeb: data.kuskStorloeb ?? [],
+    traenerAar: Math.floor((d(idag) - d('1974-12-01')) / 31556952000), // hele år siden 1. december 1974
     kortheste: heste.filter((h) => HESTEKORT[h.id]),
   };
 }
@@ -528,6 +532,17 @@ const baand = () => `
   <div class="baand__linje baand__linje--groen" aria-hidden="true"><div class="baand__flyt"><div class="baand__spor">${[0, 1].map(() => baandListe(DERBY.map(([aar, hest]) => `<b>${aar}</b> ${hest}`), true)).join('')}</div></div></div>
 </section>`;
 
+// Talord til overskrifter ("elleve gange Derby").
+const TALORD = ['nul', 'én', 'to', 'tre', 'fire', 'fem', 'seks', 'syv', 'otte', 'ni', 'ti', 'elleve', 'tolv', 'tretten', 'fjorten', 'femten', 'seksten', 'sytten', 'atten', 'nitten', 'tyve'];
+const talord = (n) => TALORD[n] ?? String(n);
+const stort = (s) => s[0].toUpperCase() + s.slice(1);
+
+// Alle derbysejre: listen ovenfor + nye, som dukker op blandt staldens store sejre (kusk ukendt → "Træner").
+const derbyListe = (o) => [...DERBY, ...o.storloeb
+  .filter((s) => /^Dansk Trav Derby \d{4}$/.test(s.navn) && !DERBY.some(([aar]) => String(aar) === s.dato.slice(0, 4)))
+  .map((s) => [Number(s.dato.slice(0, 4)), s.hest, 'Træner'])].sort((a, b) => a[0] - b[0]);
+const derbyTal = (o) => { const l = derbyListe(o); return { liste: l, kusk: l.filter(([, , rolle]) => /Kusk/.test(rolle)).length, traener: l.filter(([, , rolle]) => /træner/i.test(rolle)).length }; };
+
 // Laurbærkransen til derbykort uden billede: blade parvis op ad begge sider af en cirkel.
 const KRANS = (() => {
   let blade = '';
@@ -541,18 +556,21 @@ const KRANS = (() => {
 })();
 
 // Derbysejrene på en vandret bane, der kører forbi, mens man ruller lodret.
-const derby = () => `
-<section class="derby" data-p="fast" style="--antal:${DERBY.length}">
+const derby = (o) => {
+  const { liste, kusk, traener } = derbyTal(o);
+  const [foerste, sidste] = [liste[0], liste.at(-1)];
+  return `
+<section class="derby" data-p="fast" style="--antal:${liste.length}">
   <div class="derby__ramme">
     <div class="wrap derby__hoved">
       <div>
         ${etiket('Dansk Trav Derby')}
-        <h2>Elleve gange Derby.</h2>
+        <h2>${stort(talord(liste.length))} gange Derby.</h2>
       </div>
-      <p>Ti sejre som kusk og ni som træner – fra For Ever Vixi i 1983 til Festival of Speed i 2021. Med ti sejre som kusk tangerer Steen Juul N. J. Kosters rekord.</p>
+      <p>${stort(talord(kusk))} sejre som kusk og ${talord(traener)} som træner – fra ${foerste[1]} i ${foerste[0]} til ${sidste[1]} i ${sidste[0]}.${kusk === 10 ? ' Med ti sejre som kusk tangerer Steen Juul N. J. Kosters rekord.' : kusk > 10 ? ` Med ${talord(kusk)} sejre som kusk har Steen Juul slået N. J. Kosters rekord.` : ''}</p>
       <div class="derby__bar" aria-hidden="true"><i></i></div>
     </div>
-    <ol class="derby__spor">${DERBY.map(([aar, hest, rolle, note], i) => {
+    <ol class="derby__spor">${liste.map(([aar, hest, rolle, note], i) => {
       const [foto, alt, kredit, pos] = DERBYFOTO[aar] ?? [];
       return `
       <li class="derby__kort${foto ? ' derby__kort--foto' : ''}" style="--i:${i}${pos ? `; --pos:${pos}` : ''}">
@@ -568,6 +586,7 @@ const derby = () => `
     </ol>
   </div>
 </section>`;
+};
 
 // Kort, der lægger sig oven på hinanden, med en fast spalte ved siden af. kort = [[nummer/år, titel, tekst], …]
 const stakSektion = ({ over, titel, tekst, valg = '', figur = '', kort }) => `
@@ -615,11 +634,12 @@ const ydelser = (o) => `
       </li>`).join('')}
     </ul>`;
 
-// Staldens unge kusk. Tallene opdateres hver dag; de store sejre er skrevet ind (kilder: trav24.dk 3. og 11.10.2026, travservice.dk 19.4.2026).
-const KUSKSEJRE = [
-  ['Dansk Hoppe Kriterium 2026', 'Monterey Market – 1.13,2a over 2000 meter, 306.000 kr.'],
-  ['Jydsk 2-årings Grand Prix 2026', 'New Watch i debuten – staldkammeraten Nabucco blev toer'],
-];
+// Store sejre (førstepræmie på mindst 100.000 kr.) med løbets navn – hentes automatisk af build.mjs.
+const storloebLinje = (s) => `${esc(s.hest)} · ${esc(bane(s.bane))}, ${kortDato(s.dato)}${tid(s.tid) ? ` · ${tid(s.tid)} over ${nf(s.distance)} m` : ''} · ${kr(s.praemie)}`;
+const storloebListe = (liste) => `<ul class="storloeb">${liste.map((s) => `
+        <li><b>${esc(s.navn || 'Storløb')}</b><span>${storloebLinje(s)}</span></li>`).join('')}
+      </ul>`;
+
 const kuskSektion = (o) => {
   if (!SITE.kusk) return '';
   const [fornavn, ...efternavn] = SITE.kusk.navn.split(' ');
@@ -637,7 +657,7 @@ const kuskSektion = (o) => {
   <div class="sek--papir kusk__info">
     <div class="wrap kusk__gitter">
       <div data-vis>
-        <p class="indled">Født i ${SITE.kusk.foedt} og jockey hos ${SITE.person} med Charlottenlund som hjemmebane.${pl && foer?.starter ? ` ${pl.aar} blev gennembruddet: fra ${foer.starter} starter året før til ${pl.starter} – og ${pl.sejre} sejre.` : ''}</p>
+        <p class="indled">Født i ${o.kuskFoedt} og jockey hos ${SITE.person} med Charlottenlund som hjemmebane.${pl && foer?.starter && pl.starter >= foer.starter * 3 ? ` ${pl.aar} blev gennembruddet: fra ${foer.starter} starter året før til ${pl.starter} – og ${pl.sejre} sejre.` : pl ? ` I ${pl.aar} har han ${pl.sejre} sejre på ${pl.starter} starter.` : ''}</p>
         <blockquote class="kusk__citat"><p>»Det nye dream team i dansk travsport.«</p><cite>travservice.dk om ${SITE.person} og ${SITE.kusk.navn}, april 2026</cite></blockquote>
       </div>
       ${pl ? `<dl class="kusk__tal" data-vis style="--i:1">
@@ -646,10 +666,10 @@ const kuskSektion = (o) => {
         <div><dd>${pl.procent}<small>%</small></dd><dt>Sejrsprocent</dt></div>
         <div><dd>${(pl.praemier / 1e6).toLocaleString('da-DK', { maximumFractionDigits: 1 })}<small>mio. kr.</small></dd><dt>Indkørt</dt></div>
       </dl>` : '<div></div>'}
-      <div data-vis style="--i:2">
+      ${o.kuskStorloeb.length ? `<div data-vis style="--i:2">
         <h3 class="mini">Storløb vundet</h3>
-        <ol class="kusk__sejre">${KUSKSEJRE.map(([loeb, tekst]) => `<li><span class="kusk__plads" aria-hidden="true">1</span><div><b>${loeb}</b><span>${tekst}</span></div></li>`).join('')}</ol>
-      </div>
+        <ol class="kusk__sejre">${o.kuskStorloeb.slice(0, 3).map((s) => `<li><span class="kusk__plads" aria-hidden="true">1</span><div><b>${esc(s.navn || 'Storløb')}</b><span>${storloebLinje(s)}</span></div></li>`).join('')}</ol>
+      </div>` : '<div></div>'}
     </div>
   </div>
 </section>`;
@@ -819,7 +839,7 @@ ${baand()}
     <ul class="rekorder">
       <li data-vis><small class="rekorder__over">Næsten</small><b data-tael="8000">8.000</b><span>sejre i karrieren</span><small>»tæt på 8000 sejre« – Sjællandske, dec. 2024</small></li>
       <li data-vis style="--i:1"><b data-tael="10">10</b><span>derbysejre som kusk</span><small>tangerer N. J. Kosters rekord</small></li>
-      <li data-vis style="--i:2"><b data-tael="50">50</b><span>år som træner</span><small>siden 1. december 1974</small></li>
+      <li data-vis style="--i:2"><b data-tael="${o.traenerAar}">${o.traenerAar}</b><span>år som træner</span><small>siden 1. december 1974</small></li>
       <li data-vis style="--i:3"><b data-tael="35">35</b><span>championater på Charlottenlund</span><small>fra 1985 til 2024</small></li>
     </ul>
     <p class="note">Kilder: Sjællandske Medier (1. december 2024), Travsportens Hall of Fame (thof.dk), da.wikipedia.org og Charlottenlund Travbanes løbsprogram (5. januar 2025).</p>
@@ -842,6 +862,10 @@ ${baand()}
       <div class="tal__felt tal__felt--groen" data-vis style="--i:3"><b data-tael="${o.heste.length}">${o.heste.length}</b><span>heste i træning – ${o.ustartede.length} unge på vej</span></div>
       <div class="tal__felt tal__felt--moerk" data-vis style="--i:4"><b data-tael="${o.kusk.sejre}">${o.kusk.sejre}</b><span>sejre som kusk på ${o.kusk.starter} starter</span></div>
     </div>
+    ${o.storloeb.some((s) => s.dato.startsWith(String(o.saeson.aar))) ? `<div class="storloeb-boks" data-vis>
+      <h3 class="mini">Storløbssejre i ${o.saeson.aar}</h3>
+      ${storloebListe(o.storloeb.filter((s) => s.dato.startsWith(String(o.saeson.aar))))}
+    </div>` : ''}
   </div>
 </section>
 
@@ -874,7 +898,7 @@ ${hestebane(o)}
 ${kuskSektion(o)}
 ${stakSektion({
   over: 'Stalden',
-  titel: 'Træning med 50 års erfaring.',
+  titel: `Træning med ${o.traenerAar} års erfaring.`,
   tekst: `${SITE.navn} træner ${o.heste.length} heste med Charlottenlund Trav som hjemmebane. Ring for en snak om din hest.`,
   valg: `${knap('kontakt/', 'Kontakt stalden')} ${link('stalden/', 'Om stalden')}`,
   figur: `<figure class="karriere__foto">${billede('sort', 'Sort travhest i trav foran tribunen', { sizes: '(min-width: 1101px) 34vw, 92vw' })}<figcaption>Fra løbsdagene · Team Juuls Facebook-side</figcaption></figure>`,
@@ -948,7 +972,7 @@ ${sidehoved({
         <div><dt>Licens</dt><dd>${esc(data.traener.licens)} – professionel træner og kusk</dd></div>
         <div><dt>Hjemmebane</dt><dd>${esc(data.traener.hjemmebane)} – siden 1983</dd></div>
         <div><dt>Løbsfarver</dt><dd>Rød og grøn</dd></div>
-        <div><dt>Dansk Trav Derby</dt><dd>10 sejre som kusk, 9 som træner</dd></div>
+        <div><dt>Dansk Trav Derby</dt><dd>${derbyTal(o).kusk} sejre som kusk, ${derbyTal(o).traener} som træner</dd></div>
         <div><dt>Heste i træning</dt><dd>${o.heste.length}</dd></div>
       </dl>
     </aside>
@@ -970,7 +994,7 @@ ${sidehoved({
       <p data-vis>Senere har stjerner som Classic Grand Cru, In Cap’N Gown, Korvet Klintholm og Neo Holmsminde haft usædvanligt lange karrierer i stalden.</p>
       <blockquote data-vis><p>»Steen Juul vil vinde – hver gang.«</p><cite>Travsportens Hall of Fame (thof.dk)</cite></blockquote>
       <h2 data-vis>Rekorden.</h2>
-      <p data-vis>I Dansk Trav Derby har Steen Juul ti sejre som kusk – fra For Ever Vixi i 1983 til Festival of Speed i 2021 – og tangerer dermed N. J. Kosters rekord. Som træner har han vundet løbet ni gange, blandt andet i 2018, da Björn Goop kørte Chock Nock.</p>
+      <p data-vis>I Dansk Trav Derby har Steen Juul ti sejre som kusk – fra For Ever Vixi i 1983 til Festival of Speed i 2021 – og tangerer dermed N. J. Kosters rekord. Som træner har han vundet løbet ${talord(derbyTal(o).traener)} gange, blandt andet i 2018, da Björn Goop kørte Chock Nock.</p>
       <p data-vis>De Jydske Grand Prix’er for 2- til 4-årige har givet 25 sejre, fra Camrose i 1978 til Daytona i 2019. Sejrstallet som kusk var officielt opgjort til 7.602 pr. 1. april 2020, og ved 50-års jubilæet som træner i december 2024 var han ifølge Sjællandske tæt på 8.000 sejre.</p>
       <p data-vis>I dag har ${SITE.navn} ${o.heste.length} heste på træningslisten, og i ${o.saeson.aar} er det indtil videre blevet til ${o.saeson.sejre} sejre på ${o.saeson.starter} starter som træner.</p>
       <p class="valg" data-vis>${ekstern(SITE.travinfo, 'Profilen på Travinfo')} ${ekstern(SITE.thof, 'Hall of Fame-artiklen')}</p>
@@ -980,7 +1004,7 @@ ${sidehoved({
 </section>
 
 ${karriere()}
-${derby()}
+${derby(o)}
 
 <section class="bredbillede parallax" data-p>
   ${billede('graes', 'Travhest i fuld fart med kusken i rødt og grønt', { sizes: '100vw' })}
@@ -1144,6 +1168,11 @@ ${sidehoved({
       <h3 class="mini">Formkurve – de seneste ${o.seneste.length} starter</h3>
       ${formkurve(o.seneste)}
     </div>
+    ${o.storloeb.length ? `<div class="storloeb-boks" data-vis style="--i:2">
+      <h3 class="mini">Storløbssejre</h3>
+      ${storloebListe(o.storloeb)}
+      <p class="note">Sejre med mindst 100.000 kr. i førstepræmie, hentet fra Dansk Hestevæddeløb.</p>
+    </div>` : ''}
   </div>
 </section>
 

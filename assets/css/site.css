@@ -339,6 +339,13 @@ html:not(.fx) .derby__kort { scroll-snap-align: center; }
 .tal__felt--groen > span { color: rgba(255, 255, 255, .85); }
 .tal__felt--moerk { background: #0d0d0c; }
 
+/* Store sejre (automatisk) */
+.storloeb-boks { margin-top: 32px; }
+.storloeb { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 10px; }
+.storloeb li { display: grid; gap: 4px; padding: 16px 20px; border-radius: var(--r-lille); background: var(--flade); border-left: 4px solid var(--roed); }
+.storloeb b { font: 850 1.35rem/1.05 var(--display); text-transform: uppercase; }
+.storloeb span { font-size: .86rem; color: var(--daemp); }
+
 /* Hestekort */
 .hestekort { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)); gap: 14px; margin-bottom: 14px; }
 .hestekort a { display: grid; grid-template-rows: auto 1fr; height: 100%; overflow: hidden; border-radius: var(--r); background: var(--flade); transition: transform .4s var(--ease); }
