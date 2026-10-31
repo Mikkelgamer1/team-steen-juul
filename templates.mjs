@@ -290,7 +290,7 @@ const person = () => ({
   name: SITE.person,
   birthDate: '1950-08-20',
   jobTitle: 'Travtræner og kusk',
-  description: 'Dansk travtræner og kusk med over 7.600 sejre, ti sejre i Dansk Trav Derby som kusk og en plads i Travsportens Hall of Fame.',
+  description: 'Dansk travtræner og kusk med næsten 8.000 sejre, ti sejre i Dansk Trav Derby som kusk og en plads i Travsportens Hall of Fame.',
   url: `${SITE.url}/om-steen/`,
   image: `${SITE.url}/assets/img/solvalla-1400.webp`,
   worksFor: { '@id': `${SITE.url}/#stald` },
@@ -488,7 +488,7 @@ const hestegruppe = (titel, heste) => (heste.length ? `
     </div>` : '');
 
 // To bånd i løbsfarverne, der krydser hinanden og glider hver sin vej, når man ruller.
-const MERITTER = ['7.602 sejre som kusk', '10 derbysejre som kusk', 'Travsportens Hall of Fame', 'Landschampion første gang i 1980', '25 sejre i De Jydske Grand Prix’er', 'Grand Circuit-vinder 2002'];
+const MERITTER = ['Næsten 8.000 sejre', '10 derbysejre som kusk', 'Travsportens Hall of Fame', 'Landschampion første gang i 1980', '25 sejre i De Jydske Grand Prix’er', 'Grand Circuit-vinder 2002'];
 const baandListe = (punkter, skjult) => `<ul${skjult ? ' aria-hidden="true"' : ''}>${punkter.map((m) => `<li>${m}</li>`).join('')}</ul>`;
 const baand = () => `
 <section class="baand" data-p aria-label="Meritter">
@@ -648,7 +648,7 @@ const forside = (o) => `
       <p class="hero__meta"><span>Travtræner og kusk</span><span>Charlottenlund Trav</span><span>Hall of Fame</span></p>
       <h1 class="hero__navn"><span class="sr">Team Steen Juul – Steen Juul, travtræner og kusk på Charlottenlund</span><span class="hero__ord hero__ord--1" aria-hidden="true"><span>Team</span></span><span class="hero__ord hero__ord--2" aria-hidden="true"><span>Juul</span></span></h1>
       <div class="hero__bund">
-        <p class="hero__indled">Over 7.600 sejre, ti derbysejre som kusk og en plads i Travsportens Hall of Fame. I dag ${o.heste.length} heste i træning med Charlottenlund som hjemmebane.</p>
+        <p class="hero__indled">Næsten 8.000 sejre, ti derbysejre som kusk og en plads i Travsportens Hall of Fame. I dag ${o.heste.length} heste i træning med Charlottenlund som hjemmebane.</p>
         <p class="valg">${knap('kontakt/', 'Kontakt stalden', 'knap--lys')} ${knap('heste/', 'Se hestene', 'knap--kant')}</p>
       </div>
     </div>
@@ -660,14 +660,14 @@ ${baand()}
 <section class="sek udsagn">
   <div class="wrap">
     ${etiket('Legenden')}
-    <p class="udsagn__tekst" data-p>${ordvis('Fra en sejr med Karat i 1968 til *over 7.600 sejre,* *ti derbysejre* som kusk og en plads i travsportens *Hall of Fame.*')}</p>
+    <p class="udsagn__tekst" data-p>${ordvis('Fra en sejr med Karat i 1968 til *næsten 8.000 sejre,* *ti derbysejre* som kusk og en plads i travsportens *Hall of Fame.*')}</p>
     <ul class="rekorder">
-      <li data-vis><b data-tael="7602">7.602</b><span>sejre som kusk</span><small>officielt opgjort pr. 1. april 2020</small></li>
+      <li data-vis><small class="rekorder__over">Næsten</small><b data-tael="8000">8.000</b><span>sejre i karrieren</span><small>»tæt på 8000 sejre« – Sjællandske, dec. 2024</small></li>
       <li data-vis style="--i:1"><b data-tael="10">10</b><span>derbysejre som kusk</span><small>tangerer N. J. Kosters rekord</small></li>
       <li data-vis style="--i:2"><b data-tael="25">25</b><span>sejre i De Jydske Grand Prix’er</span><small>fra Camrose 1978 til Daytona 2019</small></li>
       <li data-vis style="--i:3"><b data-tael="30">30</b><span>championater på Charlottenlund</span><small>pr. januar 2018</small></li>
     </ul>
-    <p class="note">Kilder: Travsportens Hall of Fame (thof.dk) og da.wikipedia.org.</p>
+    <p class="note">Kilder: Sjællandske Medier (1. december 2024), Travsportens Hall of Fame (thof.dk) og da.wikipedia.org.</p>
   </div>
 </section>
 ${derby()}
@@ -830,10 +830,10 @@ ${sidehoved({
       <blockquote data-vis><p>»Steen Juul vil vinde – hver gang.«</p><cite>Travsportens Hall of Fame (thof.dk)</cite></blockquote>
       <h2 data-vis>Rekorden.</h2>
       <p data-vis>I Dansk Trav Derby har Steen Juul ti sejre som kusk – fra For Ever Vixi i 1983 til Festival of Speed i 2021 – og tangerer dermed N. J. Kosters rekord. Som træner har han vundet løbet ni gange, blandt andet i 2018, da Björn Goop kørte Chock Nock.</p>
-      <p data-vis>De Jydske Grand Prix’er for 2- til 4-årige har givet 25 sejre, fra Camrose i 1978 til Daytona i 2019. Sejrstallet som kusk var officielt opgjort til 7.602 pr. 1. april 2020.</p>
+      <p data-vis>De Jydske Grand Prix’er for 2- til 4-årige har givet 25 sejre, fra Camrose i 1978 til Daytona i 2019. Sejrstallet som kusk var officielt opgjort til 7.602 pr. 1. april 2020, og ved 50-års jubilæet som træner i december 2024 var han ifølge Sjællandske tæt på 8.000 sejre.</p>
       <p data-vis>I dag har ${SITE.navn} ${o.heste.length} heste på træningslisten, og i ${o.saeson.aar} er det indtil videre blevet til ${o.saeson.sejre} sejre på ${o.saeson.starter} starter som træner.</p>
       <p class="valg" data-vis>${ekstern(SITE.travinfo, 'Profilen på Travinfo')} ${ekstern(SITE.thof, 'Hall of Fame-artiklen')}</p>
-      <p class="note" data-vis>Kilder: Travsportens Hall of Fame (thof.dk), da.wikipedia.org (Steen Juul; Dansk Trav Derby), Team Juul på Facebook og Dansk Hestevæddeløb.</p>
+      <p class="note" data-vis>Kilder: Travsportens Hall of Fame (thof.dk), Sjællandske Medier (1. december 2024), da.wikipedia.org (Steen Juul; Dansk Trav Derby), Team Juul på Facebook og Dansk Hestevæddeløb.</p>
     </div>
   </div>
 </section>
@@ -1095,7 +1095,7 @@ export function sider(data, { v, idag, kort }) {
   return [
     side('', () => ({
       titel: `Steen Juul – travtræner og kusk på Charlottenlund | ${SITE.navn}`,
-      beskrivelse: `${SITE.navn}: Hall of Fame-træneren med over 7.600 sejre og ti derbysejre som kusk. ${o.heste.length} heste i træning med Charlottenlund Trav som hjemmebane.`,
+      beskrivelse: `${SITE.navn}: Hall of Fame-træneren med næsten 8.000 sejre og ti derbysejre som kusk. ${o.heste.length} heste i træning med Charlottenlund Trav som hjemmebane.`,
       klasse: 'forside',
       indhold: forside(o),
     })),
