@@ -20,6 +20,8 @@ export const SITE = {
   hjemmebane: 'https://www.travbanen.dk/',
   // Staldens kusk – hans tal hentes hver dag fra Dansk Hestevæddeløb (licensregistret: født 2003, jockey hos Steen Juul).
   kusk: { navn: 'Patrick Larsen', licens: 526155, foedt: 2003 },
+  // Anbefalinger på Facebook-siden (aflæst oktober 2026) – ret tallene, når de ændrer sig, eller sæt til null.
+  anbefalinger: { procent: 94, antal: 27, aflaest: 'oktober 2026' },
   kort: 'https://www.google.com/maps/search/?api=1&query=Mannerupvej+8%2C+4320+Lejre',
 };
 
@@ -602,7 +604,7 @@ const karriere = () => stakSektion({
 const YDELSER = (o) => [
   ['01', 'Træning af løbsheste', `${o.heste.length} heste står på træningslisten. I ${o.saeson.aar} har staldens heste været til start i ${dkListe(o.banerIAar)}.`],
   ['02', 'Tilkøring af ungheste', o.ungheste.length > 1 ? `Lige nu står ${o.ungheste.length} åringer og 2-årige på træningslisten og bygges op mod deres første starter.` : 'Ungheste køres til og bygges op mod deres første starter.'],
-  ['03', 'Erfaring i sulkyen', `${SITE.fornavn} har kørt løb siden 1968 og kører selv staldens heste – i ${o.kusk.aar} ${o.kusk.starter} starter og ${o.kusk.sejre} sejre som kusk.`],
+  ['03', 'Erfaring i sulkyen', `${SITE.fornavn} har kørt løb siden 1968.${o.kuskPL && SITE.kusk ? ` I dag kører staldens jockey, ${SITE.kusk.navn}, mange af hestene – i ${o.kuskPL.aar} ${o.kuskPL.starter} starter og ${o.kuskPL.sejre} sejre.` : ''}`],
 ];
 const ydelser = (o) => `
     <ul class="ydelser">${YDELSER(o).map(([nr, h, p], i) => `
@@ -777,7 +779,8 @@ const foelg = (fb = []) => (SITE.facebook || fb.length ? `
       ${etiket('Følg med', ' data-vis')}
       <h2 data-vis style="--i:1">Løbsdagene, før de sker.</h2>
       <p data-vis style="--i:2">På Facebook gennemgår Team Juul staldens starter før hver løbsdag – hest for hest – og fortæller, hvordan det gik${fb.length ? '. Her er de seneste opslag' : ''}.</p>
-      <p class="valg" data-vis style="--i:3">${ekstern(SITE.facebook, 'Team Juul på Facebook', 'knap')}</p>
+      ${SITE.anbefalinger ? `<p class="anbefal" data-vis style="--i:3"><b>${SITE.anbefalinger.procent}<small>%</small></b><span>anbefaler Team Juul på Facebook<small>${SITE.anbefalinger.antal} anmeldelser · ${SITE.anbefalinger.aflaest}</small></span></p>` : ''}
+      <p class="valg" data-vis style="--i:4">${ekstern(SITE.facebook, 'Team Juul på Facebook', 'knap')}</p>
     </div>
     <div>
       ${!fb.length ? `<div class="fb" data-fb="${SITE.facebook}">

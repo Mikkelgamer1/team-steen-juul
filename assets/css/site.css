@@ -445,6 +445,11 @@ html:not(.fx) .derby__kort { scroll-snap-align: center; }
 .foelg { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: center; }
 .foelg h2 { margin-bottom: 18px; }
 .foelg p { color: var(--daemp); }
+.anbefal { display: flex; align-items: center; gap: 16px; margin-top: 26px; }
+.anbefal b { font: 900 clamp(3.4rem, 5vw, 4.6rem)/.85 var(--display); color: var(--roed); }
+.anbefal b small { font-size: .5em; }
+.foelg .anbefal span { display: grid; gap: 2px; font-weight: 700; color: var(--tekst); }
+.anbefal span small { font-size: .78rem; font-weight: 500; color: var(--daemp); }
 html:not(.js) .fb { display: none; }
 .fb__note { margin-top: 12px; font-size: .78rem; color: var(--daemp) !important; }
 .fb iframe { display: block; width: 100%; max-width: 500px; height: 640px; border: 0; border-radius: var(--r); background: #fff; }
