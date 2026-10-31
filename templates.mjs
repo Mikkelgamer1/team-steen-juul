@@ -42,6 +42,7 @@ const DERBY = [
 // "Derbyvinder 17, 18 & 20". 1983 er fra travet.dk (22.8.2023, foto Burt Seeger). Vindere uden billede får en tegnet laurbærkrans.
 const DERBYFOTO = {
   1983: ['derby-1983', 'For Ever Vixi med laurbærkrans og Charlottenlund Travbanes dækken efter derbysejren i 1983', 'Foto: Burt Seeger', '88% 50%'],
+  1987: ['derby-1987', 'Konsonant og et barn, der krammer pokalen, i 1987', '', '50% 32%'],
   2017: ['derby-2017', 'Bvlgari Peak med laurbærkrans og derbydækken i 2017', 'Foto: Burt Seeger', '30% 50%'],
   2018: ['derby-2018', 'Chock Nock med laurbærkrans foran publikum i 2018', 'Foto: Burt Seeger', '46% 40%'],
   2020: ['derby-2020', 'Extreme med laurbærkrans og derbydækken i 2020', '', '35% 30%'],
@@ -63,6 +64,7 @@ const BILLEDER = {
   'festival': [1.529, 800, 1170],
   'derby-1983': [1.406, 800],
   'vixi-ejer': [1.540, 616],
+  'derby-1987': [0.689, 720],
   'derby-2017': [1.006, 505],
   'derby-2018': [1.473, 610],
   'derby-2020': [0.699, 420],
