@@ -144,9 +144,9 @@ a:hover > .maerke .maerke__juul { color: #fff; }
 
 .hero { --p: 0; position: relative; background: var(--bg); }
 .fx .hero { height: 230svh; }
-.hero__ramme { --q: min(1, calc(var(--p) * 1.45)); --navn: min(13.4vw, 25svh); --pb: 1.8em; --ph: .74em; position: relative; height: 100svh; min-height: 560px; overflow: hidden; }
+.hero__ramme { --q: min(1, calc(var(--p) * 1.45)); --navn: min(13.4vw, 25svh); --pb: 1.8em; --ph: .74em; --midt: 50%; position: relative; height: 100svh; min-height: 560px; overflow: hidden; }
 .fx .hero__ramme { position: sticky; top: 0; }
-.hero__foto { position: absolute; left: 50%; top: 50%; z-index: 1; margin: 0; overflow: hidden; font-size: var(--navn); width: calc(var(--pb) + var(--q) * (100% - var(--pb))); height: calc(var(--ph) + var(--q) * (100% - var(--ph))); border-radius: calc((1 - var(--q)) * var(--ph) / 2); translate: -50% -50%; animation: pille 1.3s var(--ease) .15s both; }
+.hero__foto { position: absolute; left: 50%; top: calc(var(--midt) + var(--q) * (50% - var(--midt))); z-index: 1; margin: 0; overflow: hidden; font-size: var(--navn); width: calc(var(--pb) + var(--q) * (100% - var(--pb))); height: calc(var(--ph) + var(--q) * (100% - var(--ph))); border-radius: calc((1 - var(--q)) * var(--ph) / 2); translate: -50% -50%; animation: pille 1.3s var(--ease) .15s both; }
 .hero__foto img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 12%; }
 .hero__foto figcaption { position: absolute; top: calc(var(--top) + 54px); right: var(--kant); z-index: 2; padding: 7px 14px; border-radius: 999px; background: rgba(13, 13, 12, .55); backdrop-filter: blur(10px); font-size: .74rem; color: #fff; white-space: nowrap; opacity: clamp(0, calc(var(--q) * 2 - 1), 1); }
 .hero__slor { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(13, 13, 12, .7) 0%, rgba(13, 13, 12, .1) 30%, rgba(13, 13, 12, .2) 55%, rgba(13, 13, 12, .92) 100%); opacity: var(--q); pointer-events: none; }
@@ -154,7 +154,7 @@ a:hover > .maerke .maerke__juul { color: #fff; }
 .hero__meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; padding-block: 12px; border-top: 1px solid rgba(242, 237, 227, .2); font: 600 .72rem var(--sans); letter-spacing: .18em; text-transform: uppercase; color: rgba(242, 237, 227, .7); animation: op .8s var(--ease) .2s both; }
 .hero__meta span:first-child { color: #fff; }
 /* Navnet ligger midt i rammen, så pillens plads (midterspalten) falder præcis oven i billedet */
-.hero__navn { position: absolute; inset: 50% 0 auto; display: grid; grid-template-columns: 1fr var(--pb) 1fr; column-gap: .14em; align-items: center; padding-inline: var(--kant); font-size: var(--navn); font-weight: 900; line-height: .8; letter-spacing: -.01em; translate: 0 -50%; pointer-events: none; }
+.hero__navn { position: absolute; inset: var(--midt) 0 auto; display: grid; grid-template-columns: 1fr var(--pb) 1fr; column-gap: .14em; align-items: center; padding-inline: var(--kant); font-size: var(--navn); font-weight: 900; line-height: .8; letter-spacing: -.01em; translate: 0 -50%; pointer-events: none; }
 .hero__ord { display: block; overflow: hidden; padding: .03em .02em 0; }
 .hero__ord > span { display: block; animation: ordop 1.3s var(--ease) .1s both; }
 .hero__ord--1 { grid-column: 1; justify-self: end; translate: calc(var(--q) * -60vw) 0; }
@@ -656,16 +656,21 @@ html:not(.js) .fb { display: none; }
 }
 /* Smalle skærme: navnet stables – STEEN over pillen, JUUL under – og glider op og ned ud af billedet */
 @media (max-width: 700px) {
-  .hero__ramme { --navn: min(29vw, 13.5svh); --pb: 2.5em; --ph: 1.12em; }
+  /* Navnet lidt højere og mindre, så det ikke støder ind i teksten forneden på telefoner med lav skærm */
+  .hero__ramme { --navn: min(28vw, 11.5svh); --pb: 2.5em; --ph: 1.12em; --midt: 41%; }
   .hero__navn { grid-template-columns: 1fr; grid-template-rows: auto var(--ph) auto; row-gap: .1em; justify-items: center; }
   .hero__ord--1 { grid-column: 1; grid-row: 1; justify-self: center; translate: 0 calc(var(--q) * -55svh); }
   .hero__ord--2 { grid-column: 1; grid-row: 3; justify-self: center; translate: 0 calc(var(--q) * 55svh); }
+  .hero__ord { opacity: clamp(0, calc(1 - var(--q) * 2.2), 1); }
 }
 @media (max-width: 560px) {
   .maerke { font-size: 1.6rem; }
   .hero__meta span:nth-child(2) { display: none; }
   .hero__indled { font-size: 1rem; }
-  .hero__bund .knap { min-height: 48px; padding: 0 20px; }
+  .hero__bund { gap: 16px; }
+  .hero__bund .valg { gap: 10px; }
+  .hero__bund .knap { min-height: 46px; padding: 0 16px; gap: 10px; font-size: .88rem; }
+  .hero__indled { font-size: .96rem; }
   .baand li { padding-block: 12px; gap: 24px; padding-left: 24px; }
   .derby__kort { width: 76vw; }
   .hkort dl { gap: 6px; }
