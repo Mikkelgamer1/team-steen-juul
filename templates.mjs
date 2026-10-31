@@ -28,7 +28,7 @@ const PARTNERE = [];
 const DERBY = [
   [1983, 'For Ever Vixi', 'Kusk og træner', 'Kom i træning seks dage før løbet'],
   [1987, 'Konsonant', 'Kusk og træner', 'Opdrætteren var kun 13 år'],
-  [1990, 'New Quick', 'Kusk og træner'],
+  [1990, 'New Quick', 'Kusk og træner', 'Senere avlschampion i 2001 og 2002'],
   [1993, 'Rudolf Le Ann', 'Kusk og træner'],
   [1994, 'Skalflex', 'Kusk', 'Træner: Leo S. Larsen'],
   [1997, 'Atom Tess', 'Kusk', 'Træner: Peter Rasmussen'],
@@ -39,11 +39,11 @@ const DERBY = [
   [2021, 'Festival of Speed', 'Kusk og træner', 'Nr. 10 som kusk – staldkammeraten Frodo Cash blev toer'],
 ];
 // Billeder til derbykortene: år → [billede, alt, kredit, beskæring]. 2017, 2018 og 2020 er fra Team Juuls Facebook-collage
-// "Derbyvinder 17, 18 & 20". 1983 er fra travet.dk (22.8.2023) og 1987 fra travsportshistorie.dk (18.8.2025), begge foto Burt Seeger. 1993, 1994, 1997 og 2007 er fra travsportshistorie.dk (Dansk Trav Derby 1990-99 og 2000-2009, Kenn Erik Bech) uden fotografnavn. 1990 (New Quick) er et arkivbillede uden kendt kilde. Vindere uden billede får en tegnet laurbærkrans.
+// "Derbyvinder 17, 18 & 20". 1983 er fra travet.dk (22.8.2023) og 1987 fra travsportshistorie.dk (18.8.2025), begge foto Burt Seeger. 1993, 1994, 1997 og 2007 er fra travsportshistorie.dk (Dansk Trav Derby 1990-99 og 2000-2009, Kenn Erik Bech) uden fotografnavn. 1990 er fra Hall of Fame (thof.dk, Lilli Hanover), foto Burt Seeger. Vindere uden billede får en tegnet laurbærkrans.
 const DERBYFOTO = {
   1983: ['derby-1983', 'For Ever Vixi med laurbærkrans og Charlottenlund Travbanes dækken efter derbysejren i 1983', 'Foto: Burt Seeger', '88% 50%'],
   1987: ['derby-1987', 'Konsonant med sin 13-årige opdrætter, Camilla Rasmussen, der krammer derbypokalen i 1987', 'Foto: Burt Seeger', '50% 32%'],
-  1990: ['derby-1990', 'New Quick i trav med startnummer 2, sort-hvidt arkivbillede', '', '6% 50%'],
+  1990: ['derby-1990', 'New Quick i trav med startnummer 2, sort-hvidt arkivbillede', 'Foto: Burt Seeger', '6% 50%'],
   1993: ['derby-1993', 'Rudolf Le Ann i fuld fart med Steen Juul i sulkyen', 'Kilde: travsportshistorie.dk', '28% 50%'],
   1994: ['derby-1994', 'Skalflex med startnummer 5, sort-hvidt arkivbillede', 'Kilde: travsportshistorie.dk', '50% 40%'],
   1997: ['derby-1997', 'Atom Tess i opløbet', 'Kilde: travsportshistorie.dk', '30% 50%'],
@@ -70,7 +70,8 @@ const BILLEDER = {
   'derby-1983': [1.406, 800],
   'vixi-ejer': [1.540, 616],
   'derby-1987': [0.689, 720],
-  'derby-1990': [1.393, 500],
+  'derby-1990': [1.393, 800],
+  'copperfield': [1.382, 700, 1200],
   'derby-1993': [1.708, 900],
   'derby-1994': [1.032, 413],
   'derby-1997': [1.103, 441],
@@ -572,7 +573,7 @@ const karriere = () => `
       <h2>Et liv i sulkyen.</h2>
       <p class="indled">Fra staldmand i Skive til rekordholder på Charlottenlund – seks nedslag i en karriere, der begyndte i 1968.</p>
       <p class="valg">${link('om-steen/', 'Hele historien')}</p>
-      <figure class="karriere__foto">${billede('vixi-ejer', 'For Ever Vixi med Steen Juul og ejeren Ivar Hvidtfeldt', { sizes: '(min-width: 1101px) 34vw, 92vw' })}<figcaption>For Ever Vixi med Steen Juul og ejeren Ivar Hvidtfeldt – den første derbyvinder · Foto: Burt Seeger</figcaption></figure>
+      <figure class="karriere__foto">${billede('copperfield', 'En ung Steen Juul med Copperfield og en buket', { sizes: '(min-width: 1101px) 34vw, 92vw' })}<figcaption>En ung Steen Juul med Copperfield – den første store stjerne i stalden · Foto: Burt Seeger</figcaption></figure>
     </div>
     <ol class="stak">${KARRIERE.map(([aar, titel, tekst], i) => `
       <li class="stak__kort" style="--i:${i}">
@@ -865,9 +866,11 @@ ${sidehoved({
       <p class="indled" data-vis>${SITE.person} er født den 20. august 1950 og lærte faget hos Victor Borregård i Skive og senere hos Jørgen Hill og svigerfaren Børge Simonsen i Aarhus.</p>
       <p data-vis>Debuten kom den 31. august 1968 med Karat – og blev til sejr i første forsøg. Derefter lod succesen vente på sig: de fire første sæsoner gav tre sejre på 115 starter. I 1972–74 blev det til 30.</p>
       <p data-vis>Den 1. december 1974 blev han som 24-årig selvstændig træner. I 1976 tog han championatet i Skive fra banens syvdobbelte champion Karsten Andersen, og året efter slog han Tarok i Skovbo Eliteløb med Pondus Hanover – til odds 26. I 1980 blev han landschampion for første gang med en ny sæsonrekord på 216 sejre.</p>
+      <figure class="prosa__foto" data-vis>${billede('copperfield', 'En ung Steen Juul med Copperfield og en buket', { sizes: '(min-width: 1101px) 680px, 92vw' })}<figcaption>En ung Steen Juul med Copperfield, som han selv kalder den første store stjerne i stalden · Foto: Burt Seeger</figcaption></figure>
+      <p data-vis>Copperfield vandt blandt andet Fyens 4-års Grand Prix og Aalborg Store Pris og blev nr. 3 i Dansk Trav Derby. Lillesøsteren Dilli Hanover kom også til Steen Juul – og fik senere derbyvinderen New Quick.</p>
       <h2 data-vis>Lunden.</h2>
       <p data-vis>Den 15. januar 1983 flyttede Steen Juul til Charlottenlund. Samme år vandt Dilli Hanover i 1.13,5 – dansk rekord og verdensrekord for hopper på 1000-meterbane, en rekord der holdt i 16 år. Og samme år kom den første derbysejr.</p>
-      <figure class="prosa__foto" data-vis>${billede('derby-1983', 'For Ever Vixi med laurbærkrans og Charlottenlund Travbanes dækken efter derbysejren i 1983', { sizes: '(min-width: 1101px) 680px, 92vw' })}<figcaption>For Ever Vixi efter derbysejren i 1983 · Foto: Burt Seeger</figcaption></figure>
+      <figure class="prosa__foto" data-vis>${billede('vixi-ejer', 'For Ever Vixi med Steen Juul og ejeren Ivar Hvidtfeldt', { sizes: '(min-width: 1101px) 680px, 92vw' })}<figcaption>For Ever Vixi med Steen Juul og ejeren Ivar Hvidtfeldt · Foto: Burt Seeger</figcaption></figure>
       <p data-vis>For Ever Vixi var købt i Sverige godt en uge før Derbyet. Steen Juul og ejeren Ivar Hvidtfeldt tog flyvebåden til Malmø for at prøvekøre hesten på Jägersro, og ugedagen før løbet sad han bag den for første gang. I Derbyet kom parret forbi den førende Fight Løjbjerg i opløbet.</p>
       <p data-vis>I 1985 fulgte det første Kriterium med Join Løjbjerg og det første af 35 championater på Charlottenlund til og med 2024.</p>
       <h2 data-vis>Ude i Europa.</h2>
@@ -879,7 +882,7 @@ ${sidehoved({
       <p data-vis>De Jydske Grand Prix’er for 2- til 4-årige har givet 25 sejre, fra Camrose i 1978 til Daytona i 2019. Sejrstallet som kusk var officielt opgjort til 7.602 pr. 1. april 2020, og ved 50-års jubilæet som træner i december 2024 var han ifølge Sjællandske tæt på 8.000 sejre.</p>
       <p data-vis>I dag har ${SITE.navn} ${o.heste.length} heste på træningslisten, og i ${o.saeson.aar} er det indtil videre blevet til ${o.saeson.sejre} sejre på ${o.saeson.starter} starter som træner.</p>
       <p class="valg" data-vis>${ekstern(SITE.travinfo, 'Profilen på Travinfo')} ${ekstern(SITE.thof, 'Hall of Fame-artiklen')}</p>
-      <p class="note" data-vis>Kilder: Travsportens Hall of Fame (thof.dk), travet.dk (22. august 2023), Sjællandske Medier (1. december 2024), da.wikipedia.org (Steen Juul; Dansk Trav Derby), Team Juul på Facebook og Dansk Hestevæddeløb.</p>
+      <p class="note" data-vis>Kilder: Travsportens Hall of Fame (thof.dk – Steen Juul og Lilli Hanover), travet.dk (22. august 2023), Sjællandske Medier (1. december 2024), da.wikipedia.org (Steen Juul; Dansk Trav Derby), Team Juul på Facebook og Dansk Hestevæddeløb.</p>
     </div>
   </div>
 </section>
