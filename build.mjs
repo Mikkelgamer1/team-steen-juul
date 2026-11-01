@@ -35,7 +35,7 @@ const paentNavn = (s) => String(s ?? '').replace('*', '').trim().toLowerCase()
 const kuskNavn = (s) => { const [efternavn, ...rest] = String(s ?? '').trim().split(/\s+/); return [...rest, efternavn].join(' ').trim(); };
 
 /** " YesBOX præsenterer Dansk Hoppe Kriterium 2026. V5-3, Trio " → "Dansk Hoppe Kriterium 2026" (sponsor og spilformer væk) */
-const loebsnavn = (s) => String(s ?? '').trim().replace(/^.*?præsenterer\s+/i, '').split('. ')[0].replace(/\.$/, '').trim();
+const loebsnavn = (s) => String(s ?? '').trim().replace(/^.*?præsenterer\s+/i, '').split('. ')[0].replace(/\.$/, '').trim().replace(/^./, (c) => c.toUpperCase());
 
 /** Store sejre: vundne løb med mindst så meget i førstepræmie (kr.). */
 const STORLOEB = 100_000;
@@ -87,10 +87,10 @@ async function hentTravinfo(gammel) {
   const kuskInfo = SITE.kusk ? await get(`/licenseholders/${SITE.kusk.licens}/basicinformation`).catch(() => null) : null;
 
   // Store sejre med løbets navn fra løbsdagens resultater. Kendte løb gemmes, så navnet kun hentes én gang.
-  const storeSejre = async (raa, gamle = []) => {
+  const storeSejre = async (raa, gamle = [], min = STORLOEB) => {
     const kendte = new Set(gamle.map((s) => s.id));
     const nye = [];
-    for (const r of raa.filter((r) => erStart(r) && r.placement.displayValue === '1' && (r.prizeMoney?.sortValue ?? 0) >= STORLOEB)) {
+    for (const r of raa.filter((r) => erStart(r) && r.placement.displayValue === '1' && (r.prizeMoney?.sortValue ?? 0) >= min)) {
       const id = r.raceInformation.raceId;
       if (kendte.has(id)) continue;
       const dag = await get(`/raceinfo/${r.raceInformation.raceDayId}/results`).catch(() => null);
@@ -126,7 +126,8 @@ async function hentTravinfo(gammel) {
     kusk: kusk?.statistics ? tilStatistik(kusk) : gammel?.kusk ?? [],
     kuskFoedt: Number(kuskInfo?.yearBorn) || gammel?.kuskFoedt,
     storloeb: await storeSejre(resultater, gammel?.storloeb),
-    kuskStorloeb: SITE.kusk ? await storeSejre(kuskRes, gammel?.kuskStorloeb) : [],
+    // kusken er ung, så også mindre løb med: siden viser hans største sejre efter præmie
+    kuskStorloeb: SITE.kusk ? await storeSejre(kuskRes, gammel?.kuskStorloeb, 25_000) : [],
     heste,
     resultater: flet(resultater.filter(erStart).map(tilResultat), gammel?.resultater),
     kommende: kommende.map((k) => ({ dato: k.raceInformation.date, bane: k.track.code, loeb: k.raceInformation.raceNumber, hestId: k.horse.id, hest: paentNavn(k.horse.name), kusk: kuskNavn(k.driver?.name) })),
@@ -237,6 +238,7 @@ function test() {
   assert.equal(plac('d'), 'disk.');
   assert.equal(loebsnavn(' YesBOX præsenterer Dansk Hoppe Kriterium 2026. V5-3, Trio '), 'Dansk Hoppe Kriterium 2026');
   assert.equal(loebsnavn(' Jydsk 2-årings Grand Prix 2026. V4-3, V5-5, Trio '), 'Jydsk 2-årings Grand Prix 2026');
+  assert.equal(loebsnavn(' J. Jensen præsenterer kvalifikationsløb til Dansk Hoppe Derby 2026. V65-2, Trio '), 'Kvalifikationsløb til Dansk Hoppe Derby 2026');
   assert.equal(loebsnavn(undefined), '');
   const raa = (over) => ({ withdrawn: false, raceType: { displayValue: '' }, placement: { displayValue: '1' }, ...over });
   assert.equal(erStart(raa()), true);

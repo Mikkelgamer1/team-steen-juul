@@ -683,8 +683,8 @@ const kuskSektion = (o) => {
         <div><dd>${(pl.praemier / 1e6).toLocaleString('da-DK', { maximumFractionDigits: 1 })}<small>mio. kr.</small></dd><dt>Indkørt</dt></div>
       </dl>` : '<div></div>'}
       ${o.kuskStorloeb.length ? `<div data-vis style="--i:2">
-        <h3 class="mini">Storløb vundet</h3>
-        <ol class="kusk__sejre">${o.kuskStorloeb.slice(0, 3).map((s) => `<li><span class="kusk__plads" aria-hidden="true">1</span><div><b>${esc(s.navn || 'Storløb')}</b><span>${storloebLinje(s)}</span></div></li>`).join('')}</ol>
+        <h3 class="mini">Største sejre</h3>
+        <ol class="kusk__sejre">${o.kuskStorloeb.filter((s) => s.navn && !s.navn.startsWith('Løb ')).sort((a, b) => b.praemie - a.praemie).slice(0, 4).map((s) => `<li><span class="kusk__plads" aria-hidden="true">1</span><div><b>${esc(s.navn || 'Storløb')}</b><span>${storloebLinje(s)}</span></div></li>`).join('')}</ol>
       </div>` : '<div></div>'}
     </div>
   </div>

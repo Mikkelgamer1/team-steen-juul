@@ -1,5 +1,5 @@
 {
- "opdateret": "2026-11-01T21:03:55.477Z",
+ "opdateret": "2026-11-01T21:06:38.133Z",
  "traener": {
   "foedt": 1950,
   "hjemmebane": "Charlottenlund Trav",
@@ -190,6 +190,76 @@
    "tid": "16,6a",
    "distance": 1800,
    "praemie": 150000
+  },
+  {
+   "id": 837010,
+   "navn": "Hoppe Derby Consolation 2026",
+   "dato": "2026-08-29",
+   "bane": "Ch",
+   "hest": "Lets Go Ostedantik",
+   "tid": "14,4a",
+   "distance": 2000,
+   "praemie": 50000
+  },
+  {
+   "id": 836741,
+   "navn": "Jydsk 3-årings Grand Prix Consolation 2026",
+   "dato": "2026-08-15",
+   "bane": "År",
+   "hest": "Mindy",
+   "tid": "16,8a",
+   "distance": 1800,
+   "praemie": 30000
+  },
+  {
+   "id": 836656,
+   "navn": "Kvalifikationsløb til Dansk Hoppe Derby 2026",
+   "dato": "2026-08-12",
+   "bane": "Ch",
+   "hest": "Love Caviar",
+   "tid": "14,4a",
+   "distance": 2000,
+   "praemie": 30000
+  },
+  {
+   "id": 835581,
+   "navn": "Tivoli Frihedens Ærespræmieløb",
+   "dato": "2026-06-20",
+   "bane": "År",
+   "hest": "King Darling",
+   "tid": "15,2a",
+   "distance": 1800,
+   "praemie": 25000
+  },
+  {
+   "id": 833197,
+   "navn": "Løb 5",
+   "dato": "2026-01-27",
+   "bane": "Jæ",
+   "hest": "Medaljon",
+   "tid": "17,6",
+   "distance": 2140,
+   "praemie": 27375
+  },
+  {
+   "id": 832466,
+   "navn": "Løb 1",
+   "dato": "2025-11-19",
+   "bane": "Bj",
+   "hest": "Kirsten Tinghøj",
+   "tid": "15,3a",
+   "distance": 2100,
+   "praemie": 25465
+  },
+  {
+   "id": 830713,
+   "navn": "Travligaen (finale Lunden 9/11)",
+   "dato": "2025-08-31",
+   "bane": "Ch",
+   "hest": "The One (NO)",
+   "tid": "12,8a",
+   "distance": 2000,
+   "praemie": 25000
   }
  ],
  "heste": [
