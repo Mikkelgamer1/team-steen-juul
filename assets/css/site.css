@@ -143,8 +143,8 @@ a:hover > .maerke .maerke__juul { color: #fff; }
    til hele skærmen, og ordene glider ud til siderne. Uden rulleeffekter står navnet og pillen bare der. ---------- */
 
 .hero { --p: 0; position: relative; background: var(--bg); }
-.fx .hero { height: 190svh; }
-.hero__ramme { --q: min(1, calc(var(--p) * 1.45)); --navn: min(13.4vw, 25svh); --pb: 1.8em; --ph: .74em; --midt: 50%; position: relative; height: 100svh; min-height: 560px; overflow: hidden; }
+.fx .hero { height: 165svh; }
+.hero__ramme { --q: min(1, calc(var(--p) * 1.12)); --navn: min(13.4vw, 25svh); --pb: 1.8em; --ph: .74em; --midt: 50%; position: relative; height: 100svh; min-height: 560px; overflow: hidden; }
 .fx .hero__ramme { position: sticky; top: 0; }
 /* Billedet fylder hele rammen hele tiden: pillen er en klip-maske, og billedet er skaleret ned i den (--s0 måles af site.js).
    Det er billigt at ændre for browseren – ingen ny opsætning af siden og ingen ny skalering af selve billedfilen. */
