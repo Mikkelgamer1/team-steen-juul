@@ -86,6 +86,7 @@ const BILLEDER = {
   'k-1983': [1.406, 700, 1100],
   'k-2002': [1.415, 700, 1100],
   'patrick': [2.127, 800, 1400],
+  'patrick-norge': [1.499, 600, 1024],
   'lunden': [1.400, 900, 1600],
   'h-frodo': [1.515, 800],
   'h-monterey': [1.501, 800],
@@ -702,6 +703,10 @@ const kuskSektion = (o) => {
         <p>Som 16-årig flyttede Patrick til Norge i 2019. I 2024 vandt han 43 løb på 281 starter, blev jockeychampion på Bjerke, Biri og Harstad – og norsk mester for staldansatte.</p>
         <small>Kilde: travet.dk</small>
       </div>
+      <figure class="kusk__foer-foto">
+        ${billede('patrick-norge', `${SITE.kusk.navn} jubler i sulkyen efter en sejr i Norge`, { sizes: '(max-width: 900px) 100vw, 380px' })}
+        <figcaption>Patrick jubler efter en sejr i Norge · Kilde: travet.dk</figcaption>
+      </figure>
       <ol class="kusk__sejre">${KUSK_FOER.map(([navn, linje]) => `<li><span class="kusk__plads" aria-hidden="true">1</span><div><b>${navn}</b><span>${linje}</span></div></li>`).join('')}</ol>
     </div>
     </div>

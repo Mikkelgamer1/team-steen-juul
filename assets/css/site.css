@@ -302,7 +302,10 @@ html:not(.fx) .derby__kort { scroll-snap-align: center; }
 .kusk__sejre div span { display: block; margin-top: 4px; font-size: .88rem; color: var(--daemp); }
 /* Største sejre fylder to rækker i højre kolonne; Patricks år i Norge lægger sig under tekst og tal, så der ikke opstår et hul */
 .kusk__gitter > :nth-child(3) { grid-column: 3; grid-row: span 2; }
-.kusk__foer { grid-column: 1 / 3; padding-top: 28px; border-top: 1px solid var(--linje); }
+.kusk__foer { grid-column: 1 / 3; display: grid; grid-template-columns: 1fr minmax(0, 1fr); gap: 0 28px; align-items: start; padding-top: 28px; border-top: 1px solid var(--linje); }
+.kusk__foer > .kusk__sejre { grid-column: 1 / -1; }
+.kusk__foer-foto img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--r); }
+.kusk__foer-foto figcaption { margin-top: 8px; font-size: .72rem; color: var(--daemp); }
 .kusk__foer p { max-width: 62ch; }
 .kusk__foer small { display: block; margin-top: 10px; font-size: .72rem; color: var(--daemp); }
 .kusk__foer .kusk__sejre { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); column-gap: 28px; margin-top: 18px; }
@@ -660,6 +663,7 @@ html:not(.js) .fb { display: none; }
   .stak__foto img { min-height: 0; aspect-ratio: 16 / 10; }
   .kusk__gitter { grid-template-columns: 1fr; }
   .kusk__gitter > :nth-child(3), .kusk__foer { grid-column: auto; grid-row: auto; }
+  .kusk__foer { grid-template-columns: 1fr; gap: 20px; }
   .kusk__hero { height: clamp(380px, 92vw, 560px); }
   .kusk__hero > img { object-position: 58% 30%; }
   .kusk__kredit { right: auto; left: var(--kant); top: 14px; max-width: calc(100% - 2 * var(--kant)); }
