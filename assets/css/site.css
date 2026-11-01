@@ -280,7 +280,7 @@ html:not(.fx) .derby__kort { scroll-snap-align: center; }
 .kusk__over .etiket { color: rgba(255, 255, 255, .8); }
 .kusk__navn { font-size: clamp(3.6rem, 12.5vw, 12rem); font-weight: 900; line-height: .8; }
 .kusk__navn span:last-child { color: var(--roed); }
-.kusk__kredit { position: absolute; bottom: 18px; right: var(--kant); z-index: 1; padding: 7px 14px; border-radius: 999px; background: rgba(13, 13, 12, .72); font-size: .72rem; }
+.kusk__kredit { position: absolute; top: 18px; right: var(--kant); z-index: 1; padding: 7px 14px; border-radius: 999px; background: rgba(13, 13, 12, .72); font-size: .72rem; }
 .kusk__info { padding-block: clamp(48px, 6vw, 88px); }
 .kusk__gitter { display: grid; grid-template-columns: 1.15fr 1fr 1fr; gap: 32px clamp(32px, 4.5vw, 72px); align-items: start; }
 .kusk__info .indled { color: var(--tekst); }
@@ -655,7 +655,7 @@ html:not(.js) .fb { display: none; }
   .kusk__gitter { grid-template-columns: 1fr; }
   .kusk__hero { height: clamp(380px, 92vw, 560px); }
   .kusk__hero > img { object-position: 58% 30%; }
-  .kusk__kredit { bottom: auto; right: auto; left: var(--kant); top: 14px; max-width: calc(100% - 2 * var(--kant)); }
+  .kusk__kredit { right: auto; left: var(--kant); top: 14px; max-width: calc(100% - 2 * var(--kant)); }
   .ydelser { grid-template-columns: 1fr; }
   .ydelser__nr { margin-bottom: 24px; }
   .bund__gitter { grid-template-columns: 1fr 1fr; }
