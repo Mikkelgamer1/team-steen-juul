@@ -1,5 +1,5 @@
 {
- "opdateret": "2026-11-01T11:17:55.170Z",
+ "opdateret": "2026-11-01T15:21:18.424Z",
  "traener": {
   "foedt": 1950,
   "hjemmebane": "Charlottenlund Trav",
@@ -103,12 +103,12 @@
  "kusk": [
   {
    "aar": 2026,
-   "starter": 253,
+   "starter": 255,
    "sejre": 41,
    "toer": 28,
-   "treer": 26,
+   "treer": 27,
    "procent": 16,
-   "praemier": 1799612
+   "praemier": 1803112
   },
   {
    "aar": 2025,
@@ -4113,14 +4113,5 @@
    "praemie": 1000
   }
  ],
- "kommende": [
-  {
-   "dato": "2026-11-01",
-   "bane": "Ch",
-   "loeb": 2,
-   "hestId": 656378,
-   "hest": "Madison Tårs",
-   "kusk": "Patrick Larsen"
-  }
- ]
+ "kommende": []
 }
