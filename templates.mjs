@@ -666,7 +666,7 @@ const kuskSektion = (o) => {
     ${billede('patrick', `${SITE.kusk.navn} vinker med buketten efter sejren med New Watch`, { sizes: '100vw' })}
     <p class="kusk__kredit">New Watch og ${SITE.kusk.navn} efter Jydsk 2-årings Grand Prix 2026 · Foto: Ole Hindby</p>
     <div class="wrap kusk__over">
-      ${etiket('Kusken hos Team Juul', ' data-vis')}
+      ${etiket('Jockey hos Steen Juul', ' data-vis')}
       <h2 class="kusk__navn" data-vis style="--i:1"><span>${fornavn}</span> <span>${efternavn.join(' ')}</span></h2>
     </div>
   </div>
