@@ -101,7 +101,7 @@ h3 { font-size: 1.2rem; font-weight: 700; letter-spacing: -.02em; line-height: 1
 html:not(.fx) .fremdrift { display: none; }
 
 .top { position: fixed; inset: 0 0 auto; z-index: 50; height: var(--top); color: #fff; transition: background .35s, box-shadow .35s; }
-.er-scrollet .top { background: rgba(13, 13, 12, .8); backdrop-filter: blur(14px) saturate(140%); box-shadow: 0 1px 0 rgba(242, 237, 227, .1); }
+.er-scrollet .top { background: rgba(13, 13, 12, .94); box-shadow: 0 1px 0 rgba(242, 237, 227, .1); }
 .top__inner { display: flex; align-items: center; gap: 28px; height: 100%; }
 /* Logoet: TEAM JUUL i den smalle skrift, JUUL i rødt – som forsidens store navn */
 .maerke { display: inline-flex; align-items: baseline; gap: .16em; font: 900 1.85rem/.8 var(--display); letter-spacing: -.005em; text-transform: uppercase; white-space: nowrap; }
@@ -143,12 +143,15 @@ a:hover > .maerke .maerke__juul { color: #fff; }
    til hele skærmen, og ordene glider ud til siderne. Uden rulleeffekter står navnet og pillen bare der. ---------- */
 
 .hero { --p: 0; position: relative; background: var(--bg); }
-.fx .hero { height: 230svh; }
+.fx .hero { height: 190svh; }
 .hero__ramme { --q: min(1, calc(var(--p) * 1.45)); --navn: min(13.4vw, 25svh); --pb: 1.8em; --ph: .74em; --midt: 50%; position: relative; height: 100svh; min-height: 560px; overflow: hidden; }
 .fx .hero__ramme { position: sticky; top: 0; }
-.hero__foto { position: absolute; left: 50%; top: calc(var(--midt) + var(--q) * (50% - var(--midt))); z-index: 1; margin: 0; overflow: hidden; font-size: var(--navn); width: calc(var(--pb) + var(--q) * (100% - var(--pb))); height: calc(var(--ph) + var(--q) * (100% - var(--ph))); border-radius: calc((1 - var(--q)) * var(--ph) / 2); translate: -50% -50%; animation: pille 1.3s var(--ease) .15s both; }
-.hero__foto img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 12%; }
-.hero__foto figcaption { position: absolute; top: calc(var(--top) + 54px); right: var(--kant); z-index: 2; padding: 7px 14px; border-radius: 999px; background: rgba(13, 13, 12, .55); backdrop-filter: blur(10px); font-size: .74rem; color: #fff; white-space: nowrap; opacity: clamp(0, calc(var(--q) * 2 - 1), 1); }
+/* Billedet fylder hele rammen hele tiden: pillen er en klip-maske, og billedet er skaleret ned i den (--s0 måles af site.js).
+   Det er billigt at ændre for browseren – ingen ny opsætning af siden og ingen ny skalering af selve billedfilen. */
+.hero__foto { --w: calc(var(--pb) + var(--q) * (100% - var(--pb))); --h: calc(var(--ph) + var(--q) * (100% - var(--ph))); --c: calc(var(--midt) + var(--q) * (50% - var(--midt))); position: absolute; inset: 0; z-index: 1; margin: 0; font-size: var(--navn); clip-path: inset(calc(var(--c) - var(--h) / 2) calc((100% - var(--w)) / 2) calc(100% - var(--c) - var(--h) / 2) round calc((1 - var(--q)) * var(--ph) / 2)); transform-origin: 50% var(--midt); animation: pille 1.3s var(--ease) .15s both; }
+/* Billedet er altid fuld højde og mindst fuld bredde – på en høj telefonskærm bliver det bredere end skærmen, så pillen kan vise hele scenen */
+.hero__foto img { position: absolute; top: 0; left: 50%; width: auto; min-width: 100%; max-width: none; height: 100%; translate: -50% 0; object-fit: cover; object-position: 50% 12%; transform-origin: 50% var(--c); scale: calc(var(--s0, .6) + var(--q) * (1 - var(--s0, .6))); will-change: scale; }
+.hero__foto figcaption { position: absolute; top: calc(var(--top) + 54px); right: var(--kant); z-index: 2; padding: 7px 14px; border-radius: 999px; background: rgba(13, 13, 12, .72); font-size: .74rem; color: #fff; white-space: nowrap; opacity: clamp(0, calc(var(--q) * 2 - 1), 1); }
 .hero__slor { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(13, 13, 12, .7) 0%, rgba(13, 13, 12, .1) 30%, rgba(13, 13, 12, .2) 55%, rgba(13, 13, 12, .92) 100%); opacity: var(--q); pointer-events: none; }
 .hero__indhold { position: relative; z-index: 2; display: grid; grid-template-rows: auto 1fr auto; height: 100%; padding-top: var(--top); padding-bottom: clamp(24px, 4svh, 48px); }
 .hero__meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; padding-block: 12px; border-top: 1px solid rgba(242, 237, 227, .2); font: 600 .72rem var(--sans); letter-spacing: .18em; text-transform: uppercase; color: rgba(242, 237, 227, .7); animation: op .8s var(--ease) .2s both; }
@@ -188,7 +191,7 @@ html:not(.fx) .hero__rul { display: none; }
 .udsagn { padding-top: clamp(72px, 10vw, 160px); }
 .udsagn__tekst { max-width: 19ch; font: 850 clamp(2.6rem, 6.8vw, 6.6rem)/.96 var(--display); text-transform: uppercase; }
 .ordvis .em { font: italic 500 .92em/1 var(--serif); text-transform: none; letter-spacing: -.02em; color: var(--roed); }
-.fx .ordvis > span { opacity: clamp(.12, calc((var(--p) - .16) * 3.2 * var(--antal) - var(--n)), 1); transition: opacity .2s linear; }
+.fx .ordvis > span { opacity: clamp(.12, calc((var(--p) - .16) * 3.2 * var(--antal) - var(--n)), 1); }
 .rekorder { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: clamp(64px, 9vw, 140px); border-top: 1px solid var(--linje); }
 .rekorder li { display: grid; align-content: start; gap: 8px; padding: 30px 24px 0; border-left: 1px solid var(--linje); }
 .rekorder li:first-child { padding-left: 0; border-left: 0; }
@@ -202,7 +205,7 @@ html:not(.fx) .hero__rul { display: none; }
 
 .derby { --linje: rgba(255, 255, 255, .28); --daemp: rgba(255, 255, 255, .82); position: relative; background: var(--roed); color: #fff; }
 .derby__ramme { padding-block: var(--luft); overflow: hidden; }
-.fx .derby { height: calc(var(--antal) * 34vh + 100vh); }
+.fx .derby { height: calc(var(--antal) * 26vh + 100vh); }
 .fx .derby__ramme { position: sticky; top: 0; display: flex; flex-direction: column; justify-content: center; gap: clamp(20px, 4svh, 52px); height: 100svh; padding-block: calc(var(--top) + 8px) 24px; }
 .derby__hoved { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 56px; align-items: end; }
 .derby__hoved h2 { font-size: clamp(3rem, 7.6vw, 7.4rem); }
@@ -276,7 +279,7 @@ html:not(.fx) .derby__kort { scroll-snap-align: center; }
 .kusk__over .etiket { color: rgba(255, 255, 255, .8); }
 .kusk__navn { font-size: clamp(3.6rem, 12.5vw, 12rem); font-weight: 900; line-height: .8; }
 .kusk__navn span:last-child { color: var(--roed); }
-.kusk__kredit { position: absolute; bottom: 18px; right: var(--kant); z-index: 1; padding: 7px 14px; border-radius: 999px; background: rgba(13, 13, 12, .55); backdrop-filter: blur(10px); font-size: .72rem; }
+.kusk__kredit { position: absolute; bottom: 18px; right: var(--kant); z-index: 1; padding: 7px 14px; border-radius: 999px; background: rgba(13, 13, 12, .72); font-size: .72rem; }
 .kusk__info { padding-block: clamp(48px, 6vw, 88px); }
 .kusk__gitter { display: grid; grid-template-columns: 1.15fr 1fr 1fr; gap: 32px clamp(32px, 4.5vw, 72px); align-items: start; }
 .kusk__info .indled { color: var(--tekst); }
@@ -521,7 +524,7 @@ html:not(.js) .fb { display: none; }
 .chips li:first-child b { color: #fff; }
 .sidehoved__foto { position: relative; margin: 0; height: clamp(340px, 72svh, 780px); overflow: hidden; background: var(--flade); }
 .sidehoved__foto img { width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, 50% 50%); }
-.sidehoved__foto figcaption { position: absolute; left: var(--kant); bottom: 16px; max-width: calc(100% - 2 * var(--kant)); padding: 7px 14px; border-radius: 999px; background: rgba(13, 13, 12, .6); backdrop-filter: blur(10px); font-size: .74rem; color: #fff; }
+.sidehoved__foto figcaption { position: absolute; left: var(--kant); bottom: 16px; max-width: calc(100% - 2 * var(--kant)); padding: 7px 14px; border-radius: 999px; background: rgba(13, 13, 12, .72); font-size: .74rem; color: #fff; }
 .sidehoved__foto figcaption a { text-decoration: underline; }
 
 .artikel { display: grid; grid-template-columns: 320px 1fr; gap: clamp(36px, 6vw, 112px); align-items: start; }
@@ -606,7 +609,7 @@ html:not(.js) .fb { display: none; }
 @keyframes zoom { from { transform: scale(1.12); } }
 @keyframes glid { to { transform: translateX(-50%); } }
 @keyframes rul { to { background-position: 0 -112px; } }
-.js [data-vis] { opacity: 0; transform: translateY(26px); transition: opacity .9s var(--ease), transform .9s var(--ease); transition-delay: calc(var(--i, 0) * 80ms); }
+.js [data-vis] { opacity: 0; transform: translateY(16px); transition: opacity .55s var(--ease), transform .55s var(--ease); transition-delay: calc(var(--i, 0) * 50ms); }
 .js [data-vis].ses { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
