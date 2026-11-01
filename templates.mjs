@@ -696,14 +696,14 @@ const kuskSektion = (o) => {
         <h3 class="mini">Største sejre</h3>
         <ol class="kusk__sejre">${o.kuskStorloeb.filter((s) => s.navn && !s.navn.startsWith('Løb ')).sort((a, b) => b.praemie - a.praemie).slice(0, 4).map((s) => `<li><span class="kusk__plads" aria-hidden="true">1</span><div><b>${esc(s.navn || 'Storløb')}</b><span>${storloebLinje(s)}</span></div></li>`).join('')}</ol>
       </div>` : '<div></div>'}
-    </div>
-    <div class="wrap kusk__foer" data-vis>
+    <div class="kusk__foer" data-vis>
       <div>
         <h3 class="mini">Før Team Juul · Norge 2019–2025</h3>
         <p>Som 16-årig flyttede Patrick til Norge i 2019. I 2024 vandt han 43 løb på 281 starter, blev jockeychampion på Bjerke, Biri og Harstad – og norsk mester for staldansatte.</p>
         <small>Kilde: travet.dk</small>
       </div>
       <ol class="kusk__sejre">${KUSK_FOER.map(([navn, linje]) => `<li><span class="kusk__plads" aria-hidden="true">1</span><div><b>${navn}</b><span>${linje}</span></div></li>`).join('')}</ol>
+    </div>
     </div>
   </div>
 </section>`;
