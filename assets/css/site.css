@@ -233,6 +233,7 @@ html:not(.fx) .derby__kort { scroll-snap-align: center; }
 
 /* Hestene på samme slags bane, på grøn bund */
 .derby--heste { background: var(--groen); }
+.fx .derby--heste { height: calc(var(--antal) * 15vh + 100vh); }
 .derby--heste .etiket::before { background: linear-gradient(90deg, #fff 50%, var(--roed) 50%); }
 .derby--heste .derby__kort:nth-child(3n) { background: var(--roed); }
 .derby__hoved .valg { margin-top: 18px; }
