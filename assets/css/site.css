@@ -300,6 +300,10 @@ html:not(.fx) .derby__kort { scroll-snap-align: center; }
 .kusk__plads { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--roed); color: #fff; font-weight: 800; font-size: .9rem; }
 .kusk__sejre b { display: block; font: 850 1.4rem/1 var(--display); text-transform: uppercase; }
 .kusk__sejre div span { display: block; margin-top: 4px; font-size: .88rem; color: var(--daemp); }
+/* Patricks år i Norge: tekst til venstre, sejrene side om side til højre */
+.kusk__foer { display: grid; grid-template-columns: 1.15fr 2fr; gap: 24px clamp(32px, 4.5vw, 72px); margin-top: clamp(40px, 5vw, 72px); padding-top: clamp(28px, 3vw, 40px); border-top: 1px solid var(--linje); }
+.kusk__foer small { display: block; margin-top: 10px; font-size: .72rem; color: var(--daemp); }
+.kusk__foer .kusk__sejre { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); column-gap: 28px; }
 
 /* ---------- citatet ---------- */
 
@@ -653,6 +657,7 @@ html:not(.js) .fb { display: none; }
   .stak__foto { grid-column: 1; grid-row: auto; }
   .stak__foto img { min-height: 0; aspect-ratio: 16 / 10; }
   .kusk__gitter { grid-template-columns: 1fr; }
+  .kusk__foer { grid-template-columns: 1fr; }
   .kusk__hero { height: clamp(380px, 92vw, 560px); }
   .kusk__hero > img { object-position: 58% 30%; }
   .kusk__kredit { right: auto; left: var(--kant); top: 14px; max-width: calc(100% - 2 * var(--kant)); }

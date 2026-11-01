@@ -656,6 +656,16 @@ const storloebListe = (liste) => `<ul class="storloeb">${liste.map((s) => `
         <li><b>${esc(s.navn || 'Storløb')}</b><span>${storloebLinje(s)}</span></li>`).join('')}
       </ul>`;
 
+// Patricks år i Norge (2019–2025) – ikke i Dansk Hestevæddeløbs data, så skrevet ind i hånden. Kilder (travet.dk):
+// flytning okt. 2019: /patrick-skal-forsvare-sin-titel-i-nm/ · NM 2024 med Vertigo Safir: /stor-succes-for-patrick-larsen/
+// 43 sejre/281 starter 2024, champion Bjerke/Biri/Harstad, Kind Of Steel: /v75-sejr-til-patrick-larsen/ og /patrick-larsen-champ-paa-bjerke-biri-og-harstad/
+// The One på Axevalla: /patrick-larsen-hentede-110-000-skr/
+const KUSK_FOER = [
+  ['Norsk mesterskab for staldansatte', 'Vertigo Safir · Norge, aug. 2024 · 40.000 NOK'],
+  ['V75-løb på Klosterskogen', 'Kind Of Steel · Norge, 19. apr. 2025 · 125.000 NOK'],
+  ['V75-løb på Axevalla', 'The One · Sverige, 20. jul. 2024 · 110.000 SEK'],
+];
+
 const kuskSektion = (o) => {
   if (!SITE.kusk) return '';
   const [fornavn, ...efternavn] = SITE.kusk.navn.split(' ');
@@ -686,6 +696,14 @@ const kuskSektion = (o) => {
         <h3 class="mini">Største sejre</h3>
         <ol class="kusk__sejre">${o.kuskStorloeb.filter((s) => s.navn && !s.navn.startsWith('Løb ')).sort((a, b) => b.praemie - a.praemie).slice(0, 4).map((s) => `<li><span class="kusk__plads" aria-hidden="true">1</span><div><b>${esc(s.navn || 'Storløb')}</b><span>${storloebLinje(s)}</span></div></li>`).join('')}</ol>
       </div>` : '<div></div>'}
+    </div>
+    <div class="wrap kusk__foer" data-vis>
+      <div>
+        <h3 class="mini">Før Team Juul · Norge 2019–2025</h3>
+        <p>Som 16-årig flyttede Patrick til Norge i 2019. I 2024 vandt han 43 løb på 281 starter, blev jockeychampion på Bjerke, Biri og Harstad – og norsk mester for staldansatte.</p>
+        <small>Kilde: travet.dk</small>
+      </div>
+      <ol class="kusk__sejre">${KUSK_FOER.map(([navn, linje]) => `<li><span class="kusk__plads" aria-hidden="true">1</span><div><b>${navn}</b><span>${linje}</span></div></li>`).join('')}</ol>
     </div>
   </div>
 </section>`;
