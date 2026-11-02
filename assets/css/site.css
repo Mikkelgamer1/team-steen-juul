@@ -308,6 +308,8 @@ html:not(.fx) .derby__kort { scroll-snap-align: center; }
 .kusk__gitter > :nth-child(3) { grid-column: 3; grid-row: span 2; }
 .kusk__foer { grid-column: 1 / 3; display: grid; grid-template-columns: 1fr minmax(0, 1fr); gap: 0 28px; align-items: start; padding-top: 28px; border-top: 1px solid var(--linje); }
 .kusk__foer > .kusk__sejre { grid-column: 1 / -1; }
+/* Teksten til venstre er højere end tallene, så fotoet trækkes op i hullet under tallene */
+@media (min-width: 901px) { .kusk__foer-foto { position: relative; margin-top: -88px; } }
 .kusk__foer-foto img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--r); }
 .kusk__foer-foto figcaption { margin-top: 8px; font-size: .72rem; color: var(--daemp); }
 .kusk__foer p { max-width: 62ch; }
