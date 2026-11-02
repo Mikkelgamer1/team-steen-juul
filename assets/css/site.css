@@ -283,10 +283,14 @@ html:not(.fx) .derby__kort { scroll-snap-align: center; }
 .kusk__kredit { position: absolute; top: 18px; right: var(--kant); z-index: 1; padding: 7px 14px; border-radius: 999px; background: rgba(13, 13, 12, .72); font-size: .72rem; }
 .kusk__info { padding-block: clamp(48px, 6vw, 88px); }
 .kusk__gitter { display: grid; grid-template-columns: 1.15fr 1fr 1fr; gap: 32px clamp(32px, 4.5vw, 72px); align-items: start; }
-.kusk__info .indled { color: var(--tekst); }
-.kusk__citat { margin-top: 28px; padding-left: 20px; border-left: 3px solid var(--roed); }
-.kusk__citat p { font: italic 500 clamp(1.4rem, 2.1vw, 1.85rem)/1.15 var(--serif); }
-.kusk__citat cite { display: block; margin-top: 10px; font-size: .7rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--daemp); }
+.kusk__info .indled { font-size: clamp(1.2rem, 1.6vw, 1.45rem); line-height: 1.45; letter-spacing: -.01em; color: var(--tekst); text-wrap: pretty; }
+/* Citatet som et lyst kort med rød top-markering og et stort, svagt anførselstegn i hjørnet */
+.kusk__citat { position: relative; margin-top: 32px; padding: 34px 28px 24px; border-radius: var(--r); background: var(--flade); box-shadow: 0 1px 0 var(--linje), 0 18px 40px -24px rgba(13, 13, 12, .35); overflow: hidden; }
+.kusk__citat::before { content: "\201C"; position: absolute; top: -18px; right: 16px; font: 900 9rem/1 var(--serif); color: var(--roed); opacity: .14; pointer-events: none; }
+.kusk__citat::after { content: ""; position: absolute; left: 28px; top: 0; width: 44px; height: 4px; border-radius: 0 0 4px 4px; background: var(--roed); }
+.kusk__citat p { position: relative; font: italic 600 clamp(1.45rem, 2.2vw, 1.95rem)/1.2 var(--serif); letter-spacing: -.01em; text-wrap: balance; }
+.kusk__citat cite { display: flex; align-items: center; gap: 10px; margin-top: 18px; font-size: .68rem; font-style: normal; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--daemp); }
+.kusk__citat cite::before { content: ""; width: 24px; height: 1px; background: currentColor; }
 .kusk__tal { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--linje); }
 .kusk__tal div { display: flex; flex-direction: column; gap: 6px; padding: 18px 0 20px; border-bottom: 1px solid var(--linje); }
 .kusk__tal div:nth-child(odd) { padding-right: 16px; border-right: 1px solid var(--linje); }
