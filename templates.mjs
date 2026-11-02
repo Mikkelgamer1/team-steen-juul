@@ -22,6 +22,7 @@ export const SITE = {
   kusk: { navn: 'Patrick Larsen', licens: 526155, foedt: 2003 },
   // Anbefalinger på Facebook-siden (aflæst oktober 2026) – ret tallene, når de ændrer sig, eller sæt til null.
   anbefalinger: { procent: 94, antal: 27, aflaest: 'oktober 2026' },
+  foelgere: 'ca. 3.000', // følgere på Facebook-siden (aflæst november 2026) – eller ''
   kort: 'https://www.google.com/maps/search/?api=1&query=Mannerupvej+8%2C+4320+Lejre',
 };
 
@@ -836,6 +837,17 @@ const formkurve = (liste) => `<ol class="form" aria-label="Placeringer i de sene
 /** Lang tekst forkortes ved et ordskifte. */
 const kortTekst = (s, max = 240) => (s.length <= max ? s : `${s.slice(0, s.lastIndexOf(' ', max))}…`);
 
+// Uden hentede opslag: et fast kort, der viser, hvad man finder på Facebook-siden, og linker dertil.
+// (Facebooks egen indlejring viser ikke opslag for besøgende, der ikke er logget ind, og satte cookies.)
+const fbSide = () => `<a class="fbside" href="${SITE.facebook}" target="_blank" rel="noopener">
+        ${billede('loeb-4', '', { sizes: '(max-width: 900px) 92vw, 520px' })}
+        <span class="fbside__krop">
+          <span class="fbside__navn"><svg viewBox="0 0 24 24" width="34" height="34" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="currentColor"/><path d="M13.4 19.5v-6.3h2.1l.3-2.5h-2.4V9.2c0-.7.2-1.2 1.2-1.2h1.3V5.8a17 17 0 0 0-1.9-.1c-1.9 0-3.2 1.2-3.2 3.3v1.8H8.7v2.5h2.1v6.3z" fill="var(--bg)"/></svg><span>Team Juul<small>facebook.com/teamsteenjuul${SITE.foelgere ? ` · ${SITE.foelgere} følgere` : ''}</small></span></span>
+          <span class="fbside__liste"><span>Starterne før hver løbsdag – hest for hest</span><span>Resultater og billeder fra banen</span><span>Nye heste i stalden</span></span>
+          <span class="fbside__mere">Følg med på Facebook ${ud}</span>
+        </span>${nyFane}
+      </a>`;
+
 // De seneste Facebook-opslag (hentet af build.mjs) som kort. Vises kun, når der er opslag.
 const fbKort = (liste) => `
     <ul class="fbkort" aria-label="Seneste opslag fra Facebook">${liste.map((p, i) => `
@@ -859,12 +871,7 @@ const foelg = (fb = []) => (SITE.facebook || fb.length ? `
       ${SITE.anbefalinger ? `<p class="anbefal" data-vis style="--i:3"><b>${SITE.anbefalinger.procent}<small>%</small></b><span>anbefaler Team Juul på Facebook<small>${SITE.anbefalinger.antal} anmeldelser · ${SITE.anbefalinger.aflaest}</small></span></p>` : ''}
       <p class="valg" data-vis style="--i:4">${ekstern(SITE.facebook, 'Team Juul på Facebook', 'knap')}</p>
     </div>
-    <div>
-      ${!fb.length ? `<div class="fb" data-fb="${SITE.facebook}">
-        <button class="knap knap--kant" type="button">Vis de seneste opslag ${pil}</button>
-        <p class="fb__note">Opslagene hentes fra Facebook og sætter cookies derfra.</p>
-      </div>` : ''}
-    </div>
+    <div data-vis style="--i:2">${!fb.length && SITE.facebook ? fbSide() : ''}</div>
   </div>
   ${fb.length ? `<div class="wrap">${fbKort(fb)}</div>` : ''}
 </section>` : '');
