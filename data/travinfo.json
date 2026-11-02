@@ -1,5 +1,5 @@
 {
- "opdateret": "2026-11-01T21:27:57.274Z",
+ "opdateret": "2026-11-02T07:54:12.632Z",
  "traener": {
   "foedt": 1950,
   "hjemmebane": "Charlottenlund Trav",
@@ -4183,5 +4183,14 @@
    "praemie": 1000
   }
  ],
- "kommende": []
+ "kommende": [
+  {
+   "dato": "2026-11-04",
+   "bane": "Jæ",
+   "loeb": 6,
+   "hestId": 656666,
+   "hest": "Get In Your Pj's (SE)",
+   "kusk": "Patrick Larsen"
+  }
+ ]
 }
