@@ -1,5 +1,5 @@
 {
- "opdateret": "2026-11-02T10:14:48.207Z",
+ "opdateret": "2026-11-02T11:42:34.278Z",
  "traener": {
   "foedt": 1950,
   "hjemmebane": "Charlottenlund Trav",
@@ -4190,6 +4190,14 @@
    "loeb": 6,
    "hestId": 656666,
    "hest": "Get In Your Pj's (SE)",
+   "kusk": "Patrick Larsen"
+  },
+  {
+   "dato": "2026-11-08",
+   "bane": "Ch",
+   "loeb": 91,
+   "hestId": 657131,
+   "hest": "Magic Bird",
    "kusk": "Patrick Larsen"
   }
  ]
