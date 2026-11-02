@@ -683,6 +683,9 @@ const kuskSektion = (o) => {
   if (!SITE.kusk) return '';
   const [fornavn, ...efternavn] = SITE.kusk.navn.split(' ');
   const pl = o.kuskPL, foer = o.kuskFoer;
+  const sejre = o.kuskStorloeb.filter((s) => s.navn && !s.navn.startsWith('Løb ')).sort((a, b) => b.praemie - a.praemie).slice(0, 4);
+  // Hestens eget billede på sejrskortet – dog ikke topbilledet, som allerede står øverst i sektionen
+  const foto = (s) => { const h = o.heste.find((h) => h.navn.toLowerCase() === s.hest.toLowerCase()); const f = h && HESTEFOTO[h.id]; return f?.[0] === 'patrick' ? null : f; };
   return `
 <section class="kusk">
   <div class="kusk__hero parallax" data-p>
@@ -693,36 +696,38 @@ const kuskSektion = (o) => {
       <h2 class="kusk__navn" data-vis style="--i:1"><span>${fornavn}</span> <span>${efternavn.join(' ')}</span></h2>
     </div>
   </div>
-  <div class="sek--papir kusk__info">
-    <div class="wrap kusk__gitter">
-      <div data-vis>
-        <p class="indled">Født i ${o.kuskFoedt} og jockey hos ${SITE.person} med Charlottenlund som hjemmebane.${pl && foer?.starter && pl.starter >= foer.starter * 3 ? ` ${pl.aar} blev gennembruddet: fra ${foer.starter} starter året før til ${pl.starter} – og ${pl.sejre} sejre.` : pl ? ` I ${pl.aar} har han ${pl.sejre} sejre på ${pl.starter} starter.` : ''}</p>
-        <blockquote class="kusk__citat"><p>»Det nye dream team i dansk travsport.«</p><cite>travservice.dk om ${SITE.person} og ${SITE.kusk.navn}, april 2026</cite></blockquote>
+  <div class="kusk__info">
+    <div class="wrap bento">
+      <div class="bento__felt bento__intro" data-vis>
+        <p>Født i ${o.kuskFoedt} og jockey hos ${SITE.person} med Charlottenlund som hjemmebane.${pl && foer?.starter && pl.starter >= foer.starter * 3 ? ` <em>${pl.aar} blev gennembruddet:</em> fra ${foer.starter} starter året før til ${pl.starter} – og ${pl.sejre} sejre.` : pl ? ` I ${pl.aar} har han ${pl.sejre} sejre på ${pl.starter} starter.` : ''}</p>
+      </div>${pl ? `
+      <div class="bento__felt bento__tal bento__tal--roed" data-vis style="--i:1"><b data-tael="${pl.sejre}">${pl.sejre}</b><span>Sejre i ${pl.aar}</span></div>
+      <div class="bento__felt bento__tal" data-vis style="--i:2"><b data-tael="${pl.starter}">${pl.starter}</b><span>Starter i ${pl.aar}</span></div>` : ''}
+      <blockquote class="bento__felt bento__citat" data-vis><p>Det nye dream team i dansk travsport.</p><cite>travservice.dk om ${SITE.person} og ${SITE.kusk.navn}, april 2026</cite></blockquote>${pl ? `
+      <div class="bento__felt bento__tal bento__ring" data-vis style="--i:1;--pct:${Number(pl.procent) || 0}"><b>${pl.procent}<small>%</small></b><span>Sejrsprocent</span></div>
+      <div class="bento__felt bento__tal" data-vis style="--i:2"><b>${(pl.praemier / 1e6).toLocaleString('da-DK', { maximumFractionDigits: 1 })}<small>mio. kr.</small></b><span>Indkørt i ${pl.aar}</span></div>` : ''}${sejre.length ? `
+      <h3 class="bento__titel" data-vis>Største sejre</h3>${sejre.map((s, i) => { const f = foto(s); return `
+      <article class="bento__felt bento__sejr${f ? ' bento__sejr--foto' : ''}" data-vis style="--i:${i}${f?.[3] ? `;--pos:${f[3]}` : ''}">
+        ${f ? billede(f[0], f[1], { sizes: i ? '(max-width: 900px) 100vw, 25vw' : '(max-width: 900px) 100vw, 50vw' }) : ''}${f ? `<small class="bento__kredit">${f[2]}</small>` : ''}
+        <div>
+          <span class="bento__praemie">${kr(s.praemie)}</span>
+          <b>${esc(s.navn)}</b>
+          <span>${esc(s.hest)} · ${esc(bane(s.bane))}, ${kortDato(s.dato)}</span>
+        </div>
+      </article>`; }).join('')}` : ''}
+      <div class="bento__felt bento__norge" data-vis>
+        <figure>
+          ${billede('patrick-norge', `${SITE.kusk.navn} jubler i sulkyen efter en sejr i Norge`, { sizes: '(max-width: 900px) 100vw, 40vw' })}
+          <figcaption>Patrick jubler efter en sejr i Norge · Kilde: travet.dk</figcaption>
+        </figure>
+        <div>
+          <p class="mini">Før Team Juul · Norge 2019–2025</p>
+          <h3>Seks år i Norge</h3>
+          <p>Som 16-årig flyttede Patrick til Norge i 2019. I 2024 vandt han 43 løb på 281 starter, blev jockeychampion på Bjerke, Biri og Harstad – og norsk mester for staldansatte. Da arbejdsgiveren Kim Pedersen flyttede til Åby, vendte Patrick i januar 2026 hjem til pladsen hos Steen Juul.</p>
+          <ul>${KUSK_FOER.map(([navn, linje]) => `<li><b>${navn}</b><span>${linje}</span></li>`).join('')}</ul>
+          <small>Kilde: travet.dk</small>
+        </div>
       </div>
-      ${pl ? `<dl class="kusk__tal" data-vis style="--i:1">
-        <div><dd data-tael="${pl.sejre}">${pl.sejre}</dd><dt>Sejre i ${pl.aar}</dt></div>
-        <div><dd data-tael="${pl.starter}">${pl.starter}</dd><dt>Starter</dt></div>
-        <div><dd>${pl.procent}<small>%</small></dd><dt>Sejrsprocent</dt></div>
-        <div><dd>${(pl.praemier / 1e6).toLocaleString('da-DK', { maximumFractionDigits: 1 })}<small>mio. kr.</small></dd><dt>Indkørt</dt></div>
-      </dl>` : '<div></div>'}
-      ${o.kuskStorloeb.length || o.kuskAar.length > 1 ? `<div data-vis style="--i:2">
-        ${o.kuskStorloeb.length ? `<h3 class="mini">Største sejre</h3>
-        <ol class="kusk__sejre">${o.kuskStorloeb.filter((s) => s.navn && !s.navn.startsWith('Løb ')).sort((a, b) => b.praemie - a.praemie).slice(0, 4).map((s) => `<li><span class="kusk__plads" aria-hidden="true">1</span><div><b>${esc(s.navn || 'Storløb')}</b><span>${storloebLinje(s)}</span></div></li>`).join('')}</ol>` : ''}
-        ${o.kuskAar.length > 1 ? kuskAarForAar(o.kuskAar) : ''}
-      </div>` : '<div></div>'}
-    <div class="kusk__foer">
-      <div class="kusk__foer-tekst" data-vis>
-        <h3 class="mini">Før Team Juul · Norge 2019–2025</h3>
-        <p>Som 16-årig flyttede Patrick til Norge i 2019. I 2024 vandt han 43 løb på 281 starter, blev jockeychampion på Bjerke, Biri og Harstad – og norsk mester for staldansatte. Da arbejdsgiveren Kim Pedersen flyttede til Åby, vendte Patrick i januar 2026 hjem til pladsen hos Steen Juul.</p>
-        <small>Kilde: travet.dk</small>
-      </div>
-      <div class="kusk__foer-midt">
-        <figure class="kusk__foer-foto" data-vis style="--i:1">
-          ${billede('patrick-norge', `${SITE.kusk.navn} jubler i sulkyen efter en sejr i Norge`, { sizes: '(max-width: 900px) 100vw, 380px' })}        </figure>
-        <blockquote class="kusk__udvikling" data-vis style="--i:2"><p>»Han tager ansvar og ikke mindst initiativ i løbene.«</p><cite>travet.dk om Patrick efter hjemkomsten, august 2026</cite></blockquote>
-      </div>
-      <ol class="kusk__sejre" data-vis>${KUSK_FOER.map(([navn, linje]) => `<li><span class="kusk__plads" aria-hidden="true">1</span><div><b>${navn}</b><span>${linje}</span></div></li>`).join('')}</ol>
-    </div>
     </div>
   </div>
 </section>`;
