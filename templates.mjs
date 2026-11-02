@@ -227,6 +227,7 @@ function afled(data, idag) {
     fb: (data.facebook ?? []).slice(0, 5),
     kuskPL: (data.kusk ?? []).find((s) => s.aar === saeson.aar && s.starter > 0) ?? (data.kusk ?? []).find((s) => s.starter > 0),
     kuskFoer: (data.kusk ?? []).find((s) => s.aar === saeson.aar - 1),
+    kuskAar: (data.kusk ?? []).filter((s) => s.starter > 0).sort((a, b) => a.aar - b.aar),
     kuskFoedt: data.kuskFoedt ?? SITE.kusk?.foedt,
     storloeb: data.storloeb ?? [],
     kuskStorloeb: data.kuskStorloeb ?? [],
@@ -661,11 +662,21 @@ const storloebListe = (liste) => `<ul class="storloeb">${liste.map((s) => `
 // flytning okt. 2019: /patrick-skal-forsvare-sin-titel-i-nm/ · NM 2024 med Vertigo Safir: /stor-succes-for-patrick-larsen/
 // 43 sejre/281 starter 2024, champion Bjerke/Biri/Harstad, Kind Of Steel: /v75-sejr-til-patrick-larsen/ og /patrick-larsen-champ-paa-bjerke-biri-og-harstad/
 // The One på Axevalla: /patrick-larsen-hentede-110-000-skr/
+// Kim Pedersen til Åby og pladsen hos Juul: /spaendende-fredag-for-patrick/ · hjem i januar 2026 og citatet under fotoet: /patrick-larsen-runder-750-000/
 const KUSK_FOER = [
   ['Norsk mesterskab for staldansatte', 'Vertigo Safir · Norge, aug. 2024 · 40.000 NOK'],
   ['V75-løb på Klosterskogen', 'Kind Of Steel · Norge, 19. apr. 2025 · 125.000 NOK'],
   ['V75-løb på Axevalla', 'The One · Sverige, 20. jul. 2024 · 110.000 SEK'],
 ];
+
+// Patricks starter og sejre i Danmark år for år (Dansk Hestevæddeløbs tal); det seneste år står fremhævet nederst
+const kuskAarForAar = (aar) => `<div class="kusk__aar" data-vis style="--i:3">
+          <h3 class="mini">År for år i Danmark</h3>
+          <table>
+            <thead><tr><th scope="col">År</th><th scope="col">Starter</th><th scope="col">Sejre</th><th scope="col">Sejrs-%</th></tr></thead>
+            <tbody>${aar.map((s, i) => `<tr${i === aar.length - 1 ? ' class="kusk__aar-nu"' : ''}><th scope="row">${s.aar}</th><td>${s.starter}</td><td>${s.sejre}</td><td>${s.procent}<small>%</small></td></tr>`).join('')}</tbody>
+          </table>
+        </div>`;
 
 const kuskSektion = (o) => {
   if (!SITE.kusk) return '';
@@ -693,20 +704,22 @@ const kuskSektion = (o) => {
         <div><dd>${pl.procent}<small>%</small></dd><dt>Sejrsprocent</dt></div>
         <div><dd>${(pl.praemier / 1e6).toLocaleString('da-DK', { maximumFractionDigits: 1 })}<small>mio. kr.</small></dd><dt>Indkørt</dt></div>
       </dl>` : '<div></div>'}
-      ${o.kuskStorloeb.length ? `<div data-vis style="--i:2">
-        <h3 class="mini">Største sejre</h3>
-        <ol class="kusk__sejre">${o.kuskStorloeb.filter((s) => s.navn && !s.navn.startsWith('Løb ')).sort((a, b) => b.praemie - a.praemie).slice(0, 4).map((s) => `<li><span class="kusk__plads" aria-hidden="true">1</span><div><b>${esc(s.navn || 'Storløb')}</b><span>${storloebLinje(s)}</span></div></li>`).join('')}</ol>
+      ${o.kuskStorloeb.length || o.kuskAar.length > 1 ? `<div data-vis style="--i:2">
+        ${o.kuskStorloeb.length ? `<h3 class="mini">Største sejre</h3>
+        <ol class="kusk__sejre">${o.kuskStorloeb.filter((s) => s.navn && !s.navn.startsWith('Løb ')).sort((a, b) => b.praemie - a.praemie).slice(0, 4).map((s) => `<li><span class="kusk__plads" aria-hidden="true">1</span><div><b>${esc(s.navn || 'Storløb')}</b><span>${storloebLinje(s)}</span></div></li>`).join('')}</ol>` : ''}
+        ${o.kuskAar.length > 1 ? kuskAarForAar(o.kuskAar) : ''}
       </div>` : '<div></div>'}
     <div class="kusk__foer">
-      <div data-vis>
+      <div class="kusk__foer-tekst" data-vis>
         <h3 class="mini">Før Team Juul · Norge 2019–2025</h3>
-        <p>Som 16-årig flyttede Patrick til Norge i 2019. I 2024 vandt han 43 løb på 281 starter, blev jockeychampion på Bjerke, Biri og Harstad – og norsk mester for staldansatte.</p>
+        <p>Som 16-årig flyttede Patrick til Norge i 2019. I 2024 vandt han 43 løb på 281 starter, blev jockeychampion på Bjerke, Biri og Harstad – og norsk mester for staldansatte. Da arbejdsgiveren Kim Pedersen flyttede til Åby, vendte Patrick i januar 2026 hjem til pladsen hos Steen Juul.</p>
         <small>Kilde: travet.dk</small>
       </div>
-      <figure class="kusk__foer-foto" data-vis style="--i:1">
-        ${billede('patrick-norge', `${SITE.kusk.navn} jubler i sulkyen efter en sejr i Norge`, { sizes: '(max-width: 900px) 100vw, 380px' })}
-        <figcaption>Patrick jubler efter en sejr i Norge · Kilde: travet.dk</figcaption>
-      </figure>
+      <div class="kusk__foer-midt">
+        <figure class="kusk__foer-foto" data-vis style="--i:1">
+          ${billede('patrick-norge', `${SITE.kusk.navn} jubler i sulkyen efter en sejr i Norge`, { sizes: '(max-width: 900px) 100vw, 380px' })}        </figure>
+        <blockquote class="kusk__udvikling" data-vis style="--i:2"><p>»Han tager ansvar og ikke mindst initiativ i løbene.«</p><cite>travet.dk om Patrick efter hjemkomsten, august 2026</cite></blockquote>
+      </div>
       <ol class="kusk__sejre" data-vis>${KUSK_FOER.map(([navn, linje]) => `<li><span class="kusk__plads" aria-hidden="true">1</span><div><b>${navn}</b><span>${linje}</span></div></li>`).join('')}</ol>
     </div>
     </div>

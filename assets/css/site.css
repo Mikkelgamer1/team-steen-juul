@@ -304,7 +304,22 @@ html:not(.fx) .derby__kort { scroll-snap-align: center; }
 .kusk__plads { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--roed); color: #fff; font-weight: 800; font-size: .9rem; }
 .kusk__sejre b { display: block; font: 850 1.4rem/1 var(--display); text-transform: uppercase; }
 .kusk__sejre div span { display: block; margin-top: 4px; font-size: .88rem; color: var(--daemp); }
+/* År for år: dæmpede tidlige år og det seneste år som en mørk række nederst med store tal */
+.kusk__aar { margin-top: 28px; }
+.kusk__aar table { width: 100%; margin-top: 10px; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.kusk__aar thead th { padding: 0 0 8px; font-size: .6rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--daemp); text-align: right; }
+.kusk__aar th, .kusk__aar td { padding-left: 10px; text-align: right; }
+.kusk__aar :is(th, td):first-child { padding-left: 0; text-align: left; }
+.kusk__aar tbody :is(th, td) { padding-block: 7px; border-top: 1px solid var(--linje); font: 800 1.15rem/1 var(--display); color: var(--daemp); }
+.kusk__aar tbody td:nth-child(3) { color: var(--roed); }
+.kusk__aar td small { margin-left: 1px; font-size: .62em; }
+.kusk__aar tbody tr:nth-last-child(2) :is(th, td) { padding-bottom: 14px; }
+.kusk__aar .kusk__aar-nu :is(th, td) { padding-block: 14px; border-top: 0; background: var(--bg); color: var(--papir); font-size: 1.7rem; }
+.kusk__aar .kusk__aar-nu td:nth-child(3) { color: var(--roed); }
+.kusk__aar .kusk__aar-nu :is(th, td):first-child { padding-left: 14px; border-radius: var(--r-lille) 0 0 var(--r-lille); }
+.kusk__aar .kusk__aar-nu :is(th, td):last-child { padding-right: 14px; border-radius: 0 var(--r-lille) var(--r-lille) 0; }
 .kusk__foer { display: grid; gap: 20px; padding-top: 28px; border-top: 1px solid var(--linje); }
+.kusk__foer-midt { display: grid; gap: 28px; }
 /* På brede skærme lægges Patricks år i Norge direkte ind i gitteret: fotoet starter lige under tallene, teksten under citatet, så
    ingen af kolonnerne får et hul, uanset hvor høj teksten til venstre er. Største sejre fylder hele højre kolonne, og den sidste
    række (1fr) tager den ekstra højde, hvis højre kolonne er længst. */
@@ -314,12 +329,18 @@ html:not(.fx) .derby__kort { scroll-snap-align: center; }
   .kusk__gitter > :nth-child(2) { grid-column: 2; grid-row: 1; }
   .kusk__gitter > :nth-child(3) { grid-column: 3; grid-row: 1 / -1; }
   .kusk__foer { display: contents; }
-  .kusk__foer > div { grid-column: 1; grid-row: 3; padding-top: 28px; border-top: 1px solid var(--linje); }
-  .kusk__foer-foto { grid-column: 2; grid-row: 2 / 4; }
+  .kusk__foer-tekst { grid-column: 1; grid-row: 3; padding-top: 28px; border-top: 1px solid var(--linje); }
+  /* Fotoet tæller kun med sin mindstehøjde og strækker sig så, til fotoet og citatet fylder ned til teksten ved siden af */
+  .kusk__foer-midt { grid-column: 2; grid-row: 2 / 4; align-self: stretch; }
+  .kusk__foer-midt, .kusk__foer-foto { display: flex; flex-direction: column; }
+  .kusk__foer-foto { flex: 1; }
+  .kusk__foer-foto img { flex: 1 1 0px; height: 0; min-height: 150px; aspect-ratio: auto; object-position: 30% 50%; }
   .kusk__foer > .kusk__sejre { grid-column: 1 / 3; grid-row: 4; }
 }
 .kusk__foer-foto img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--r); }
-.kusk__foer-foto figcaption { margin-top: 8px; font-size: .72rem; color: var(--daemp); }
+.kusk__udvikling { padding-left: 16px; border-left: 3px solid var(--roed); }
+.kusk__udvikling p { font: italic 600 clamp(1.1rem, 1.5vw, 1.3rem)/1.25 var(--serif); text-wrap: balance; }
+.kusk__udvikling cite { display: block; margin-top: 8px; font: normal 600 .66rem/1.5 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--daemp); }
 .kusk__foer p { max-width: 62ch; }
 .kusk__foer small { display: block; margin-top: 10px; font-size: .72rem; color: var(--daemp); }
 .kusk__foer .kusk__sejre { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); column-gap: 28px; margin-top: 18px; }
