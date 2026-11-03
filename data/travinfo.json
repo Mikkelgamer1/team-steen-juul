@@ -1,5 +1,5 @@
 {
- "opdateret": "2026-11-02T12:28:26.652Z",
+ "opdateret": "2026-11-03T08:04:50.869Z",
  "traener": {
   "foedt": 1950,
   "hjemmebane": "Charlottenlund Trav",
@@ -4191,6 +4191,70 @@
    "hestId": 656666,
    "hest": "Get In Your Pj's (SE)",
    "kusk": "Patrick Larsen"
+  },
+  {
+   "dato": "2026-11-06",
+   "bane": "Od",
+   "loeb": 4,
+   "hestId": 652856,
+   "hest": "K O Donna",
+   "kusk": "Birger Jørgensen"
+  },
+  {
+   "dato": "2026-11-06",
+   "bane": "Od",
+   "loeb": 4,
+   "hestId": 657005,
+   "hest": "Warren Buffet (SE)",
+   "kusk": "Patrick Larsen"
+  },
+  {
+   "dato": "2026-11-08",
+   "bane": "Ch",
+   "loeb": 3,
+   "hestId": 659013,
+   "hest": "New Watch",
+   "kusk": "Patrick Larsen"
+  },
+  {
+   "dato": "2026-11-08",
+   "bane": "Ch",
+   "loeb": 5,
+   "hestId": 655674,
+   "hest": "Charlie Munger (SE)",
+   "kusk": "Patrick Larsen"
+  },
+  {
+   "dato": "2026-11-08",
+   "bane": "Ch",
+   "loeb": 7,
+   "hestId": 651251,
+   "hest": "Keep The Money",
+   "kusk": "Patrick Larsen"
+  },
+  {
+   "dato": "2026-11-08",
+   "bane": "Ch",
+   "loeb": 9,
+   "hestId": 660306,
+   "hest": "Dutchess Sun (NO)",
+   "kusk": "Patrick Larsen"
+  },
+  {
+   "dato": "2026-11-08",
+   "bane": "Ch",
+   "loeb": 10,
+   "hestId": 658940,
+   "hest": "Nabucco",
+   "kusk": "Patrick Larsen"
+  },
+  {
+   "dato": "2026-11-08",
+   "bane": "Ch",
+   "loeb": 10,
+   "hestId": 659246,
+   "hest": "Niarkos Flax",
+   "kusk": "Jeppe Juel"
   },
   {
    "dato": "2026-11-08",
