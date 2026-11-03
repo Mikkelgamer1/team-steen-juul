@@ -88,7 +88,6 @@ const BILLEDER = {
   'k-2002': [1.415, 700, 1100],
   'patrick': [2.127, 800, 1400],
   'patrick-norge': [1.499, 600, 1024],
-  'lunden': [1.400, 900, 1600],
   'h-frodo': [1.515, 800],
   'h-monterey': [1.501, 800],
   'h-ostedantik': [1.501, 800],
@@ -331,7 +330,7 @@ const bund = (o) => `
   </div>
   <div class="wrap bund__linje">
     <p>Resultater og statistik: Dansk Hestevæddeløb · opdateret ${o.opdateret}</p>
-    <p>Billeder: Team Juuls Facebook-side – fotografer bl.a. Burt Seeger, Kjeld Mikkelsen og Gormfoto. Solvalla-fotoet: Lars Jakobsson/Kanal 75, <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener">CC BY 3.0${nyFane}</a>. Arkivbilleder: Burt Seeger, travet.dk, travsportshistorie.dk og Travsportens Hall of Fame. Charlottenlund: Malouette, <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank" rel="noopener">CC BY-SA 2.0${nyFane}</a></p>
+    <p>Billeder: Team Juuls Facebook-side – fotografer bl.a. Burt Seeger, Kjeld Mikkelsen og Gormfoto. Solvalla-fotoet: Lars Jakobsson/Kanal 75, <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener">CC BY 3.0${nyFane}</a>. Arkivbilleder: Burt Seeger, travet.dk, travsportshistorie.dk og Travsportens Hall of Fame.</p>
     <p>© ${new Date().getFullYear()} ${SITE.navn}</p>
   </div>
   <p class="bund__ord" aria-hidden="true">Steen Juul</p>
@@ -434,19 +433,21 @@ const sidehoved = ({ sti, h1, tekst, foto, alt = '', pos = '50% 50%', chips = []
 </section>`;
 
 /**
- * Skematisk Danmarkskort. `punkter` er [{ kode, navn, antal? }]: med antal tegnes en boble med tallet i,
- * uden antal en lille prik. Hjemmebanen får en ring, og der tegnes linjer derfra til de andre baner.
+ * Skematisk Danmarkskort. `punkter` er [{ kode, navn, antal? }]: med antal tegnes en boble med tallet i – jo flere,
+ * jo større – uden antal en lille prik. Hjemmebanen får en ring. Med `stald` (en kode i BANE_POS) tegnes stalden
+ * som et lille hus, og der går en streg derfra ud til hver bane: turene til løbene.
  */
-function danmarkskort(punkter, beskrivelse) {
+function danmarkskort(punkter, beskrivelse, stald = '') {
   const { bredde, hoejde, lon0, lat1, kx, ky, sti } = KORT;
+  const xy = ([lon, lat]) => ({ x: +((lon - lon0) * kx).toFixed(1), y: +((lat1 - lat) * ky).toFixed(1) });
   const max = Math.max(1, ...punkter.map((p) => p.antal ?? 0));
   const vist = punkter.filter((p) => BANE_POS[p.kode]).map((p) => {
-    const [lon, lat] = BANE_POS[p.kode];
-    const r = p.antal ? +(8 + 6 * Math.sqrt(p.antal / max)).toFixed(1) : 7;
-    return { ...p, x: +((lon - lon0) * kx).toFixed(1), y: +((lat1 - lat) * ky).toFixed(1), r, ydre: p.kode === HJEM ? r + (p.antal ? 4 : 6) : r };
+    const r = p.antal ? +(6 + 13 * Math.sqrt(p.antal / max)).toFixed(1) : 7;
+    return { ...p, ...xy(BANE_POS[p.kode]), r, ydre: p.kode === HJEM ? r + (p.antal ? 4 : 6) : r };
   });
-  const hjem = vist.find((p) => p.kode === HJEM);
-  const ruter = hjem ? vist.filter((p) => p !== hjem) : [];
+  const fra = BANE_POS[stald] ? { kode: stald, navn: 'Stalden', ...xy(BANE_POS[stald]), r: 7, ydre: 8 } : null;
+  const ruter = fra ? vist : [];
+  const alle = fra ? [...vist, fra] : vist;
 
   // Navnet sættes dér, hvor det bedst holder sig inden for kortet og fri af ruter og andre baner.
   const navn = (p) => {
@@ -456,19 +457,20 @@ function danmarkskort(punkter, beskrivelse) {
       const x0 = (anker === 'start' ? x : anker === 'end' ? x - w : x - w / 2) - 3, x1 = x0 + w + 6, y0 = y - 12, y1 = y + 4;
       const inde = (px, py, luft = 0) => px > x0 - luft && px < x1 + luft && py > y0 - luft && py < y1 + luft;
       const udenfor = x0 < 0 || x1 > bredde || y0 < 0 || y1 > hoejde;
-      const rammer = vist.some((q) => q !== p && inde(q.x, q.y, q.ydre))
-        || ruter.some((q) => { for (let t = 0; t <= 1; t += 0.02) if (inde(hjem.x + (q.x - hjem.x) * t, hjem.y + (q.y - hjem.y) * t)) return true; return false; });
+      const rammer = alle.some((q) => q !== p && inde(q.x, q.y, q.ydre))
+        || ruter.some((q) => { for (let t = 0; t <= 1; t += 0.02) if (inde(fra.x + (q.x - fra.x) * t, fra.y + (q.y - fra.y) * t)) return true; return false; });
       return (udenfor ? 100 : 0) + (rammer ? 10 : 0);
     };
-    // Hjemmebanen helst til venstre, uden for viften af ruter. Ved lige straf vinder det første sted på listen.
-    const [anker, x, y] = (p === hjem ? [steder[2], ...steder] : steder).map((sted, i) => [straf(sted) + i / 100, sted]).sort((a, b) => a[0] - b[0])[0][1];
-    return `<text class="kort__navn" x="${+x.toFixed(1)}" y="${+y.toFixed(1)}" text-anchor="${anker}">${esc(p.navn)}</text>`;
+    // Hjemmebanen helst til venstre. Ved lige straf vinder det første sted på listen.
+    const [anker, x, y] = (p.kode === HJEM ? [steder[2], ...steder] : steder).map((sted, i) => [straf(sted) + i / 100, sted]).sort((a, b) => a[0] - b[0])[0][1];
+    return `<text class="kort__navn${p === fra ? ' kort__navn--stald' : ''}" x="${+x.toFixed(1)}" y="${+y.toFixed(1)}" text-anchor="${anker}">${esc(p.navn)}</text>`;
   };
 
   return `<svg class="kort__svg" viewBox="0 0 ${bredde} ${hoejde}" role="img" aria-label="${esc(beskrivelse)}">
         <path class="kort__land" d="${sti}"/>${ruter.map((p, i) => `
-        <path class="kort__rute" pathLength="1" d="M${hjem.x},${hjem.y}L${p.x},${p.y}" style="--n:${i}"/>`).join('')}${vist.map((p, i) => `
-        <g class="kort__bane" style="--n:${i}">${p === hjem ? `<circle class="kort__ring" cx="${p.x}" cy="${p.y}" r="${p.ydre}"/>` : ''}<circle class="kort__prik" cx="${p.x}" cy="${p.y}" r="${p.r}"/>${p.antal ? `<text class="kort__tal" x="${p.x}" y="${+(p.y + 3.3).toFixed(1)}" text-anchor="middle">${p.antal}</text>` : ''}${navn(p)}</g>`).join('')}
+        <path class="kort__rute" pathLength="1" d="M${fra.x},${fra.y}L${p.x},${p.y}" style="--n:${i}"/>`).join('')}${vist.map((p, i) => `
+        <g class="kort__bane" style="--n:${i}">${p.kode === HJEM ? `<circle class="kort__ring" cx="${p.x}" cy="${p.y}" r="${p.ydre}"/>` : ''}<circle class="kort__prik" cx="${p.x}" cy="${p.y}" r="${p.r}"/>${p.antal ? `<text class="kort__tal" x="${p.x}" y="${+(p.y + 3.3).toFixed(1)}" text-anchor="middle">${p.antal}</text>` : ''}${navn(p)}</g>`).join('')}${fra ? `
+        <g class="kort__bane kort__stald" style="--n:0"><path d="M${fra.x - 6},${fra.y + 5}h12v-6.5l-6,-5.5l-6,5.5z"/>${navn(fra)}</g>` : ''}
       </svg>`;
 }
 
@@ -704,7 +706,7 @@ const kuskSektion = (o) => {
       <div class="bento__felt bento__tal bento__tal--roed" data-vis style="--i:1"><b data-tael="${pl.sejre}">${pl.sejre}</b><span>Sejre i ${pl.aar}</span></div>
       <div class="bento__felt bento__tal" data-vis style="--i:2"><b data-tael="${pl.starter}">${pl.starter}</b><span>Starter i ${pl.aar}</span></div>` : ''}
       <blockquote class="bento__felt bento__citat" data-vis><p>Det nye dream team i dansk travsport.</p><cite>travservice.dk om ${SITE.person} og ${SITE.kusk.navn}, april 2026</cite></blockquote>${pl ? `
-      <div class="bento__felt bento__tal bento__ring" data-vis style="--i:1;--pct:${Number(pl.procent) || 0}"><b>${pl.procent}<small>%</small></b><span>Sejrsprocent</span></div>
+      <div class="bento__felt bento__tal" data-vis style="--i:1"><b>${pl.procent}<small>%</small></b><span>Sejrsprocent<em>${pl.sejre + (pl.toer ?? 0) + (pl.treer ?? 0)} gange i top 3</em></span></div>
       <div class="bento__felt bento__tal" data-vis style="--i:2"><b>${(pl.praemier / 1e6).toLocaleString('da-DK', { maximumFractionDigits: 1 })}<small>mio. kr.</small></b><span>Indkørt i ${pl.aar}</span></div>` : ''}${sejre.length ? `
       <h3 class="bento__titel" data-vis>Største sejre</h3>${sejre.map((s, i) => { const f = foto(s); return `
       <article class="bento__felt bento__sejr${f ? ' bento__sejr--foto' : ''}" data-vis style="--i:${i}${f?.[3] ? `;--pos:${f[3]}` : ''}">
@@ -799,7 +801,7 @@ const hestebane = (o) => {
 // Billedgitteret: stor og bred = 2×2 felter, hoej = 1×2. Fjerde felt (valgfrit) styrer beskæringen. Hvert billede glider lidt i sin ramme.
 const FOTOS = [
   ['graes', 'Travhest i fuld fart med kusken i rødt og grønt · Foto: Kjeld Mikkelsen', 'stor'],
-  ['buket', 'Steen Juul med buketten efter en sejr', 'hoej', '30% 50%'],
+  ['loeb-6', 'Kusken i rødt og grønt bag hest nummer 6 · Foto: Burt Seeger', 'hoej', '0% 50%'],
   ['daekken', 'Steen Juul smiler i sulkyen efter en sejr', 'hoej', '62% 50%'],
   ['nat-6', 'Aftenløb under lysene · Foto: Burt Seeger', 'bred'],
   ['aarhus', 'Hest nummer 2 foran tribunen', 'bred'],
@@ -811,8 +813,8 @@ const galleri = (n = FOTOS.length) => `<ul class="galleri">${FOTOS.slice(0, n).m
       <li class="galleri__${form}" data-p style="--i:${i % 4}${pos ? `; --pos:${pos}` : ''}">${billede(navn, alt, { sizes: form === 'stor' || form === 'bred' ? '(min-width: 901px) 50vw, 92vw' : '(min-width: 901px) 25vw, 46vw' })}</li>`).join('')}
     </ul>`;
 
-// Opløbet på Charlottenlund – frit billede fra Wikimedia Commons (CC BY-SA 2.0), vist over afsnittet om hjemmebanen.
-const lundenFoto = () => `<figure class="lunden" data-vis>${billede('lunden', 'Opløbet på Charlottenlund Travbane med heste i sulky foran tribunen', { sizes: '(min-width: 1400px) 1300px, 94vw' })}<figcaption>Opløbet på Charlottenlund Travbane · Foto: Malouette, <a href="https://commons.wikimedia.org/wiki/File:Charlottenlund_Travbane.jpg" target="_blank" rel="noopener">Wikimedia Commons${nyFane}</a>, <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank" rel="noopener">CC BY-SA 2.0${nyFane}</a></figcaption></figure>`;
+// Holdets eget billede over afsnittet om banerne: Steen, hesten og staldens folk i holdets farver med buketten.
+const lundenFoto = () => `<figure class="lunden" data-vis>${billede('buket', 'Steen Juul i holdets rød-grønne farver med buketten og hesten, holdt af en fra stalden', { sizes: '(min-width: 1400px) 1300px, 94vw' })}<figcaption>Steen Juul med buketten · Jysk 4-års Grand Prix 2024 · Foto: Team Juuls Facebook-side</figcaption></figure>`;
 
 const banebjaelker = (banetal) => {
   const max = Math.max(1, ...banetal.map((b) => b.antal));
@@ -822,8 +824,8 @@ const banebjaelker = (banetal) => {
 };
 
 const kortfigur = (o) => `<figure class="kort" data-vis style="--i:2">
-      ${danmarkskort(o.banetal, `Danmarkskort med staldens starter pr. bane i ${o.saeson.aar}: ${o.banetal.map((b) => `${b.navn} ${b.antal}`).join(', ')}.`)}
-      <figcaption>Staldens starter pr. dansk bane i ${o.saeson.aar}. Ringen markerer hjemmebanen.</figcaption>
+      ${danmarkskort(o.banetal, `Danmarkskort med stalden i Osted og staldens starter pr. bane i ${o.saeson.aar}: ${o.banetal.map((b) => `${b.navn} ${b.antal}`).join(', ')}.`, 'Os')}
+      <figcaption>Hvor stalden har kørt i ${o.saeson.aar}: jo større cirkel, jo flere starter. Stregerne er turene fra stalden i Osted, og ringen markerer hjemmebanen.</figcaption>
     </figure>`;
 
 const statTabel = (titel, raekker) => `

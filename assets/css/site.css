@@ -357,8 +357,8 @@ html:not(.fx) .derby__kort { scroll-snap-align: center; }
 
 /* Parallakse: billedet glider lidt langsommere end siden i sin ramme */
 .kusk__info { padding-block: clamp(20px, 2.5vw, 36px) var(--luft); }
-/* Navnet glider ind fra hver side, mens topbilledet ruller op, og står stille, når billedet er nået lidt over midten */
-.kusk__navn span { --ind: clamp(0, calc((.6 - var(--p, .6)) * 5), 1); display: inline-block; }
+/* Navnet glider ind fra hver side, mens topbilledet ruller op, og står stille, når billedet står midt på skærmen */
+.kusk__navn span { --ind: clamp(0, calc((.5 - var(--p, .5)) * 5), 1); display: inline-block; }
 .fx .kusk__navn span:first-child { translate: calc(var(--ind) * -22vw) 0; }
 .fx .kusk__navn span:last-child { translate: calc(var(--ind) * 22vw) 0; }
 
@@ -377,11 +377,7 @@ html:not(.fx) .derby__kort { scroll-snap-align: center; }
 .bento__tal b small { margin-left: 6px; font: 700 .8rem var(--sans); color: var(--daemp); }
 .bento__tal span { font-size: .68rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--daemp); }
 .bento__tal--roed { --daemp: rgba(255, 255, 255, .82); background: var(--roed); color: #fff; }
-/* Ring, der fyldes op til sejrsprocenten, når feltet kommer frem */
-@property --ring { syntax: '<number>'; inherits: false; initial-value: 0; }
-.bento__ring::after { --ring: var(--pct); content: ""; position: absolute; top: clamp(18px, 2vw, 28px); right: clamp(18px, 2vw, 28px); width: clamp(54px, 5vw, 76px); aspect-ratio: 1; border-radius: 50%; background: conic-gradient(var(--roed) calc(var(--ring) * 1%), var(--linje) 0); mask: radial-gradient(farthest-side, transparent calc(100% - 9px), #000 calc(100% - 8px)); transition: --ring 1.4s var(--ease) .3s; }
-.js .bento__ring:not(.ses)::after { --ring: 0; }
-.bento__titel { grid-column: 1 / -1; margin-top: clamp(28px, 4vw, 56px); font: 900 clamp(2.2rem, 4.4vw, 4rem)/.9 var(--display); text-transform: uppercase; }
+.bento__tal span em { display: block; margin-top: 5px; font-style: normal; color: var(--tekst); }.bento__titel { grid-column: 1 / -1; margin-top: clamp(28px, 4vw, 56px); font: 900 clamp(2.2rem, 4.4vw, 4rem)/.9 var(--display); text-transform: uppercase; }
 .bento__sejr:first-of-type { grid-column: span 2; grid-row: span 2; }
 .bento__sejr:nth-of-type(2) { grid-column: span 2; }
 .bento__sejr { justify-content: flex-end; min-height: clamp(220px, 19vw, 280px); }
@@ -475,7 +471,7 @@ html:not(.fx) .derby__kort { scroll-snap-align: center; }
 
 /* Opløbet på Charlottenlund over afsnittet om banerne */
 .lunden { margin: 0 0 clamp(32px, 4.5vw, 64px); }
-.lunden img { width: 100%; height: auto; aspect-ratio: 21 / 9; object-fit: cover; object-position: 30% 60%; border-radius: var(--r); }
+.lunden img { width: 100%; height: auto; aspect-ratio: 21 / 9; object-fit: cover; object-position: 50% 32%; border-radius: var(--r); }
 .lunden figcaption { margin-top: 10px; font-size: .76rem; color: var(--daemp); }
 .lunden figcaption a { text-decoration: underline; }
 
@@ -533,6 +529,8 @@ html:not(.fx) .derby__kort { scroll-snap-align: center; }
 .kort__ring { fill: none; stroke: var(--tekst); stroke-width: 2.4; vector-effect: non-scaling-stroke; }
 .kort__tal { font: 700 9.5px var(--sans); fill: #fff; font-variant-numeric: tabular-nums; }
 .kort__navn { font: 600 11px var(--sans); fill: var(--tekst); paint-order: stroke; stroke: var(--flade); stroke-width: 3.5px; stroke-linejoin: round; }
+.kort__stald path { fill: var(--tekst); stroke: var(--flade); stroke-width: 1.8; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.kort__navn--stald { font-weight: 800; letter-spacing: .04em; }
 .kort--mini { padding: 0; background: none; }
 .kort--mini .kort__svg { max-width: 220px; }
 .kort--mini .kort__navn { display: none; }
