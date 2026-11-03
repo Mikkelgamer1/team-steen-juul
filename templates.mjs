@@ -94,6 +94,7 @@ const BILLEDER = {
   'h-keepthemoney': [1.515, 800],
   'h-dutchess': [1.413, 800],
   'h-lanson': [1.413, 800],
+  'h-pjs': [1.413, 800],
   'copperfield': [1.382, 700, 1200],
   'derby-1993': [1.708, 900],
   'derby-1994': [1.032, 413],
@@ -121,7 +122,8 @@ const BILLEDER = {
 // Kilder: travet.dk – "Mesterskab for Danmark til Frodo Cash" (okt. 2025), "Perfekt sæsondebut for Monterey Market" (maj 2026),
 // "Auktionsløbet 2024 til Lets Go Ostedantik" (artiklens hovedbillede), "Wedellsborgs Mindeløb til Keep The Money" (nov. 2025),
 // "Sådan gik det i Odense" (23.10.2026, hovedbilledet af vinderen Dutchess Sun), "Steen Juul runder 60 sejre i 2025" (23.11.2025, Lanson
-// vandt i Odense den dag); New Watch: trav24.dk 3.10.2026 (samme billede som ved kusken).
+// vandt i Odense den dag), "Sådan gik det i Odense" (7.6.2026; Get In Your Pj's har startnummer 7 i API'et);
+// New Watch: trav24.dk 3.10.2026 (samme billede som ved kusken).
 const HESTEFOTO = {
   643267: ['h-frodo', 'Frodo Cash i front med Steen Juul i sulkyen', 'Foto: Burt Seeger', '14% 50%'],
   656701: ['h-monterey', 'Monterey Market i fuld fart', 'Kilde: travet.dk', '58% 50%'],
@@ -129,7 +131,8 @@ const HESTEFOTO = {
   659013: ['patrick', 'New Watch med laurbærkrans efter sejren i Jydsk 2-årings Grand Prix 2026', 'Foto: Ole Hindby', '38% 40%'],
   653150: ['h-ostedantik', 'Lets Go Ostedantik i vindercirklen med Steen Juul og ejerne', 'Foto: Kjeld Mikkelsen', '64% 40%'],
   654349: ['h-lanson', 'Lanson med Steen Juul i holdets rød-grønne farver efter sejren i Odense i november 2025', 'Foto: Gormfoto', '40% 50%'],
-  660306: ['h-dutchess','Dutchess Sun og Patrick Larsen, der jubler efter sejren i Odense i oktober 2026', 'Foto: Gormfoto', '46% 50%'],
+  656666: ['h-pjs', 'Get in Your Pj’s med startnummer 7 og Patrick Larsen på vej mod sejren i Odense i juni 2026', 'Foto: Gormfoto', '5% 50%'],
+  660306: ['h-dutchess', 'Dutchess Sun og Patrick Larsen, der jubler efter sejren i Odense i oktober 2026', 'Foto: Gormfoto', '46% 50%'],
 };
 
 const HESTEKORT = {
