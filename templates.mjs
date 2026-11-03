@@ -92,6 +92,7 @@ const BILLEDER = {
   'h-monterey': [1.501, 800],
   'h-ostedantik': [1.501, 800],
   'h-keepthemoney': [1.515, 800],
+  'h-dutchess': [1.413, 800],
   'copperfield': [1.382, 700, 1200],
   'derby-1993': [1.708, 900],
   'derby-1994': [1.032, 413],
@@ -117,14 +118,15 @@ const BILLEDER = {
 // Hestekort: hest-id → [billede, billedtekst fra Facebook-opslaget]
 // Billeder på kortene i hestebanen: hest-id → [billede, alt, kredit, beskæring]. Kun billeder, hvor kilden siger, hvilken hest det er.
 // Kilder: travet.dk – "Mesterskab for Danmark til Frodo Cash" (okt. 2025), "Perfekt sæsondebut for Monterey Market" (maj 2026),
-// "Auktionsløbet 2024 til Lets Go Ostedantik" (artiklens hovedbillede), "Wedellsborgs Mindeløb til Keep The Money" (nov. 2025);
-// New Watch: trav24.dk 3.10.2026 (samme billede som ved kusken).
+// "Auktionsløbet 2024 til Lets Go Ostedantik" (artiklens hovedbillede), "Wedellsborgs Mindeløb til Keep The Money" (nov. 2025),
+// "Sådan gik det i Odense" (23.10.2026, hovedbilledet af vinderen Dutchess Sun); New Watch: trav24.dk 3.10.2026 (samme billede som ved kusken).
 const HESTEFOTO = {
   643267: ['h-frodo', 'Frodo Cash i front med Steen Juul i sulkyen', 'Foto: Burt Seeger', '14% 50%'],
   656701: ['h-monterey', 'Monterey Market i fuld fart', 'Kilde: travet.dk', '58% 50%'],
   651251: ['h-keepthemoney', 'Keep The Money med Steen Juul i sulkyen', 'Foto: Burt Seeger', '70% 40%'],
   659013: ['patrick', 'New Watch med laurbærkrans efter sejren i Jydsk 2-årings Grand Prix 2026', 'Foto: Ole Hindby', '38% 40%'],
   653150: ['h-ostedantik', 'Lets Go Ostedantik i vindercirklen med Steen Juul og ejerne', 'Foto: Kjeld Mikkelsen', '64% 40%'],
+  660306: ['h-dutchess', 'Dutchess Sun og Patrick Larsen, der jubler efter sejren i Odense i oktober 2026', 'Foto: Gormfoto', '46% 50%'],
 };
 
 const HESTEKORT = {
