@@ -1,5 +1,5 @@
 {
- "opdateret": "2026-11-08T11:18:34.787Z",
+ "opdateret": "2026-11-09T12:54:54.719Z",
  "traener": {
   "foedt": 1950,
   "hjemmebane": "Charlottenlund Trav",
@@ -9,12 +9,12 @@
  "traenerStatistik": [
   {
    "aar": 2026,
-   "starter": 230,
-   "sejre": 47,
+   "starter": 235,
+   "sejre": 48,
    "toer": 31,
    "treer": 25,
    "procent": 20,
-   "praemier": 2200226
+   "praemier": 2275476
   },
   {
    "aar": 2025,
@@ -103,12 +103,12 @@
  "kusk": [
   {
    "aar": 2026,
-   "starter": 257,
-   "sejre": 41,
+   "starter": 262,
+   "sejre": 42,
    "toer": 28,
    "treer": 27,
    "procent": 16,
-   "praemier": 1804139
+   "praemier": 1849389
   },
   {
    "aar": 2025,
@@ -171,6 +171,16 @@
   }
  ],
  "kuskStorloeb": [
+  {
+   "id": 838154,
+   "navn": "Opdrætningsløb Consolation 2026",
+   "dato": "2026-11-08",
+   "bane": "Ch",
+   "hest": "New Watch",
+   "tid": "16,3a",
+   "distance": 2000,
+   "praemie": 25000
+  },
   {
    "id": 837737,
    "navn": "Dansk Hoppe Kriterium 2026",
@@ -284,10 +294,10 @@
    "foedt": "2019-04-27",
    "far": "Maharajah (SE)",
    "mor": "Hertiginnan C D (SE)",
-   "starter": 44,
+   "starter": 45,
    "placeringer": "11-8-4",
-   "praemier": 1071080,
-   "rekord": "13,1m 11,2ak 12,3am"
+   "praemier": 1078580,
+   "rekord": "13,1m 11,0ak 12,3am"
   },
   {
    "id": 643267,
@@ -336,7 +346,7 @@
    "foedt": "2021-04-17",
    "far": "Trixton (US)",
    "mor": "Fashion Brodda (SE)",
-   "starter": 27,
+   "starter": 28,
    "placeringer": "10-6-1",
    "praemier": 190986,
    "rekord": "*14,6m 15,4l *14,3ak 13,6am 16,6al"
@@ -353,19 +363,6 @@
    "placeringer": "8-4-4",
    "praemier": 139104,
    "rekord": "18,1l 14,9ak 14,2am 16,9al"
-  },
-  {
-   "id": 652856,
-   "navn": "K O Donna",
-   "alder": 5,
-   "koen": "Hoppe",
-   "foedt": "2021-05-29",
-   "far": "Djali Boko (SE)",
-   "mor": "Feel The Muscle (SE)",
-   "starter": 37,
-   "placeringer": "1-7-4",
-   "praemier": 95477,
-   "rekord": "16,6m 17,0l 15,9ak 14,0am"
   },
   {
    "id": 654349,
@@ -570,10 +567,10 @@
    "foedt": "2024-04-03",
    "far": "Bird Parker (FR)",
    "mor": "Ecomoy (CA)",
-   "starter": 3,
+   "starter": 4,
    "placeringer": "1-1-1",
-   "praemier": 86844,
-   "rekord": "19,5m 16,0ak *18,3am"
+   "praemier": 95844,
+   "rekord": "19,5m 16,0ak 17,4am"
   },
   {
    "id": 658797,
@@ -635,10 +632,10 @@
    "foedt": "2024-06-12",
    "far": "Readly Express (SE)",
    "mor": "Swiss Watch (SE)",
-   "starter": 2,
-   "placeringer": "1-0-0",
-   "praemier": 152000,
-   "rekord": "*16,6ak 18,8am"
+   "starter": 3,
+   "placeringer": "2-0-0",
+   "praemier": 177000,
+   "rekord": "*16,6ak *16,3am"
   },
   {
    "id": 658762,
@@ -661,10 +658,10 @@
    "foedt": "2024-03-08",
    "far": "Ecurie D",
    "mor": "Bombastic Design",
-   "starter": 2,
+   "starter": 3,
    "placeringer": "0-0-2",
-   "praemier": 11250,
-   "rekord": "20,3ak 18,2am"
+   "praemier": 45000,
+   "rekord": "20,3ak 16,7am"
   },
   {
    "id": 658839,
@@ -713,6 +710,32 @@
    "foedt": "2024-05-09",
    "far": "Calgary Games (SE)",
    "mor": "Elvira M",
+   "starter": 0,
+   "placeringer": "0-0-0",
+   "praemier": 0,
+   "rekord": ""
+  },
+  {
+   "id": 660245,
+   "navn": "Odyssey",
+   "alder": 1,
+   "koen": "Hoppe",
+   "foedt": "2025-04-25",
+   "far": "Calgary Games (SE)",
+   "mor": "Global Theory (SE)",
+   "starter": 0,
+   "placeringer": "0-0-0",
+   "praemier": 0,
+   "rekord": ""
+  },
+  {
+   "id": 660417,
+   "navn": "Otis Redding",
+   "alder": 1,
+   "koen": "Hingst",
+   "foedt": "2025-06-04",
+   "far": "Googoo Gaagaa (US)",
+   "mor": "Xanthis Exciting (SE)",
    "starter": 0,
    "placeringer": "0-0-0",
    "praemier": 0,
@@ -798,6 +821,66 @@
   }
  ],
  "resultater": [
+  {
+   "id": "838134-658940",
+   "dato": "2026-11-08",
+   "bane": "Ch",
+   "loeb": 10,
+   "hestId": 658940,
+   "hest": "Nabucco",
+   "placering": "8",
+   "tid": "17,4ag",
+   "distance": 2000,
+   "praemie": 9000
+  },
+  {
+   "id": "838134-659246",
+   "dato": "2026-11-08",
+   "bane": "Ch",
+   "loeb": 10,
+   "hestId": 659246,
+   "hest": "Niarkos Flax",
+   "placering": "4",
+   "tid": "16,7a",
+   "distance": 2000,
+   "praemie": 33750
+  },
+  {
+   "id": "838149-660306",
+   "dato": "2026-11-08",
+   "bane": "Ch",
+   "loeb": 9,
+   "hestId": 660306,
+   "hest": "Dutchess Sun (NO)",
+   "placering": "5",
+   "tid": "11,0a",
+   "distance": 1600,
+   "praemie": 7500
+  },
+  {
+   "id": "838152-651251",
+   "dato": "2026-11-08",
+   "bane": "Ch",
+   "loeb": 7,
+   "hestId": 651251,
+   "hest": "Keep The Money",
+   "placering": "0",
+   "tid": "13,8ag",
+   "distance": 2000,
+   "praemie": 0
+  },
+  {
+   "id": "838154-659013",
+   "dato": "2026-11-08",
+   "bane": "Ch",
+   "loeb": 3,
+   "hestId": 659013,
+   "hest": "New Watch",
+   "placering": "1",
+   "tid": "16,3a",
+   "distance": 2000,
+   "praemie": 25000
+  },
   {
    "id": "838174-652856",
    "dato": "2026-11-06",
@@ -4219,54 +4302,5 @@
    "praemie": 1000
   }
  ],
- "kommende": [
-  {
-   "dato": "2026-11-08",
-   "bane": "Ch",
-   "loeb": 3,
-   "hestId": 659013,
-   "hest": "New Watch",
-   "kusk": "Patrick Larsen"
-  },
-  {
-   "dato": "2026-11-08",
-   "bane": "Ch",
-   "loeb": 5,
-   "hestId": 655674,
-   "hest": "Charlie Munger (SE)",
-   "kusk": "Patrick Larsen"
-  },
-  {
-   "dato": "2026-11-08",
-   "bane": "Ch",
-   "loeb": 7,
-   "hestId": 651251,
-   "hest": "Keep The Money",
-   "kusk": "Patrick Larsen"
-  },
-  {
-   "dato": "2026-11-08",
-   "bane": "Ch",
-   "loeb": 9,
-   "hestId": 660306,
-   "hest": "Dutchess Sun (NO)",
-   "kusk": "Patrick Larsen"
-  },
-  {
-   "dato": "2026-11-08",
-   "bane": "Ch",
-   "loeb": 10,
-   "hestId": 658940,
-   "hest": "Nabucco",
-   "kusk": "Patrick Larsen"
-  },
-  {
-   "dato": "2026-11-08",
-   "bane": "Ch",
-   "loeb": 10,
-   "hestId": 659246,
-   "hest": "Niarkos Flax",
-   "kusk": "Jeppe Juel"
-  }
- ]
+ "kommende": []
 }
