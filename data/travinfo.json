@@ -1,5 +1,5 @@
 {
- "opdateret": "2026-11-10T12:41:29.299Z",
+ "opdateret": "2026-11-11T11:54:34.685Z",
  "traener": {
   "foedt": 1950,
   "hjemmebane": "Charlottenlund Trav",
@@ -805,19 +805,6 @@
    "placeringer": "0-0-0",
    "praemier": 0,
    "rekord": ""
-  },
-  {
-   "id": 657005,
-   "navn": "Warren Buffet (SE)",
-   "alder": 4,
-   "koen": "Vallak",
-   "foedt": "2022-04-15",
-   "far": "Brillantissime (FR)",
-   "mor": "Yankee Amour (US)",
-   "starter": 23,
-   "placeringer": "5-4-1",
-   "praemier": 131624,
-   "rekord": "15,7m 15,7l 12,5ak *14,4am"
   }
  ],
  "resultater": [
@@ -4302,5 +4289,22 @@
    "praemie": 1000
   }
  ],
- "kommende": []
+ "kommende": [
+  {
+   "dato": "2026-11-15",
+   "bane": "Ny",
+   "loeb": 4,
+   "hestId": 656721,
+   "hest": "Monkey Osted Antik",
+   "kusk": "Patrick Larsen"
+  },
+  {
+   "dato": "2026-11-15",
+   "bane": "Ny",
+   "loeb": 7,
+   "hestId": 653150,
+   "hest": "Lets Go Ostedantik",
+   "kusk": "Patrick Larsen"
+  }
+ ]
 }
