@@ -1,5 +1,5 @@
 {
- "opdateret": "2026-11-11T11:54:34.685Z",
+ "opdateret": "2026-11-12T12:45:32.975Z",
  "traener": {
   "foedt": 1950,
   "hjemmebane": "Charlottenlund Trav",
@@ -9,12 +9,12 @@
  "traenerStatistik": [
   {
    "aar": 2026,
-   "starter": 235,
-   "sejre": 48,
+   "starter": 238,
+   "sejre": 49,
    "toer": 31,
    "treer": 25,
-   "procent": 20,
-   "praemier": 2275476
+   "procent": 21,
+   "praemier": 2418169
   },
   {
    "aar": 2025,
@@ -103,12 +103,12 @@
  "kusk": [
   {
    "aar": 2026,
-   "starter": 262,
+   "starter": 264,
    "sejre": 42,
    "toer": 28,
    "treer": 27,
    "procent": 16,
-   "praemier": 1849389
+   "praemier": 1855206
   },
   {
    "aar": 2025,
@@ -149,6 +149,16 @@
  ],
  "kuskFoedt": 2003,
  "storloeb": [
+  {
+   "id": 838309,
+   "navn": "Løb 9",
+   "dato": "2026-11-11",
+   "bane": "Åb",
+   "hest": "Lanson",
+   "tid": "14,4",
+   "distance": 3140,
+   "praemie": 136876
+  },
   {
    "id": 837737,
    "navn": "Dansk Hoppe Kriterium 2026",
@@ -372,10 +382,10 @@
    "foedt": "2022-04-30",
    "far": "Googoo Gaagaa (US)",
    "mor": "Cash Flow",
-   "starter": 19,
-   "placeringer": "5-4-0",
-   "praemier": 224700,
-   "rekord": "21,4k *16,2m *14,0ak 13,4am"
+   "starter": 20,
+   "placeringer": "6-4-0",
+   "praemier": 361576,
+   "rekord": "21,4k *16,2m *14,4l *14,0ak 13,4am"
   },
   {
    "id": 654582,
@@ -424,9 +434,9 @@
    "foedt": "2022-05-22",
    "far": "Ready Cash (FR)",
    "mor": "Paprika Mom (IT)",
-   "starter": 14,
+   "starter": 15,
    "placeringer": "7-1-0",
-   "praemier": 146465,
+   "praemier": 148176,
    "rekord": "*15,7m 11,7am *13,3al"
   },
   {
@@ -541,9 +551,9 @@
    "foedt": "2023-06-10",
    "far": "Googoo Gaagaa (US)",
    "mor": "Rio Celeber (SE)",
-   "starter": 15,
+   "starter": 16,
    "placeringer": "5-7-1",
-   "praemier": 735774,
+   "praemier": 739880,
    "rekord": "17,3k 16,2ak *13,2am"
   },
   {
@@ -808,6 +818,42 @@
   }
  ],
  "resultater": [
+  {
+   "id": "838309-654349",
+   "dato": "2026-11-11",
+   "bane": "Åb",
+   "loeb": 9,
+   "hestId": 654349,
+   "hest": "Lanson",
+   "placering": "1",
+   "tid": "14,4",
+   "distance": 3140,
+   "praemie": 136876
+  },
+  {
+   "id": "838309-653959",
+   "dato": "2026-11-11",
+   "bane": "Åb",
+   "loeb": 9,
+   "hestId": 653959,
+   "hest": "Lucky Mom",
+   "placering": "d",
+   "tid": "g",
+   "distance": 3140,
+   "praemie": 1711
+  },
+  {
+   "id": "838308-656701",
+   "dato": "2026-11-11",
+   "bane": "Åb",
+   "loeb": 7,
+   "hestId": 656701,
+   "hest": "Monterey Market",
+   "placering": "6",
+   "tid": "14,0a",
+   "distance": 2140,
+   "praemie": 4106
+  },
   {
    "id": "838134-658940",
    "dato": "2026-11-08",
