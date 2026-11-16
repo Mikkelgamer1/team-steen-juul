@@ -1,5 +1,5 @@
 {
- "opdateret": "2026-11-15T11:58:28.786Z",
+ "opdateret": "2026-11-16T12:47:54.368Z",
  "traener": {
   "foedt": 1950,
   "hjemmebane": "Charlottenlund Trav",
@@ -9,12 +9,12 @@
  "traenerStatistik": [
   {
    "aar": 2026,
-   "starter": 238,
+   "starter": 240,
    "sejre": 49,
-   "toer": 31,
+   "toer": 32,
    "treer": 25,
-   "procent": 21,
-   "praemier": 2418169
+   "procent": 20,
+   "praemier": 2426669
   },
   {
    "aar": 2025,
@@ -103,12 +103,12 @@
  "kusk": [
   {
    "aar": 2026,
-   "starter": 265,
+   "starter": 268,
    "sejre": 42,
-   "toer": 28,
-   "treer": 27,
+   "toer": 29,
+   "treer": 28,
    "procent": 16,
-   "praemier": 1855206
+   "praemier": 1866206
   },
   {
    "aar": 2025,
@@ -408,7 +408,7 @@
    "foedt": "2022-04-04",
    "far": "Credit Winner (US)",
    "mor": "Covini",
-   "starter": 23,
+   "starter": 24,
    "placeringer": "6-4-1",
    "praemier": 714138,
    "rekord": "15,1m 15,7ak 14,0am"
@@ -425,19 +425,6 @@
    "placeringer": "6-4-0",
    "praemier": 123750,
    "rekord": "*16,5m *12,2ak 14,0am 14,0al"
-  },
-  {
-   "id": 653959,
-   "navn": "Lucky Mom",
-   "alder": 4,
-   "koen": "Hingst",
-   "foedt": "2022-05-22",
-   "far": "Ready Cash (FR)",
-   "mor": "Paprika Mom (IT)",
-   "starter": 15,
-   "placeringer": "7-1-0",
-   "praemier": 148176,
-   "rekord": "*15,7m 11,7am *13,3al"
   },
   {
    "id": 656378,
@@ -538,9 +525,9 @@
    "foedt": "2023-04-27",
    "far": "International Moni (US)",
    "mor": "Dazzle Nock",
-   "starter": 11,
-   "placeringer": "3-1-1",
-   "praemier": 79637,
+   "starter": 12,
+   "placeringer": "3-2-1",
+   "praemier": 88137,
    "rekord": "14,5ak 14,7am"
   },
   {
@@ -818,6 +805,30 @@
   }
  ],
  "resultater": [
+  {
+   "id": "838282-653150",
+   "dato": "2026-11-15",
+   "bane": "Ny",
+   "loeb": 7,
+   "hestId": 653150,
+   "hest": "Lets Go Ostedantik",
+   "placering": "d",
+   "tid": "ga",
+   "distance": 2140,
+   "praemie": 0
+  },
+  {
+   "id": "838281-656721",
+   "dato": "2026-11-15",
+   "bane": "Ny",
+   "loeb": 4,
+   "hestId": 656721,
+   "hest": "Monkey Osted Antik",
+   "placering": "2",
+   "tid": "18,2a",
+   "distance": 2140,
+   "praemie": 8500
+  },
   {
    "id": "838309-654349",
    "dato": "2026-11-11",
@@ -4335,22 +4346,5 @@
    "praemie": 1000
   }
  ],
- "kommende": [
-  {
-   "dato": "2026-11-15",
-   "bane": "Ny",
-   "loeb": 4,
-   "hestId": 656721,
-   "hest": "Monkey Osted Antik",
-   "kusk": "Patrick Larsen"
-  },
-  {
-   "dato": "2026-11-15",
-   "bane": "Ny",
-   "loeb": 7,
-   "hestId": 653150,
-   "hest": "Lets Go Ostedantik",
-   "kusk": "Patrick Larsen"
-  }
- ]
+ "kommende": []
 }
