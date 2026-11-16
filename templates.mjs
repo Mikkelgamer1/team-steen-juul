@@ -343,7 +343,6 @@ const bund = (o) => `
     <p>Billeder: Team Juuls Facebook-side – fotografer bl.a. Burt Seeger, Kjeld Mikkelsen og Gormfoto. Solvalla-fotoet: Lars Jakobsson/Kanal 75, <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener">CC BY 3.0${nyFane}</a>. Arkivbilleder: Burt Seeger, travet.dk, travsportshistorie.dk og Travsportens Hall of Fame.</p>
     <p>© ${new Date().getFullYear()} ${SITE.navn} · ${SITE.firma} · CVR ${SITE.cvr}</p>
   </div>
-  <p class="bund__ord" aria-hidden="true">Steen Juul</p>
 </footer>`;
 
 const organisation = () => ({
@@ -841,9 +840,9 @@ const statTabel = (titel, raekker) => `
       <div class="tabelboks" role="region" aria-label="${titel}" tabindex="0">
         <table class="tabel">
           <caption>${titel}</caption>
-          <thead><tr><th scope="col">År</th><th scope="col">Starter</th><th scope="col">1.–2.–3.</th><th scope="col">Sejrs&shy;procent</th><th scope="col">Præmiesum</th></tr></thead>
+          <thead><tr><th scope="col">År</th><th scope="col">Starter</th><th scope="col">1.–2.–3.</th><th scope="col">Sejrs&shy;procent</th><th scope="col">Præmie&shy;sum, kr.</th></tr></thead>
           <tbody>${raekker.filter((s) => s.starter > 0).map((s) => `
-            <tr><th scope="row">${s.aar}</th><td>${s.starter}</td><td>${s.sejre}–${s.toer}–${s.treer}</td><td>${s.procent}&nbsp;%</td><td>${kr(s.praemier)}</td></tr>`).join('')}
+            <tr><th scope="row">${s.aar}</th><td>${s.starter}</td><td>${s.sejre}–${s.toer}–${s.treer}</td><td>${s.procent}&nbsp;%</td><td>${nf(s.praemier)}</td></tr>`).join('')}
           </tbody>
         </table>
       </div>`;
@@ -1204,6 +1203,7 @@ ${sidehoved({
 ${o.kortheste.length ? `
 <section class="sek sek--smal">
   <div class="wrap">
+    <h2 class="sr">Udvalgte heste</h2>
     ${hestekort(o.kortheste)}
   </div>
 </section>` : ''}
@@ -1241,11 +1241,11 @@ ${sidehoved({
       <div><dt>Indkørt</dt><dd>${nf(o.saeson.praemier)}<small>kr.</small></dd></div>
     </dl>
     <div class="formboks" data-vis style="--i:1">
-      <h3 class="mini">Formkurve – de seneste ${o.seneste.length} starter</h3>
+      <h2 class="mini">Formkurve – de seneste ${o.seneste.length} starter</h2>
       ${formkurve(o.seneste)}
     </div>
     ${o.storloeb.length ? `<div class="storloeb-boks" data-vis style="--i:2">
-      <h3 class="mini">Storløbssejre</h3>
+      <h2 class="mini">Storløbssejre</h2>
       ${storloebListe(o.storloeb)}
       <p class="note">Sejre med mindst 100.000 kr. i førstepræmie, hentet fra Dansk Hestevæddeløb.</p>
     </div>` : ''}
@@ -1345,7 +1345,7 @@ export function sider(data, { v, idag, kort }) {
     })),
     side('om-steen/', () => ({
       titel: `Om Steen Juul – 10 derbysejre og Hall of Fame | ${SITE.navn}`,
-      beskrivelse: `Steen Juul, født 1950: første løb i 1968, træner siden 1974, ti sejre i Dansk Trav Derby som kusk, Grand Circuit-vinder med Legendary Lover K og optaget i Travsportens Hall of Fame.`,
+      beskrivelse: `Steen Juul, født 1950: første løb i 1968, træner siden 1974, ti derbysejre som kusk, Grand Circuit-vinder og optaget i Travsportens Hall of Fame.`,
       indhold: omSteen(o, data),
     })),
     side('stalden/', () => ({

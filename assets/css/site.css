@@ -152,9 +152,9 @@ a:hover > .maerke .maerke__juul { color: #fff; }
 /* Billedet er altid fuld højde og mindst fuld bredde – på en høj telefonskærm bliver det bredere end skærmen, så pillen kan vise hele scenen */
 .hero__foto img { position: absolute; top: 0; left: 50%; width: auto; min-width: 100%; max-width: none; height: 100%; translate: -50% 0; object-fit: cover; object-position: 50% 12%; transform-origin: 50% var(--c); scale: calc(var(--s0, .6) + var(--q) * (1 - var(--s0, .6))); will-change: scale; }
 .hero__foto figcaption { position: absolute; top: calc(var(--top) + 54px); right: var(--kant); z-index: 2; padding: 7px 14px; border-radius: 999px; background: rgba(13, 13, 12, .72); font-size: .74rem; color: #fff; white-space: nowrap; opacity: clamp(0, calc(var(--q) * 2 - 1), 1); }
-.hero__slor { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(13, 13, 12, .7) 0%, rgba(13, 13, 12, .1) 30%, rgba(13, 13, 12, .2) 55%, rgba(13, 13, 12, .92) 100%); opacity: var(--q); pointer-events: none; }
+.hero__slor { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(13, 13, 12, .88) 0%, rgba(13, 13, 12, .58) 16%, rgba(13, 13, 12, .1) 34%, rgba(13, 13, 12, .2) 55%, rgba(13, 13, 12, .92) 100%); opacity: var(--q); pointer-events: none; }
 .hero__indhold { position: relative; z-index: 2; display: grid; grid-template-rows: auto 1fr auto; height: 100%; padding-top: var(--top); padding-bottom: clamp(24px, 4svh, 48px); }
-.hero__meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; padding-block: 12px; border-top: 1px solid rgba(242, 237, 227, .2); font: 600 .72rem var(--sans); letter-spacing: .18em; text-transform: uppercase; color: rgba(242, 237, 227, .7); animation: op .8s var(--ease) .2s both; }
+.hero__meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; padding-block: 12px; border-top: 1px solid rgba(242, 237, 227, .2); font: 600 .72rem var(--sans); letter-spacing: .18em; text-transform: uppercase; color: rgba(242, 237, 227, .85); animation: op .8s var(--ease) .2s both; }
 .hero__meta span:first-child { color: #fff; }
 /* Navnet ligger midt i rammen, så pillens plads (midterspalten) falder præcis oven i billedet */
 .hero__navn { position: absolute; inset: var(--midt) 0 auto; display: grid; grid-template-columns: 1fr var(--pb) 1fr; column-gap: .14em; align-items: center; padding-inline: var(--kant); font-size: var(--navn); font-weight: 900; line-height: .8; letter-spacing: -.01em; translate: 0 -50%; pointer-events: none; }
@@ -609,7 +609,6 @@ html:not(.fx) .derby__kort { scroll-snap-align: center; }
 .bund a:hover { color: var(--tekst); }
 .bund__linje { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 32px; padding-top: 22px; font-size: .74rem; }
 .bund__linje a { text-decoration: underline; text-underline-offset: 2px; }
-.bund__ord { margin: 28px 0 -0.14em; overflow: hidden; text-align: center; white-space: nowrap; font: 900 clamp(5rem, 22vw, 22rem)/.8 var(--display); text-transform: uppercase; color: transparent; -webkit-text-stroke: 1px rgba(242, 237, 227, .16); user-select: none; }
 
 /* ---------- undersider ---------- */
 
@@ -805,8 +804,10 @@ html:not(.fx) .derby__kort { scroll-snap-align: center; }
   .chips li { padding: 12px 16px; }
   .chips b { font-size: 1.8rem; }
   .bund__gitter { grid-template-columns: 1fr; }
-  .tabel { font-size: .82rem; }
-  .tabel th, .tabel td { padding-left: 8px; }
+  .tabel { font-size: .78rem; }
+  .tabel th, .tabel td { padding-left: 6px; }
+  .tabelboks { padding: 16px 14px; }
+  .tabel thead th { letter-spacing: .04em; }
   .kontakt__felt--kort { grid-template-columns: 1fr; }
   .champ b { font-size: 3.6rem; }
   .fbkort { grid-auto-columns: 78%; }
@@ -816,4 +817,16 @@ html:not(.fx) .derby__kort { scroll-snap-align: center; }
   .tal { grid-auto-flow: dense; }
   .tal__felt--bred, .tal__felt--moerk { grid-column: span 2; }
   .kpi div:nth-last-child(-n+2) { grid-column: span 2; }   /* sejrsprocent og indkørt på Resultater */
+  .tabelboks { padding-inline: 12px; }
+}
+@media (max-width: 340px) {
+  html { font-size: 93.75%; }   /* de allermindste telefoner (fx iPhone SE 1. generation): alt en tand mindre, så intet stikker ud */
+  .rekorder, .champ { grid-template-columns: 1fr; }
+  .rekorder li { padding-left: 0; border-left: 0; }
+  .rekorder li + li { margin-top: 24px; border-top: 1px solid var(--linje); }
+  .kontakt__felt { padding: 20px; }
+  .kontakt__stor { font-size: 2.4rem; }
+  .tabel { font-size: .72rem; }
+  .tabel th, .tabel td { padding-left: 4px; }
+  .tabel thead th { font-size: .54rem; letter-spacing: .02em; }
 }
