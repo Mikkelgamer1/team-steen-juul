@@ -8,6 +8,8 @@ export const SITE = {
   fornavn: 'Steen',
   licens: 3106,
   telefon: '+45 40 33 45 16', // står på Facebook-siden og i licensregistret
+  firma: 'Steen Juul Nielsen', // navn og CVR fra CVR-registret (datacvr.virk.dk, tjekket 16.11.2026: Mannerupvej 8, startdato 1.12.1974) – skal stå på siden efter e-handelsloven § 7
+  cvr: '50627217',
   gade: 'Mannerupvej 8',
   sted: 'Osted',
   postnr: '4320',
@@ -136,7 +138,7 @@ const HESTEFOTO = {
 };
 
 const HESTEKORT = {
-  658123: ['nike-high', 'Den nye Team Lunden-hest i stalden. Den forrige, Bali, blev nr. 2 i Dansk Trav Derby. Kilde: Team Juul på Facebook'],
+  658123: ['nike-high', 'Den nye Team Lunden-hest i stalden. Den forrige, Bali, blev nr. 2 i Dansk Trav Derby.'],
 };
 
 const BANER = { Sk: 'Skive', 'Ål': 'Aalborg', 'År': 'Aarhus', Od: 'Odense', Ch: 'Charlottenlund', Bi: 'Billund', Bh: 'Bornholm', Ny: 'Nykøbing F.', Bs: 'Skovbo', Kl: 'Klampenborg', 'Åb': 'Åby', 'Jæ': 'Jägersro', Ax: 'Axevalla' };
@@ -339,7 +341,7 @@ const bund = (o) => `
   <div class="wrap bund__linje">
     <p>Resultater og statistik: Dansk Hestevæddeløb · opdateret ${o.opdateret}</p>
     <p>Billeder: Team Juuls Facebook-side – fotografer bl.a. Burt Seeger, Kjeld Mikkelsen og Gormfoto. Solvalla-fotoet: Lars Jakobsson/Kanal 75, <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener">CC BY 3.0${nyFane}</a>. Arkivbilleder: Burt Seeger, travet.dk, travsportshistorie.dk og Travsportens Hall of Fame.</p>
-    <p>© ${new Date().getFullYear()} ${SITE.navn}</p>
+    <p>© ${new Date().getFullYear()} ${SITE.navn} · ${SITE.firma} · CVR ${SITE.cvr}</p>
   </div>
   <p class="bund__ord" aria-hidden="true">Steen Juul</p>
 </footer>`;
@@ -735,7 +737,6 @@ const kuskSektion = (o) => {
           <h3>Seks år i Norge</h3>
           <p>Som 16-årig flyttede Patrick til Norge i 2019. I 2024 vandt han 43 løb på 281 starter, blev jockeychampion på Bjerke, Biri og Harstad – og norsk mester for staldansatte. Da arbejdsgiveren Kim Pedersen flyttede til Åby, vendte Patrick i januar 2026 hjem til pladsen hos Steen Juul.</p>
           <ul>${KUSK_FOER.map(([navn, linje]) => `<li><b>${navn}</b><span>${linje}</span></li>`).join('')}</ul>
-          <small>Kilde: travet.dk</small>
         </div>
       </div>
     </div>
@@ -921,7 +922,6 @@ ${baand()}
       <li data-vis style="--i:2"><b data-tael="${o.traenerAar}">${o.traenerAar}</b><span>år som træner</span><small>siden 1. december 1974</small></li>
       <li data-vis style="--i:3"><b data-tael="35">35</b><span>championater på Charlottenlund</span><small>fra 1985 til 2024</small></li>
     </ul>
-    <p class="note">Kilder: Sjællandske Medier (1. december 2024), Travsportens Hall of Fame (thof.dk), da.wikipedia.org og Charlottenlund Travbanes løbsprogram (5. januar 2025).</p>
   </div>
 </section>
 
@@ -937,7 +937,7 @@ ${baand()}
     <div class="tal">
       <div class="tal__felt tal__felt--stor" data-vis><b data-tael="${o.saeson.sejre}">${o.saeson.sejre}</b><span>sejre som træner</span><small>på ${o.saeson.starter} starter i ${o.saeson.aar}</small></div>
       <div class="tal__felt" data-vis style="--i:1"><b><span data-tael="${o.saeson.procent}">${o.saeson.procent}</span><small>%</small></b><span>sejrsprocent</span></div>
-      <div class="tal__felt" data-vis style="--i:2"><b><span data-tael="${o.saeson.praemier}">${nf(o.saeson.praemier)}</span><small>kr.</small></b><span>indkørt som træner</span></div>
+      <div class="tal__felt tal__felt--bred" data-vis style="--i:2"><b><span data-tael="${o.saeson.praemier}">${nf(o.saeson.praemier)}</span><small>kr.</small></b><span>indkørt som træner</span></div>
       <div class="tal__felt tal__felt--groen" data-vis style="--i:3"><b data-tael="${o.heste.length}">${o.heste.length}</b><span>heste i træning – ${o.ustartede.length} unge på vej</span></div>
       <div class="tal__felt tal__felt--moerk" data-vis style="--i:4"><b data-tael="${o.kusk.sejre}">${o.kusk.sejre}</b><span>sejre som kusk på ${o.kusk.starter} starter</span></div>
     </div>
@@ -980,7 +980,7 @@ ${stakSektion({
   titel: `Træning med ${o.traenerAar} års erfaring.`,
   tekst: `${SITE.navn} træner ${o.heste.length} heste med Charlottenlund Trav som hjemmebane. Ring for en snak om din hest.`,
   valg: `${knap('kontakt/', 'Kontakt stalden')} ${link('stalden/', 'Om stalden')}`,
-  figur: `<figure class="karriere__foto">${billede('sort', 'Sort travhest i trav foran tribunen', { sizes: '(min-width: 1101px) 34vw, 92vw' })}<figcaption>Fra løbsdagene · Team Juuls Facebook-side</figcaption></figure>`,
+  figur: `<figure class="karriere__foto">${billede('sort', 'Sort travhest i trav foran tribunen', { sizes: '(min-width: 1101px) 34vw, 92vw' })}</figure>`,
   kort: YDELSER(o),
 })}
 <section class="sek sek--flade">
@@ -990,7 +990,6 @@ ${stakSektion({
         ${etiket('Fra banen', ' data-vis')}
         <h2 data-vis style="--i:1">Løbsdage.</h2>
       </div>
-      <p data-vis style="--i:2">Billeder fra Team Juuls Facebook-side.</p>
     </div>
     ${galleri(5)}
   </div>
@@ -1077,7 +1076,6 @@ ${sidehoved({
       <p data-vis>De Jydske Grand Prix’er for 2- til 4-årige har givet 25 sejre, fra Camrose i 1978 til Daytona i 2019. Sejrstallet som kusk var officielt opgjort til 7.602 pr. 1. april 2020, og ved 50-års jubilæet som træner i december 2024 var han ifølge Sjællandske tæt på 8.000 sejre.</p>
       <p data-vis>I dag har ${SITE.navn} ${o.heste.length} heste på træningslisten, og i ${o.saeson.aar} er det indtil videre blevet til ${o.saeson.sejre} sejre på ${o.saeson.starter} starter som træner.</p>
       <p class="valg" data-vis>${ekstern(SITE.travinfo, 'Profilen på Travinfo')} ${ekstern(SITE.thof, 'Hall of Fame-artiklen')}</p>
-      <p class="note" data-vis>Kilder: Travsportens Hall of Fame (thof.dk – Steen Juul og Lilli Hanover), travet.dk (22. august 2023), Sjællandske Medier (1. december 2024), da.wikipedia.org (Steen Juul; Dansk Trav Derby), Team Juul på Facebook og Dansk Hestevæddeløb.</p>
     </div>
   </div>
 </section>
@@ -1100,7 +1098,7 @@ ${derby(o)}
         ${etiket('Championater', ' data-vis')}
         <h2 data-vis style="--i:1">Flest sejre på banen.</h2>
       </div>
-      <p data-vis style="--i:2">Den kusk, der vinder flest løb på en bane i løbet af et år, bliver banens champion. Kilder: da.wikipedia.org (til og med 2023), Charlottenlund Travbanes løbsprogram (Årets kusk 2024) og Travsportens Hall of Fame.</p>
+      <p data-vis style="--i:2">Den kusk, der vinder flest løb på en bane i løbet af et år, bliver banens champion.</p>
     </div>
     <ul class="champ">${CHAMPIONATER.map(([tal, sted, aar], i) => `
       <li data-vis style="--i:${i % 4}"><b data-tael="${tal}">${tal}</b><span>${sted}</span><small>${aar}</small></li>`).join('')}
@@ -1159,7 +1157,6 @@ ${kuskSektion(o)}
         ${etiket('Fra banen', ' data-vis')}
         <h2 data-vis style="--i:1">Løbsdage.</h2>
       </div>
-      <p data-vis style="--i:2">Billeder fra Team Juuls Facebook-side.</p>
     </div>
     ${galleri()}
   </div>

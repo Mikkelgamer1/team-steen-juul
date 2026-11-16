@@ -34,19 +34,23 @@ Sæt også sidens adresse i `SITE.facebook` (og Instagram i `SITE.instagram`), s
 
 ## Ret indhold
 
-Alt indhold står i `templates.mjs`: kontaktoplysninger i `SITE` øverst. Design i `assets/css/site.css` (farverne øverst: hvid, grafit og smaragdgrøn – fra løbsfarverne hvid/grøn). Skrift: Plus Jakarta Sans (SIL Open Font License).
+Alt indhold står i `templates.mjs`: kontaktoplysninger i `SITE` øverst. Design i `assets/css/site.css` (farverne øverst: sort, papir, rød og grøn – fra løbsfarverne rød/grøn). Skrift: Big Shoulders Display, Schibsted Grotesk og Playfair Display (alle SIL Open Font License).
 
 ## Kilder
 
+Kilderne står her og ikke på siderne. Billedkreditter står ved billederne og i bunden af siden.
+
 | Oplysning | Kilde |
 | --- | --- |
-| Født 1993, A1-licens, hjemmebane Skive Trav, telefon, løbsfarver (hvid/grøn) | Dansk Hestevæddeløb (licens 504440) |
-| Træningsliste, resultater, statistik | Dansk Hestevæddeløb, opdateres dagligt |
-| Intro "Passion for travsport · Erfaring fra Danmark og USA · Fokus på kvalitet, udvikling og resultater", Flyvej 2 Skive, e-mail | Facebook-siden Team Kasper Foget (introduktion); e-mail også på skive-trav.dk/om-os/traenere |
-| Træner fra 1. december 2025, Stald E (Knud Mønsters gamle stald, 14–15 bokse), legater fra Sigter mod Stjernerne, René Sejthen, USA-tal (2022: 30 sejre i 327 starter, 427.472 $; i alt 61 sejre i 525 løb, 912.559 $), hjem 2023, jockey for Team Morten Friis, Kingston/Jydsk 4-årings GP 2025, EM 2018 i Rusland, citatet | travservice.dk, 30. oktober 2025 (Karsten Bønsdorf) |
-| Samme USA-tal, Jacobite, 11 heste i marts 2026 | travet.dk, 4. marts 2026 (Ulrik Pedersen) |
-| Sølv ved EM året før (2017) | TV Midtvest, 2. september 2018 (søgeresultat) |
-| Hjemmebanen: åbnet 1948, Flyvej siden 1966, lysanlæg 2019–20 | skive-trav.dk/om-os |
-| Logo (sulky-silhuetten) og sponsor Øhrberg Tømrerentreprise | Holdets logo på Facebook; CVR/Krak: Øhrberg Tømrerentreprise ApS, Viborg |
-| Hestekort: Jacobite (ejer Olsen & Thorsen I/S, foto Ole Hindby), Starcatcher (ejer Kasper Foget og Robin Øhrberg, foto Gormfoto), Kingston (træner Michael Lønborg, foto Ole Hindby) | Facebook-opslagenes tekster |
-| Billeder | Team Kasper Fogets Facebook-side (fotografer bl.a. Ole Hindby og Gorm Johansen/Gormfoto) |
+| Træningsliste, resultater, kommende starter, statistik, adresse og telefon | Dansk Hestevæddeløb (licens 3106), opdateres dagligt. Telefonen står også på Facebook-siden |
+| Tallene på forsiden: næsten 8.000 sejre, 10 derbysejre som kusk, 35 championater på Charlottenlund | Sjællandske Medier (1. december 2024), Travsportens Hall of Fame (thof.dk), da.wikipedia.org og Charlottenlund Travbanes løbsprogram (5. januar 2025) |
+| Historien på Om Steen og karrierens seks nedslag | Travsportens Hall of Fame (thof.dk – Steen Juul og Lilli Hanover), travet.dk (22. august 2023), Sjællandske Medier (1. december 2024), da.wikipedia.org (Steen Juul; Dansk Trav Derby), Team Juul på Facebook og Dansk Hestevæddeløb |
+| Championater som kusk | da.wikipedia.org (til og med 2023), Charlottenlund Travbanes løbsprogram 5. januar 2025 (Årets kusk 2024), thof.dk (Halmstad 2004) |
+| Derbysejrene | da.wikipedia.org (Steen Juul; Dansk Trav Derby), thof.dk og Team Juuls Facebook-side |
+| Rex The Great-rekorden (1.09,7a over 1600 m) | Team Juuls egen formulering på Facebook (står som citat) |
+| Patrick Larsens tal og store sejre | Dansk Hestevæddeløb (licens 526155), opdateres dagligt |
+| Patricks år i Norge 2019–2025, hjemkomsten i januar 2026 og citatet om ansvar og initiativ | travet.dk: /patrick-skal-forsvare-sin-titel-i-nm/, /stor-succes-for-patrick-larsen/, /v75-sejr-til-patrick-larsen/, /patrick-larsen-champ-paa-bjerke-biri-og-harstad/, /patrick-larsen-hentede-110-000-skr/, /spaendende-fredag-for-patrick/, /patrick-larsen-runder-750-000/ |
+| »Det nye dream team i dansk travsport.« | travservice.dk, 19. april 2026 |
+| Nike High og Bali (nr. 2 i Dansk Trav Derby) | Team Juul på Facebook |
+| Facebook-anbefalingerne (94 %, 27 anmeldelser) | Team Juuls Facebook-side, aflæst oktober 2026 |
+| Firmanavn og CVR i bunden (Steen Juul Nielsen, CVR 50627217) | CVR-registret (datacvr.virk.dk), tjekket 16. november 2026 – samme adresse som stalden, startdato 1. december 1974 |

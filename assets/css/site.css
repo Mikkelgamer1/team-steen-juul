@@ -593,7 +593,8 @@ html:not(.fx) .derby__kort { scroll-snap-align: center; }
 
 .cta { padding-block: var(--luft); background: var(--roed); color: #fff; overflow: hidden; }
 .cta h2 { max-width: 16ch; }
-.cta__tlf { display: block; margin: clamp(20px, 3vw, 36px) 0; font: 900 clamp(4rem, 15.4vw, 15rem)/.82 var(--display); white-space: nowrap; font-variant-numeric: tabular-nums; transition: color .3s; }
+.cta .wrap { container-type: inline-size; }   /* nummeret skaleres efter båndets bredde, så hele nummeret altid kan ses */
+.cta__tlf { display: block; margin: clamp(20px, 3vw, 36px) 0; font: 900 min(15rem, 15.8cqi)/.82 var(--display); white-space: nowrap; font-variant-numeric: tabular-nums; transition: color .3s; }
 .cta__tlf:hover { color: #0d0d0c; }
 .cta__bund { display: grid; grid-template-columns: 1fr auto; gap: 20px 48px; align-items: center; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, .3); }
 .cta__bund p { max-width: 52ch; color: rgba(255, 255, 255, .9); }
@@ -809,4 +810,10 @@ html:not(.fx) .derby__kort { scroll-snap-align: center; }
   .kontakt__felt--kort { grid-template-columns: 1fr; }
   .champ b { font-size: 3.6rem; }
   .fbkort { grid-auto-columns: 78%; }
+}
+@media (max-width: 400px) {
+  /* på smalle telefoner kan beløbet ikke stå i en halv kolonne – det og kusketallet får hele bredden */
+  .tal { grid-auto-flow: dense; }
+  .tal__felt--bred, .tal__felt--moerk { grid-column: span 2; }
+  .kpi div:nth-last-child(-n+2) { grid-column: span 2; }   /* sejrsprocent og indkørt på Resultater */
 }
