@@ -822,7 +822,7 @@ const galleri = (n = FOTOS.length) => `<ul class="galleri">${FOTOS.slice(0, n).m
     </ul>`;
 
 // Holdets eget billede over afsnittet om banerne: Steen, hesten og staldens folk i holdets farver med buketten.
-const lundenFoto = () => `<figure class="lunden" data-vis>${billede('buket', 'Steen Juul i holdets rød-grønne farver med buketten og hesten, holdt af en fra stalden', { sizes: '(min-width: 1400px) 1300px, 94vw' })}<figcaption>Steen Juul med buketten · Jysk 4-års Grand Prix 2024 · Foto: Team Juuls Facebook-side</figcaption></figure>`;
+const lundenFoto = () => `<figure class="lunden" data-vis>${billede('buket', 'Steen Juul i holdets rød-grønne farver med buketten og hesten, holdt af en fra stalden', { sizes: '(min-width: 1400px) 1300px, 94vw' })}<figcaption>Steen Juul med buketten · Jysk 4-års Grand Prix 2024</figcaption></figure>`;
 
 const banebjaelker = (banetal) => {
   const max = Math.max(1, ...banetal.map((b) => b.antal));
