@@ -1,5 +1,5 @@
 {
- "opdateret": "2026-11-17T13:29:32.994Z",
+ "opdateret": "2026-11-17T19:56:01.114Z",
  "traener": {
   "foedt": 1950,
   "hjemmebane": "Charlottenlund Trav",
@@ -4354,6 +4354,22 @@
    "hestId": 656574,
    "hest": "Mason",
    "kusk": "Christian Clausen"
+  },
+  {
+   "dato": "2026-11-22",
+   "bane": "Ch",
+   "loeb": 5,
+   "hestId": 654582,
+   "hest": "Lemmy",
+   "kusk": "Patrick Larsen"
+  },
+  {
+   "dato": "2026-11-22",
+   "bane": "Ch",
+   "loeb": 8,
+   "hestId": 656378,
+   "hest": "Madison Tårs",
+   "kusk": "Patrick Larsen"
   },
   {
    "dato": "2026-11-22",
