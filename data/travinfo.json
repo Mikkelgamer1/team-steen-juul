@@ -1,5 +1,5 @@
 {
- "opdateret": "2026-11-20T12:56:18.188Z",
+ "opdateret": "2026-11-21T12:41:35.520Z",
  "traener": {
   "foedt": 1950,
   "hjemmebane": "Charlottenlund Trav",
@@ -9,12 +9,12 @@
  "traenerStatistik": [
   {
    "aar": 2026,
-   "starter": 240,
+   "starter": 241,
    "sejre": 49,
    "toer": 32,
    "treer": 25,
    "procent": 20,
-   "praemier": 2426669
+   "praemier": 2429169
   },
   {
    "aar": 2025,
@@ -473,9 +473,9 @@
    "foedt": "2023-04-13",
    "far": "Mosaique Face (SE)",
    "mor": "Dominiquetrans R (NL)",
-   "starter": 7,
+   "starter": 8,
    "placeringer": "2-0-1",
-   "praemier": 34500,
+   "praemier": 37000,
    "rekord": "*18,7k 18,8m *18,2ak 14,1am"
   },
   {
@@ -805,6 +805,18 @@
   }
  ],
  "resultater": [
+  {
+   "id": "838363-656574",
+   "dato": "2026-11-20",
+   "bane": "Od",
+   "loeb": 3,
+   "hestId": 656574,
+   "hest": "Mason",
+   "placering": "4",
+   "tid": "19,1a",
+   "distance": 2140,
+   "praemie": 2500
+  },
   {
    "id": "838282-653150",
    "dato": "2026-11-15",
@@ -4347,14 +4359,6 @@
   }
  ],
  "kommende": [
-  {
-   "dato": "2026-11-20",
-   "bane": "Od",
-   "loeb": 3,
-   "hestId": 656574,
-   "hest": "Mason",
-   "kusk": "Christian Clausen"
-  },
   {
    "dato": "2026-11-22",
    "bane": "Ch",
