@@ -1,5 +1,5 @@
 {
- "opdateret": "2026-11-22T12:37:46.750Z",
+ "opdateret": "2026-11-23T14:42:17.853Z",
  "traener": {
   "foedt": 1950,
   "hjemmebane": "Charlottenlund Trav",
@@ -9,12 +9,12 @@
  "traenerStatistik": [
   {
    "aar": 2026,
-   "starter": 241,
-   "sejre": 49,
+   "starter": 243,
+   "sejre": 50,
    "toer": 32,
    "treer": 25,
-   "procent": 20,
-   "praemier": 2429169
+   "procent": 21,
+   "praemier": 2439169
   },
   {
    "aar": 2025,
@@ -103,12 +103,12 @@
  "kusk": [
   {
    "aar": 2026,
-   "starter": 268,
-   "sejre": 42,
+   "starter": 272,
+   "sejre": 43,
    "toer": 29,
-   "treer": 28,
+   "treer": 29,
    "procent": 16,
-   "praemier": 1866206
+   "praemier": 1881456
   },
   {
    "aar": 2025,
@@ -323,19 +323,6 @@
    "rekord": "16,3k 13,1m 13,6l 10,2ak 10,9am 13,8al"
   },
   {
-   "id": 656666,
-   "navn": "Get in Your Pj's (SE)",
-   "alder": 4,
-   "koen": "Hoppe",
-   "foedt": "2022-05-30",
-   "far": "Trixton (US)",
-   "mor": "Sunrise Boulevard (SE)",
-   "starter": 27,
-   "placeringer": "6-4-3",
-   "praemier": 168427,
-   "rekord": "15,4m 11,9ak *13,9am"
-  },
-  {
    "id": 649707,
    "navn": "Ikarus",
    "alder": 6,
@@ -395,10 +382,10 @@
    "foedt": "2022-05-16",
    "far": "Traders (IT)",
    "mor": "Elvira M",
-   "starter": 25,
-   "placeringer": "3-8-2",
-   "praemier": 140911,
-   "rekord": "15,2m 19,4ak 14,0am 14,4al"
+   "starter": 26,
+   "placeringer": "4-8-2",
+   "praemier": 150911,
+   "rekord": "15,2m 19,4ak *13,5am 14,4al"
   },
   {
    "id": 653150,
@@ -434,7 +421,7 @@
    "foedt": "2023-05-02",
    "far": "Calgary Games (SE)",
    "mor": "Confusion Tårs",
-   "starter": 2,
+   "starter": 3,
    "placeringer": "1-0-0",
    "praemier": 8000,
    "rekord": "*18,2m 17,1am"
@@ -805,6 +792,30 @@
   }
  ],
  "resultater": [
+  {
+   "id": "838376-656378",
+   "dato": "2026-11-22",
+   "bane": "Ch",
+   "loeb": 8,
+   "hestId": 656378,
+   "hest": "Madison Tårs",
+   "placering": "0",
+   "tid": "opgg",
+   "distance": 2020,
+   "praemie": 0
+  },
+  {
+   "id": "838386-654582",
+   "dato": "2026-11-22",
+   "bane": "Ch",
+   "loeb": 5,
+   "hestId": 654582,
+   "hest": "Lemmy",
+   "placering": "1",
+   "tid": "13,5a",
+   "distance": 2000,
+   "praemie": 10000
+  },
   {
    "id": "838363-656574",
    "dato": "2026-11-20",
@@ -4360,19 +4371,19 @@
  ],
  "kommende": [
   {
-   "dato": "2026-11-22",
-   "bane": "Ch",
-   "loeb": 5,
-   "hestId": 654582,
-   "hest": "Lemmy",
+   "dato": "2026-11-27",
+   "bane": "År",
+   "loeb": 2,
+   "hestId": 656378,
+   "hest": "Madison Tårs",
    "kusk": "Patrick Larsen"
   },
   {
-   "dato": "2026-11-22",
-   "bane": "Ch",
-   "loeb": 8,
-   "hestId": 656378,
-   "hest": "Madison Tårs",
+   "dato": "2026-11-27",
+   "bane": "År",
+   "loeb": 4,
+   "hestId": 650853,
+   "hest": "King Darling",
    "kusk": "Patrick Larsen"
   }
  ]
