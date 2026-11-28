@@ -1,5 +1,5 @@
 {
- "opdateret": "2026-11-27T13:54:11.502Z",
+ "opdateret": "2026-11-28T13:02:07.589Z",
  "traener": {
   "foedt": 1950,
   "hjemmebane": "Charlottenlund Trav",
@@ -9,11 +9,11 @@
  "traenerStatistik": [
   {
    "aar": 2026,
-   "starter": 243,
+   "starter": 244,
    "sejre": 50,
    "toer": 32,
    "treer": 25,
-   "procent": 21,
+   "procent": 20,
    "praemier": 2439169
   },
   {
@@ -103,7 +103,7 @@
  "kusk": [
   {
    "aar": 2026,
-   "starter": 273,
+   "starter": 274,
    "sejre": 43,
    "toer": 29,
    "treer": 29,
@@ -356,7 +356,7 @@
    "foedt": "2021-03-27",
    "far": "Follow You F (FR)",
    "mor": "Fly Fly Darling (FR)",
-   "starter": 38,
+   "starter": 39,
    "placeringer": "8-4-4",
    "praemier": 139104,
    "rekord": "18,1l 14,9ak 14,2am 16,9al"
@@ -792,6 +792,18 @@
   }
  ],
  "resultater": [
+  {
+   "id": "838445-650853",
+   "dato": "2026-11-27",
+   "bane": "År",
+   "loeb": 4,
+   "hestId": 650853,
+   "hest": "King Darling",
+   "placering": "0",
+   "tid": "16,9a",
+   "distance": 1800,
+   "praemie": 0
+  },
   {
    "id": "838376-656378",
    "dato": "2026-11-22",
@@ -4369,22 +4381,5 @@
    "praemie": 1000
   }
  ],
- "kommende": [
-  {
-   "dato": "2026-11-27",
-   "bane": "År",
-   "loeb": 2,
-   "hestId": 656378,
-   "hest": "Madison Tårs",
-   "kusk": "Patrick Larsen"
-  },
-  {
-   "dato": "2026-11-27",
-   "bane": "År",
-   "loeb": 4,
-   "hestId": 650853,
-   "hest": "King Darling",
-   "kusk": "Patrick Larsen"
-  }
- ]
+ "kommende": []
 }
